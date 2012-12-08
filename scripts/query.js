@@ -5,15 +5,15 @@ Queries Yelp Business and Search APIs and calls provided callback on success.
 */
 //search_type can either be search or business
 function query_yelp(query, search_type, callback, error){
-var auth = { 
+var auth = {
   //
   // Update with your auth tokens.
   //
-  consumerKey: "RmwZbuexNTnUu0pCAzcXuQ", 
+  consumerKey: "RmwZbuexNTnUu0pCAzcXuQ",
   consumerSecret: "3S6D6qH4K-hoBvMc6eQL22EjORg",
   accessToken: "JAazeyDhcErQlEMSBZqpOHCFF4mixIec",
   accessTokenSecret: "bEf62xhBTl1KoLYz6or-lRgGG_g",
-  serviceProvider: { 
+  serviceProvider: {
     signatureMethod: "HMAC-SHA1"
   }
 };
@@ -34,25 +34,25 @@ parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
 parameters.push(['oauth_token', auth.accessToken]);
 parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
 
-var Action = { 
+var Action = {
     search: 0,
-    business: 1        
+    business: 1
 };
 
 var message = {};
 
 /**If the search type is business, query.id must be provided */
 if(search_type === Action.search){
-    message = { 
+    message = {
       'action': 'http://api.yelp.com/v2/search',
       'method': 'GET',
-      'parameters': parameters 
+      'parameters': parameters
     };
 }else if(search_type === Action.business){
-    message = { 
+    message = {
       'action': 'http://api.yelp.com/v2/business/' + query.id ,
       'method': 'GET',
-      'parameters': parameters 
+      'parameters': parameters
     };
 }
 
