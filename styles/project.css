@@ -14,6 +14,27 @@
   text-align:left;
   margin:auto;
 }
+.columnLeft {
+  color:black;
+  display:block;
+  float:left;
+  width: 200px;
+  height: 2000px;
+}
+.columnCenter {
+  color:black;
+  display:block;
+  float:left;
+  width:1000px;
+  height:2000px;
+}
+.columnRight {
+  color:black;
+  display:block;
+  float:left;
+  width:200px;
+  height:2000px;
+}
 .resultsContainer {
    color: white;
   -moz-border-radius: 10px;
