@@ -2,9 +2,10 @@
 
 Queries Yelp Business and Search APIs and calls provided callback on success.
 
+search_type can either be search or business
+
 */
-//search_type can either be search or business
-var query_yelp = function(query, search_type, callback, error) {
+var queryYelp = function(query, search_type, callback, error) {
     var auth = {
         //
         // Update with your auth tokens.
@@ -75,6 +76,12 @@ var query_yelp = function(query, search_type, callback, error) {
     });
 };
 
+/* Utility function to parse JSON and return JS object */
+var parseData = function(json){
+  return JSON && JSON.parse(json) || $.parseJSON(json);
+};
 
-//obj = JSON && JSON.parse(json) || $.parseJSON(json);
-//var business_id = json.id;
+
+var onSearchSuccess = function(json){
+    var obj = parseData(json);
+};
