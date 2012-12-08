@@ -7,13 +7,13 @@
   margin:auto;
 }
 #logo {
-  float:left;
-  height:100px;
-  width:200px;
-  text-align:left;
-  position:relative;
+  float: left;
+  height: 100px;
+  width: 219px;
+  text-align: left;
+  position: relative;
   background-image: url('http://i.imgur.com/aIRpe.jpg');
-  background-size:cover;
+  background-size: cover;
 }
 #headContainer {
   display:block;
