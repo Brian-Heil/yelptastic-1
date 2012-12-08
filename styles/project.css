@@ -24,6 +24,12 @@
   text-align: left;
   margin: auto;
 }
+.breadcrumb {
+  width: 1000px;
+  position: relative;
+  display: block;
+  margin: auto;
+}
 .label {
   float:left;
 }
