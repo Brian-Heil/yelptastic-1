@@ -6,6 +6,15 @@
   text-align:center;
   margin:auto;
 }
+#logo {
+  float:left;
+  height:100px;
+  width:200px;
+  text-align:left;
+  position:relative;
+  background-image: url('http://i.imgur.com/aIRpe.jpg');
+  background-size:cover;
+}
 #headContainer {
   display:block;
   width:1400px;
@@ -57,11 +66,12 @@ form {
   margin-left: 20px;
 }
 .searchContainer {
-  float:left;
-  display:block;
+  float: left;
+  position: relative;
+  display: block;
   width: 1000px;
-  top:20px;
-  height:50px;
+  top: 10px;
+  height: 100px;
 }
 .columnRight {
   color:black;
