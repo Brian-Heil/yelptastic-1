@@ -1,3 +1,9 @@
+var Action = {
+    search: 0,
+    business: 1
+};
+
+
 /*
 
 Queries Yelp Business and Search APIs and calls provided callback on success.
@@ -35,11 +41,6 @@ var queryYelp = function(query, search_type, callback, error) {
     parameters.push(['oauth_token', auth.accessToken]);
     parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
 
-    var Action = {
-        search: 0,
-        business: 1
-    };
-
     var message = {};
 
     /**If the search type is business, query.id must be provided */
@@ -62,8 +63,8 @@ var queryYelp = function(query, search_type, callback, error) {
     OAuth.SignatureMethod.sign(message, accessor);
 
     var parameterMap = OAuth.getParameterMap(message.parameters);
-    parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature)
-    console.log(parameterMap);
+    parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
+    // console.log(parameterMap);
 
     $.ajax({
         'url': message.action,
@@ -81,7 +82,16 @@ var parseData = function(json){
   return JSON && JSON.parse(json) || $.parseJSON(json);
 };
 
+var searchQuery = function(term, location){
+    var query = {};
+    query['term'] = term;
+    query['location'] = location;
+
+    return queryYelp(query, Action.search, onSearchSuccess);
+};
 
 var onSearchSuccess = function(json){
     var obj = parseData(json);
+
+
 };
