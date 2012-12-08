@@ -1,0 +1,23 @@
+#contentContainer {
+  display:block;
+  width:1400px;
+  height:2000px;
+  position:relative;
+  text-align:center;
+  margin:auto;
+}
+#headContainer {
+  display:block;
+  width:1400px;
+  height:200px;
+  position:relative;
+  text-align:center;
+  margin:auto;
+}
+
+.gridContainer {
+  display:block;
+  
+  
+}
+
