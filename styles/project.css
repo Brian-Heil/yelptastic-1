@@ -1,4 +1,4 @@
- #contentContainer {
+#contentContainer {
   display:block;
   width:1400px;
   height:2000px;
@@ -9,33 +9,100 @@
 #headContainer {
   display:block;
   width:1400px;
-  height:200px;
+  height:100px;
   position:relative;
-  text-align:center;
+  text-align:left;
   margin:auto;
 }
-
+.columnLeft {
+  color:black;
+  display:block;
+  float:left;
+  width: 200px;
+  height: 2000px;
+}
+.columnCenter {
+  color:black;
+  display:block;
+  float:left;
+  width:1000px;
+  height:2000px;
+}
+.columnRight {
+  color:black;
+  display:block;
+  float:left;
+  width:200px;
+  height:2000px;
+}
 .resultsContainer {
+   color: white;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-  border-radius: 10px; 
-  -khtml-border-radius: 10px; 
-  display:block;
-  height:250px;
-  width:250px;
-  float:left;
+  border-radius: 10px;
+  -khtml-border-radius: 10px;
+  display: block;
+  height: 196px;
+  width: 351px;
+  float: left;
+  background-color: black;
+  text-align: left;
+
 }
 .resultsContainer .pictureContainer {
+   top: 10px;
+  position: relative;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-  border-radius: 10px; 
-  -khtml-border-radius: 10px; 
-  background-image: 'http://i.imgur.com/DFRu8.png';
-  background-repeat: no-repeat; 
-  background-size:100%;
+  border-radius: 10px;
+  -khtml-border-radius: 10px;
+  background-image: url('http://i.imgur.com/DFRu8.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   float: left;
-  display:block;
-  height: 150px;
-  width: 150px; 
+  display: block;
+  height: 142px;
+  width: 124px;
+  margin-left: 10px;
+  margin-right: 12px;
+  background-color: white;
 }
-
+.resultsContainer .textContainer {
+  top: 10px;
+  color:black;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -khtml-border-radius: 10px;
+  float: left;
+  display: block;
+  position: relative;
+  height: 145px;
+  width: 191px;
+  text-align: left;
+  background-color: white;
+  background-size: cover;
+  padding-left: 5px;
+}
+.resultsContainer .titleContainer {
+  color:white;
+  float:left;
+  margin-left:10px;
+  display:block;
+  height: 10px;
+  width:290px;
+  text-align:left;
+  position:relative;
+}
+.resultsContainer .rating {
+  color: white;
+  float: left;
+  margin-left: 10px;
+  display: block;
+  height: 10px;
+  width: 50px;
+  text-align: left;
+  position: relative;
+  padding: 5px;
+  top: 5px;
+}
