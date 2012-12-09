@@ -87,11 +87,30 @@ var searchQuery = function(term, location){
     query['term'] = term;
     query['location'] = location;
 
-    return queryYelp(query, Action.search, onSearchSuccess);
+    var results = queryYelp(query, Action.search, onSearchSuccess);
+
+    // var categories = _.chain(results.businesses).map(function(business){
+    //     return business.categories;
+    // }).union().value();
+
+    // results.categories = categories;
+
+    return results;
 };
 
 var onSearchSuccess = function(json){
     var obj = parseData(json);
 
+    var businesses = _.map(obj.businesses, function(result){
+        delete result.deals;
+        delete result.gift_certificates;
+        delete result.is_claimed;
+        delete result.is_closed;
+        return result;
+    });
 
+    var results = {};
+    results.businesses = businesses;
+    results.total = obj.total;
 };
+
