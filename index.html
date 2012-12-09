@@ -31,9 +31,9 @@
     {{/each}}
 </script>
 <script>
-  alert('This is running');
+//  alert('This is running');
   $('document').ready(function() {
-    alert('Search:' + document.search1.search_favs.value);
+//    alert('Search:' + document.search1.search_favs.value);
      //var source = $('#results').html();
      //var template = Handlebars.compile(source);
     
@@ -62,8 +62,8 @@
      
      //var string = template(data);
      //alert(string);
-
-     addQuery(data, 0);
+    addFavoritesView();
+     //addQuery(data, 0);
    // $('body').append(string);
   });
   
@@ -103,12 +103,10 @@
     <li class="active">Home</li>
   </ul>
   <div id="contentContainer">
-    <div class="columnLeft">
-      {{left}}
-          
-     <div id="myCarousel" class="carousel">
+    <div class="columnLeft">          
+    <!-- <div id="myCarousel" class="carousel">
      <!-- Carousel items -->
-     <div class="carousel-inner">
+     <!--<div class="carousel-inner">
          <div class="active item"><img src="http://placehold.it/350x150"></div>
          <div class="item"><img src="http://placehold.it/350x150"></div>
          <div class="item"><img src="http://placehold.it/350x150"></div>
@@ -117,7 +115,7 @@
          <div class="item"><img src="http://placehold.it/350x150"></div>
      </div>
      <!-- Carousel nav -->
-     <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <!-- <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
      </div>
      <div class="accordion" id="accordion2">
@@ -148,10 +146,10 @@
  </div>      
  
  
- 
+ -->
     </div>
     <div class="columnCenter">
-      <ul class="thumbnails">
+      <!--<ul class="thumbnails">
           <div class="thumbnailContainer">
             <h3>{{title}}</h3>
             <div class="thumbnail">
@@ -188,7 +186,7 @@
               <p>Rating:{{ratingImage}}</p>
             </div>    
           </div>
-    </ul>
+    </ul>-->
     </div>
     <div class="columnRight">
     </div>
