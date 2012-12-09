@@ -7,27 +7,105 @@
 <link type="text/css" href="styles/bootstrap.min.css" rel="Stylesheet"/>  
 <link type="text/css" href="styles/project.css" rel="Stylesheet"/>  
 
- 
+<!-- Add external scripts-->
+<script src="scripts/vendor/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="scripts/vendor/bootstrap.js" type="text/javascript"></script>
+<script src="scripts/vendor/bootstrap.min.js" type="text/javascript"></script>
+<script src="scripts/vendor/handlebars-1.0.rc.1.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+<script type="text/javascript" src="scripts/views.js"></script>
+<!-- Add template scrips-->
+<script id="results" type="text/x-handlebars-template">
+  {{#each this}}
+   <div class="thumbnailContainer">
+      <h3>{{title}}</h3>
+      <div class="thumbnail">
+        <img src="{{image}}" alt="" width="150" height="100">
+      </div> 
+      <p>"{{quote}}"</p>
+        <p>Tags:{{tags}}</p>
+        <p>Rating: <img src="{{ratingImage}}"></p>
+        <p><input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"  /></p>
+    </div>
+    {{/each}}
+</script>
+<script>
+  alert('This is running');
+  $('document').ready(function() {
+    alert('Search:' + document.search1.search_favs.value);
+     //var source = $('#results').html();
+     //var template = Handlebars.compile(source);
+    
+     var data = new Array({
+       title: 'Yelp',
+       image_url: 'http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg',
+       snippet_text: 'Sometimes we ask questions without reading an email thoroughly as many of us did for the last event.  In honor of Yelp, the many questions they kindly...',
+      // tags: 'sucky',
+       rating_image_url_small:'http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_3.png',
+     },{title: 'cool',
+       image_url: 'http://placehold.it/300x200',
+       snippet_text: 'this sucks',
+      // tags: 'sucky',
+       rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+     },{title: 'cool',
+       image_url: 'http://placehold.it/300x200',
+       snippet_text: 'this sucks',
+      // tags: 'sucky',
+       rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+     },{title: 'cool',
+       image_url: 'http://placehold.it/300x200',
+       snippet_text: 'this sucks',
+      // tags: 'sucky',
+       rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+     });
+     
+     //var string = template(data);
+     //alert(string);
+
+     addQuery(data, 0);
+   // $('body').append(string);
+  });
+  
+</script>
+
+
 <body>
 <div id="pageWrapper">
-<!--Test Divs-->
-<div id= "headContainer"> 
-  <h1><div id="logo"></div></h1>
-     <div class="searchContainer">
-       <form id="searchbar">
-         <input type="text" id="searchbox" placeholder="Search Favorites" name="search_favs">      
-         <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="search()">
-       </form>
+  <!--Test Divs-->
+  <div id= "headContainer"> 
+     <h1><div id="logo"></div></h1>
+     <ul class="nav nav-tabs">
+      <li class="active"><a href="#search_favorites" data-toggle="tab">Search Favorites</a></li>
+      <li><a href="#search_yelp" data-toggle="tab">Search Yelp</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="search_favorites">
+                <div class="searchContainer">
+                <form id="searchbar" name="search1">
+                  <input type="text" id="searchbox" placeholder="Search Favorites" name="search_favs">
+                  <input type="text" id="locationbox" placeholder="Near" name="search_location">     
+                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="search()">
+               </form>
+              </div>
+              </div>
+              <div class="tab-pane fade" id="search_yelp">
+                 <form id="searchbar" name="search2">
+                  <input type="text" id="searchbox" placeholder="Search Business" name="search1">
+                  <input type="text" id="locationbox" placeholder="Near" name="search_loc">     
+                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="alert('Searching Yelp For: ' + search2.search1.value + 'at' + search2.search_loc.value)">
+                 </form>
+              </div>
      </div>
-   </div>
-   <ul class="breadcrumb">
-     <li><a href="#">Home</a> <span class="divider">/</span></li>
-     <li class="active">Home</li>
-   </ul>
-   <div id="contentContainer">
-     <div class="columnLeft">
-       {{left}}
-       
+  </div>
+  <ul class="breadcrumb">
+    <li><a href="#">Home</a> <span class="divider">/</span></li>
+    <li class="active">Home</li>
+  </ul>
+  <div id="contentContainer">
+    <div class="columnLeft">
+      {{left}}
+          
      <div id="myCarousel" class="carousel">
      <!-- Carousel items -->
      <div class="carousel-inner">
@@ -71,25 +149,52 @@
  
  
  
-     </div>
-     <div class="columnCenter">
-       {{center}}
-     </div>
-     <div class="columnRight">
-       {{right}}
-     </div>
-   </div>
- </div>
- 
- </body>
- 
- <!-- Add external scripts-->
- 
- <script src="scripts/vendor/jquery-1.8.3.min.js" type="text/javascript"></script>
- <script src="scripts/vendor/bootstrap.min.js" type="text/javascript"></script>
- <script src="srcipts/vendor/handlebars-1.0.rc.1.js" type="text/javascript"></script>
- <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
- <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
- 
-     
- </html>
+    </div>
+    <div class="columnCenter">
+      <ul class="thumbnails">
+          <div class="thumbnailContainer">
+            <h3>{{title}}</h3>
+            <div class="thumbnail">
+              <img src="http://placehold.it/300x200" alt="">
+              <p>"{{quote}}"</p>
+              <p>Tags:{{tags}}</p>
+              <p>Rating:{{ratingImage}}</p>
+            </div>    
+          </div>
+          <div class="thumbnailContainer">
+            <h3>{{title}}</h3>
+              <div class="thumbnail">
+                <img src="http://placehold.it/300x200" alt="">
+                <p>"{{quote}}"</p>
+                <p>Tags:{{tags}}</p>
+                <p>Rating:{{ratingImage}}</p>
+              </div>    
+          </div>
+          <div class="thumbnailContainer">
+            <h3>{{title}}</h3>
+            <div class="thumbnail">
+              <img src="http://placehold.it/300x200" alt="">
+              <p>"{{quote}}"</p>
+              <p>Tags:{{tags}}</p>
+              <p>Rating:{{ratingImage}}</p>
+            </div>    
+          </div>
+          <div class="thumbnailContainer">
+            <h3>{{title}}</h3>
+            <div class="thumbnail">
+              <img src="http://placehold.it/300x200" alt="">
+              <p>"{{quote}}"</p>
+              <p>Tags:{{tags}}</p>
+              <p>Rating:{{ratingImage}}</p>
+            </div>    
+          </div>
+    </ul>
+    </div>
+    <div class="columnRight">
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

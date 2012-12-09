@@ -1,14 +1,24 @@
 #contentContainer {
   display: block;
-  width: 1024px;
+  width: 1300px;
   height: 768px;
   position: relative;
   text-align: center;
   margin: auto;
 }
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+   -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 10px;
+  -khtml-border-radius: 2px;
+  cursor: pointer;
+  margin-right: 10px;
+  color: black;
+}
 #logo {
   float: left;
-  margin-left: 85px;
+  margin-left: 40px;
   height: 100px;
   width: 219px;
   text-align: left;
@@ -25,13 +35,21 @@
   margin: auto;
   
 }
+img {
+  height:inherit;
+}
  button {
   color: white;
   background-color:blue;
+  margin-left:10px;
 }
 p {
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:75%;
+  line-height:12px;
+  width: 200px;
 }
 h3 {
   font-size: 24.5px;
@@ -41,17 +59,19 @@ h3 {
 .thumbnailContainer {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  border-radius: 10px; 
+  border-radius: 10px;
   -khtml-border-radius: 2px;
-  display:block;
+  display: block;
   width: 250px;
-  height:300px;
-  position:relative;
-  float:left;
+  border-style: solid;
+  height: 300px;
+  position: relative;
+  float: left;
   margin-left: 20px;
   text-align: center;
-  background-color:black;
-  color:white;
+  border-color: #F8F8F8;
+  background-color: white;
+  color: black;
   margin-bottom: 10px;
 }
 .thumbnail {
@@ -64,7 +84,7 @@ h3 {
   margin-left: 15px;
 }
 .breadcrumb {
-  width: 1000px;
+  width: 1300px;
   position: relative;
   display: block;
   margin: auto;
@@ -86,7 +106,7 @@ h3 {
   color: black;
   display: block;
   float: left;
-  width: 600px;
+  width: 850px;
   height: 768px;
 }
 .span2 {
@@ -102,12 +122,32 @@ form {
   text-align:center;
   height : 50px;
   display: block;
-  top:20px;
+  position: relative;
+}
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+  width: 660px;
+  height: 30px;
+  display: block;
+  position: relative;
+  float: left;
+}
+.tab-content {
+  overflow: auto;
+  height: 50px;
+  width: 660px;
   position: relative;
 }
 #searchbox {
   display:block;
-  width:500px;
+  width:250px;
+  float:left;
+  height:30px;
+  margin-left:15px;
+}
+#locationbox {
+  display:block;
+  width:250px;
   float:left;
   height:30px;
   margin-left:15px;
@@ -122,9 +162,8 @@ form {
   float: left;
   position: relative;
   display: block;
-  width: 611px;
-  top: 10px;
-  height: 100px;
+  width: 650px;
+  height: 50px;
 }
 .columnRight {
     margin-top:10px;
@@ -192,6 +231,12 @@ form {
   width:290px;
   text-align:left;
   position:relative;
+}
+.buttonRow {
+  display:block;
+  width:850px;
+  float:left;
+  
 }
 .grid { 
   width:1024px;
