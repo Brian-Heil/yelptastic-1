@@ -39,7 +39,7 @@ function addBusinessToFavorite (business){
 }
 function deleteBusinessFromStorage(business){
     var resultList = localStorage.getItem("results");
-    removeA(resultList, business)
+    removeA(resultList, business);
     localStorage.setItem("results", resultList);
 }
 function removeA(arr) {
