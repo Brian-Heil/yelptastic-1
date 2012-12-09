@@ -8,6 +8,7 @@ var searchFavorites = function(query){
     }
     return feedback;
 };
+
 var getFavoriteCategories = function(){
     var feedback = [];
     var resultList = localStorage.getItem("results");
@@ -16,6 +17,7 @@ var getFavoriteCategories = function(){
     }
     return feedback;
 };
+
 var getFavoritesWithinCategory = function(query){
     var feedback = [];
     var resultList = localStorage.getItem("results");
@@ -26,6 +28,7 @@ var getFavoritesWithinCategory = function(query){
     }
     return feedback;
 };
+
 var addBusinessToFavorite = function(business){
     var resultList = [];
     if(typeof localStorage.getItem("results") != 'undefined'){
