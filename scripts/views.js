@@ -1,8 +1,40 @@
+var addFavoritesView = function() {
+  alert('printing');
+  alert('length' + history.length);
+  history.pushState({}, 'Yelptastic- Yelp Search', document.URL + '/yelpsearch');
+  $('.columnCenter').empty();
+   var data = new Array({
+     title: 'Yelp',
+     image_url: 'http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg',
+     snippet_text: 'Sometimes we ask questions without reading an email thoroughly as many of us did for the last event.  In honor of Yelp, the many questions they kindly...',
+    // tags: 'sucky',
+     rating_image_url_small:'http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_3.png',
+   },{title: 'cool',
+     image_url: 'http://placehold.it/300x200',
+     snippet_text: 'this sucks',
+    // tags: 'sucky',
+     rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+   },{title: 'cool',
+     image_url: 'http://placehold.it/300x200',
+     snippet_text: 'this sucks',
+    // tags: 'sucky',
+     rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+   },{title: 'cool',
+     image_url: 'http://placehold.it/300x200',
+     snippet_text: 'this sucks',
+    // tags: 'sucky',
+     rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+       });
+    addQuery(data, 0);
+}
+
+
 /*
  * Takes in the results and appends them to the thumbnails grids
  */
 var addQuery = function (results, opt_int) {
-  $('.thumbnails').empty();
+  $('.columnCenter').empty();
+  $thumbnailswrapper = $('<ul class="thumbnails"></ul>');  
   var data = [];
   if (results.length >=20) {
     for (var i = opt_int; i < opt_int + 20; i ++) {
@@ -33,13 +65,12 @@ var addQuery = function (results, opt_int) {
   var source = $('#results').html();
   var template = Handlebars.compile(source);
   var string = template(data);
-  alert(string);
         $see_prev = $('<input type="button" value="Previous 20" name="nextButton">');
                $see_all = $('<input type="button" value="Next 20" name="prevButton">');
 
 
 
-  $('.thumbnails').append(string);
+  $thumbnailswrapper.append(string);
   if (data.length >= 20) {
     if (opt_int >= 20) {
       alert('Running >');
@@ -62,7 +93,8 @@ var addQuery = function (results, opt_int) {
   $buttonRow.append($see_prev);
   $buttonRow.append($see_all);
   
-  $('.thumbnails').append($buttonRow);
+  $thumbnailswrapper.append($buttonRow);
+  $('.columnCenter').append($thumbnailswrapper);
 }
 /*
  * Function to send the bookmarks to the backend
