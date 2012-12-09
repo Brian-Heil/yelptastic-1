@@ -1,4 +1,4 @@
-var searchFavorites = function(query){
+function searchFavorites (query){
     var feedback = [];
     var resultList = localStorage.getItem("results");
     _.each(resultList.businesses, function(x){
@@ -7,8 +7,8 @@ var searchFavorites = function(query){
         }
     });
     return feedback;
-};
-var getFavoriteCategories = function(){
+}
+function getFavoriteCategories(){
     var feedback = [];
     var resultList = localStorage.getItem("results");
     //returns the list of lists (of categories); from here Varun will try to find the broad-level category that this category belongs to 
@@ -17,8 +17,8 @@ var getFavoriteCategories = function(){
     }
  );
     return feedback;    
-};
-var getFavoritesWithinCategory = function(query){
+}
+function getFavoritesWithinCategory (query){
     var feedback = [];
     var resultList = localStorage.getItem("results");
     
@@ -28,7 +28,7 @@ var getFavoritesWithinCategory = function(query){
         }
     });
     return feedback; 
-};
+}
 function addBusinessToFavorite (business){
     var resultList = [];
     if(typeof localStorage.getItem("results") != 'undefined'){
