@@ -20,7 +20,7 @@ var getFavoritesWithinCategory = function(query){
     var feedback = [];
     var resultList = localStorage.getItem("results");
     for (var x in resultList.businesses){
-        if(x.categories.search(query) > -1){
+        if(x.categories == query){
             feedback.push(x);
         }
     }
