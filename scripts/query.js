@@ -1,10 +1,17 @@
+var Action = {
+    search: 0,
+    business: 1
+};
+
+
 /*
 
 Queries Yelp Business and Search APIs and calls provided callback on success.
 
+search_type can either be search or business
+
 */
-//search_type can either be search or business
-var query_yelp = function(query, search_type, callback, error) {
+var queryYelp = function(query, search_type, callback, error) {
     var auth = {
         //
         // Update with your auth tokens.
@@ -34,11 +41,6 @@ var query_yelp = function(query, search_type, callback, error) {
     parameters.push(['oauth_token', auth.accessToken]);
     parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
 
-    var Action = {
-        search: 0,
-        business: 1
-    };
-
     var message = {};
 
     /**If the search type is business, query.id must be provided */
@@ -61,8 +63,8 @@ var query_yelp = function(query, search_type, callback, error) {
     OAuth.SignatureMethod.sign(message, accessor);
 
     var parameterMap = OAuth.getParameterMap(message.parameters);
-    parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature)
-    console.log(parameterMap);
+    parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
+    // console.log(parameterMap);
 
     $.ajax({
         'url': message.action,
@@ -75,6 +77,40 @@ var query_yelp = function(query, search_type, callback, error) {
     });
 };
 
+/* Utility function to parse JSON and return JS object */
+var parseData = function(json){
+  return JSON && JSON.parse(json) || $.parseJSON(json);
+};
 
-//obj = JSON && JSON.parse(json) || $.parseJSON(json);
-//var business_id = json.id;
+var searchQuery = function(term, location){
+    var query = {};
+    query['term'] = term;
+    query['location'] = location;
+
+    var results = queryYelp(query, Action.search, onSearchSuccess);
+
+    // var categories = _.chain(results.businesses).map(function(business){
+    //     return business.categories;
+    // }).union().value();
+
+    // results.categories = categories;
+
+    return results;
+};
+
+var onSearchSuccess = function(json){
+    var obj = parseData(json);
+
+    var businesses = _.map(obj.businesses, function(result){
+        delete result.deals;
+        delete result.gift_certificates;
+        delete result.is_claimed;
+        delete result.is_closed;
+        return result;
+    });
+
+    var results = {};
+    results.businesses = businesses;
+    results.total = obj.total;
+};
+
