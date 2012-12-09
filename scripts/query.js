@@ -101,7 +101,7 @@ var searchQuery = function(term, location){
 var onSearchSuccess = function(json){
     var obj = parseData(json);
 
-    var businesses = _.map(obj.businesses, function(result){
+    _.invoke(obj.businesses, function(result){
         delete result.deals;
         delete result.gift_certificates;
         delete result.is_claimed;
