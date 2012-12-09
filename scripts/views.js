@@ -13,8 +13,6 @@ var addQuery = function (results, opt_int) {
         quote:results[i].snippet_text,
         ratingImage:results[i].rating_img_url_small,
         tags:'',
-        
-        
       });
     }  
   } else {
