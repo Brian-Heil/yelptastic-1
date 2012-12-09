@@ -12,9 +12,9 @@ var getFavoriteCategories = function(){
     var feedback = [];
     var resultList = localStorage.getItem("results");
     for (var x in resultList.businesses){
-            feedback.push(x.categories); //returns the list of lists (of categories); from here Varun will try to find the broad-level category that this category belongs to 
+            feedback.push(x.categories); //returns the list of lists (of categories); from here Varun will try to find the broad-level category that this category belongs to
     }
-    return feedback;    
+    return feedback;
 };
 var getFavoritesWithinCategory = function(query){
     var feedback = [];
@@ -24,7 +24,7 @@ var getFavoritesWithinCategory = function(query){
             feedback.push(x);
         }
     }
-    return feedback; 
+    return feedback;
 };
 var addBusinessToFavorite = function(business){
     var resultList = [];
@@ -32,7 +32,7 @@ var addBusinessToFavorite = function(business){
         resultList = localStorage.getItem("results");
    }
      resultList.push(business);
-     localStorage.setItem("results", resultList); 
+     localStorage.setItem("results", resultList);
 };
 
 var deleteBusinessFromStorage = function(business){
