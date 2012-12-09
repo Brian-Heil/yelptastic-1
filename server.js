@@ -5,4 +5,4 @@ var index = fs.readFileSync('index.html');
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end(index);
-}).listen(process.env.PORT + 1);
+}).listen(process.env.PORT );
