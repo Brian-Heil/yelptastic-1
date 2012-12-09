@@ -1,5 +1,4 @@
 var searchFavorites = function(query){
-    //search crap.name, tags, category, crap.category
     var feedback = [];
     var resultList = localStorage.getItem("results");
     for (var x in resultList.businesses){
@@ -8,7 +7,7 @@ var searchFavorites = function(query){
         }
     }
     return feedback;
-}
+};
 var getFavoriteCategories = function(){
     var feedback = [];
     var resultList = localStorage.getItem("results");
@@ -16,7 +15,7 @@ var getFavoriteCategories = function(){
             feedback.push(x.categories); //returns the list of lists (of categories); from here Varun will try to find the broad-level category that this category belongs to 
     }
     return feedback;    
-}
+};
 var getFavoritesWithinCategory = function(query){
     var feedback = [];
     var resultList = localStorage.getItem("results");
@@ -26,14 +25,18 @@ var getFavoritesWithinCategory = function(query){
         }
     }
     return feedback; 
-}
+};
 var addBusinessToFavorite = function(business){
-    var resultList = localStorage.getItem("results");
-    resultList.push(business);
-    localStorage.setItem("results", resultList);   
-}
+    var resultList = [];
+    if(typeof localStorage.getItem("results") != 'undefined'){
+        resultList = localStorage.getItem("results");
+   }
+     resultList.push(business);
+     localStorage.setItem("results", resultList); 
+};
+
 var deleteBusinessFromStorage = function(business){
     var resultList = localStorage.getItem("results");
     resultList.delete(business);
     localStorage.setItem("results", resultList);
-}
+};
