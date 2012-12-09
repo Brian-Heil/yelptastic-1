@@ -87,7 +87,7 @@ var searchQuery = function(term, location){
     query['term'] = term;
     query['location'] = location;
 
-    var results = queryYelp(query, Action.search, onSearchSuccess);
+    var results = queryYelp(query, Action.search, onSearchSuccess, onSearchError);
 
     // var categories = _.chain(results.businesses).map(function(business){
     //     return business.categories;
@@ -114,3 +114,8 @@ var onSearchSuccess = function(json){
     results.total = obj.total;
 };
 
+var onSearchError = function(json){
+    var err = parseData(json);
+
+    console.error("Yelp API error", err);
+};
