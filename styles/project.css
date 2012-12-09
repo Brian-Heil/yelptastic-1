@@ -23,6 +23,45 @@
   position: relative;
   text-align: left;
   margin: auto;
+  
+}
+ button {
+  color: white;
+  background-color:blue;
+}
+p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+h3 {
+  font-size: 24.5px;
+  height: 20px;
+  margin-bottom: 15px;
+}
+.thumbnailContainer {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 10px; 
+  -khtml-border-radius: 2px;
+  display:block;
+  width: 250px;
+  height:300px;
+  position:relative;
+  float:left;
+  margin-left: 20px;
+  text-align: center;
+  background-color:black;
+  color:white;
+  margin-bottom: 10px;
+}
+.thumbnail {
+  display:block;
+  margin:auto;  
+  width: 150px;
+  height: 100px;
+}
+.thumbnails {
+  margin-left: 15px;
 }
 .breadcrumb {
   width: 1000px;
@@ -34,6 +73,7 @@
   float:left;
 }
 .columnLeft {
+  margin-top:10px;
   color:black;
   display:block;
   float:left;
@@ -42,11 +82,17 @@
 }
  
 .columnCenter {
+  margin-top:10px;
   color: black;
   display: block;
   float: left;
   width: 600px;
   height: 768px;
+}
+.span2 {
+  width:600px;
+  float:left;
+  display:block;
 }
 form {
   -moz-border-radius: 2px;
@@ -81,6 +127,7 @@ form {
   height: 100px;
 }
 .columnRight {
+    margin-top:10px;
   color:black;
   display:block;
   float:left;
@@ -145,6 +192,18 @@ form {
   width:290px;
   text-align:left;
   position:relative;
+}
+.grid { 
+  width:1024px;
+  display: block;
+}
+.grid .row {
+   overflow: auto;
+ }
+
+.grid .cell {
+    width: 50%;
+    float: left;
 }
 .resultsContainer .rating {
   color: white;
