@@ -23,9 +23,9 @@ var addQuery = function (results, opt_int) {
         title:results[i].title,
         image:results[i].image_url,
         quote:results[i].snippet_text,
-        ratingImage:results[i].rating_img_url_small,
+        ratingImage:results[i].rating_image_url_small,
         tags:'',
-        button:'Favorite',//$button,
+        button:'Favorite',
       });
     }  
 
@@ -33,6 +33,12 @@ var addQuery = function (results, opt_int) {
   var source = $('#results').html();
   var template = Handlebars.compile(source);
   var string = template(data);
+  alert(string);
+        $see_prev = $('<input type="button" value="Previous 20" name="nextButton">');
+               $see_all = $('<input type="button" value="Next 20" name="prevButton">');
+
+
+
   $('.thumbnails').append(string);
   if (data.length >= 20) {
     if (opt_int >= 20) {
@@ -52,6 +58,11 @@ var addQuery = function (results, opt_int) {
       $('.thumbnails').append($see_all);
     }
   }  
+  $buttonRow = $('<div class="buttonRow"></div>');
+  $buttonRow.append($see_prev);
+  $buttonRow.append($see_all);
+  
+  $('.thumbnails').append($buttonRow);
 }
 /*
  * Function to send the bookmarks to the backend
