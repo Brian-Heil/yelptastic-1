@@ -17,7 +17,30 @@ function getFavoriteCategories(){
        feedback.push(x.categories);
     }
  );
-    return feedback;
+    var answer = []; //a temp variable used in getBroadCategories which will be filled which a business's category hierachy
+    var cats = [];   //a list of 'answer' lists; each element in cats is a list containing the hierachy for each business
+
+    _.each(feedback, function(innerCat){
+        cats.push(getBroadCategories(answer, innerCat, allCategories));
+        answer =[];
+    });
+    return cats;
+}
+//this function needs testing
+
+function getBroadCategories(answers, innerCat, globalCategories){
+    for(var ky in globalCategories){
+        if(typeof globalCategories == 'object'){
+            answers.push(globalCategories);
+            getBroadCategories(answers, globalCategories[ky])
+        }else if(typeof globalCategories == 'string'){
+            if(globalCategories == innerCat){
+                 return answers; //return the list which contains the hierachy of categories for this business 
+                 //first element in the list is the inner most category and the last element is the broad category
+            }//else, the category of the item is not this one.
+        }
+        answers = [];  //clear the array and look at the next category in the global list
+    }    
 }
 
 function getFavoritesWithinCategory (query){
