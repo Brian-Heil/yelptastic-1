@@ -82,12 +82,13 @@ var parseData = function(json){
   return JSON && JSON.parse(json) || $.parseJSON(json);
 };
 
+/* Frontend API method to search Yelp with provided query and location. */
 var searchQuery = function(term, location){
     var query = {};
     query['term'] = term;
     query['location'] = location;
 
-    var results = queryYelp(query, Action.search, onSearchSuccess);
+    var results = queryYelp(query, Action.search, onSearchSuccess, onSearchError);
 
     // var categories = _.chain(results.businesses).map(function(business){
     //     return business.categories;
@@ -98,10 +99,11 @@ var searchQuery = function(term, location){
     return results;
 };
 
+/* Get JSON object from search API, remove unnecessary fields, and return object. */
 var onSearchSuccess = function(json){
     var obj = parseData(json);
 
-    var businesses = _.map(obj.businesses, function(result){
+    _.invoke(obj.businesses, function(result){
         delete result.deals;
         delete result.gift_certificates;
         delete result.is_claimed;
@@ -114,3 +116,9 @@ var onSearchSuccess = function(json){
     results.total = obj.total;
 };
 
+/* Return appropriate Yelp API error. */
+var onSearchError = function(json){
+    var err = parseData(json);
+
+    console.error("Yelp API error", err);
+};
