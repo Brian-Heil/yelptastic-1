@@ -21,10 +21,13 @@ function getFavoriteCategories(){
     var cats = [];   //a list of 'answer' lists; each element in cats is a list containing the hierachy for each business
 
     _.each(feedback, function(innerCat){
-        cats.push(getBroadCategories(answer, innerCat, categories))
+        cats.push(getBroadCategories(answer, innerCat, allCategories));
+        answer =[];
     });
     return cats;
 }
+//this function needs testing
+
 function getBroadCategories(answers, innerCat, globalCategories){
     for(var ky in globalCategories){
         if(typeof globalCategories == 'object'){
@@ -37,7 +40,6 @@ function getBroadCategories(answers, innerCat, globalCategories){
             }//else, the category of the item is not this one.
         }
         answers = [];  //clear the array and look at the next category in the global list
-
     }    
 }
 
