@@ -1,0 +1,19 @@
+Comments so far:
+
+'Search Yelp'
+------------------------------
+Logo and search boxes need to be spaced so that breadcrumb bar doesn't overextend results
+
+Space out search results more
+
+Search results rating isn't working
+
+Search button in 'Search Yelp' should be a form, so enter works
+
+Breadcrumb bar error: Home/Search/Search
+
+Favorite button restyle
+
+Remove tags in search results in 'Search Yelp'
+
+-----------------------------------------------------
