@@ -17,3 +17,18 @@ Favorite button restyle
 Remove tags in search results in 'Search Yelp'
 
 -----------------------------------------------------
+
+TO DO
+
+Add 'date added' parameter to the favorite
+
+Implement filtering
+
+Fix the bug that does not fetch the rating
+
+Implement sorting - where it is on the page?
+    Sort by rating, price, distance, date added to favorites
+
+Favorites homepage when there are no favorites
+
+Allow geolocation (automatic filling of the location search box)
