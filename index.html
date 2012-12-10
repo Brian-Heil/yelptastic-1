@@ -15,6 +15,7 @@
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 <script type="text/javascript" src="scripts/views.js"></script>
+<script type="text/javascript" src="scripts/query.js"></script>
 <!-- Add template scrips-->
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
@@ -87,7 +88,7 @@
      //var string = template(data);
      //alert(string);
     //addFavoritesView();
-    browseFavorites();
+  //  browseFavorites();
      //addQuery(data, 0);
    // $('body').append(string);
   });
@@ -110,7 +111,7 @@
                 <form id="searchbar" name="search1">
                   <input type="text" id="searchbox" placeholder="Search Favorites" name="search_favs">
                   <input type="text" id="locationbox" placeholder="Near" name="search_location">     
-                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="search()">
+                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="searchYelp(search1.search_favs.value, search1.search_location.value)">
                </form>
               </div>
               </div>
@@ -118,7 +119,7 @@
                  <form id="searchbar" name="search2">
                   <input type="text" id="searchbox" placeholder="Search Business" name="search1">
                   <input type="text" id="locationbox" placeholder="Near" name="search_loc">     
-                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="alert('Searching Yelp For: ' + search2.search1.value + 'at' + search2.search_loc.value)">
+                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="searchYelp(search2.search1.value, search2.search_loc.value)">
                  </form>
               </div>
      </div>

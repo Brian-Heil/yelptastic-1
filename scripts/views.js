@@ -1,3 +1,17 @@
+/*
+ * Search the yelp api
+ */
+var searchYelp = function (term, near) {
+  var results = searchQuery(term, near);
+  addFavoritesView(results);
+
+}
+
+
+
+/*
+ * Browses Favorites
+ */
 var browseFavorites = function() {
   var current = $('.active1').text();
   //alert("LOL" + current);
@@ -37,17 +51,19 @@ var browseFavorites = function() {
 /*
  * Displays the view for searching yelp.
  */
-var addFavoritesView = function() {
+var addFavoritesView = function(data) {
   //$('.breadcrumbs').removeClass('.active');
   var current = $('.active1').text();
   //alert("LOL" + current);
-  $('.active1').remove();
- // $('body').triggerHandler('Home');
-  $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
-  $('.breadcrumb').append('<li class="active">' + 'Search' +'</li> ');
-  history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
+  if (current !== 'Search'){
+    $('.active1').remove();
+   // $('body').triggerHandler('Home');
+    $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
+    $('.breadcrumb').append('<li class="active">' + 'Search' +'</li> ');
+    history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
+  }
   $('.columnCenter').empty();
-   var data = new Array({
+   /*var data = new Array({
      title: 'Yelp',
      image_url: 'http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg',
      snippet_text: 'Sometimes we ask questions without reading an email thoroughly as many of us did for the last event.  In honor of Yelp, the many questions they kindly...',
@@ -68,7 +84,7 @@ var addFavoritesView = function() {
      snippet_text: 'this sucks',
     // tags: 'sucky',
      rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
-       });
+       });*/
     addQuery(data, 0);
 }
 
