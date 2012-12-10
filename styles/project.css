@@ -6,6 +6,13 @@
   text-align: center;
   margin: auto;
 }
+.modal-body {
+  overflow-y: auto; 
+  max-height: 400px;
+  height: 330px;
+  padding: 15px;
+}
+
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
   -webkit-appearance: button;
    -moz-border-radius: 2px;

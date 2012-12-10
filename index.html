@@ -19,6 +19,8 @@
 <script type="text/javascript" src="scripts/query.js"></script>
 
 <!-- Add template scrips-->
+<!-- Modal -->
+  
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
    <div class="thumbnailContainer">
@@ -29,7 +31,32 @@
       <p>"{{quote}}"</p>
         <p>Tags:{{tags}}</p>
         <p>Rating: <img src="{{ratingImage}}"></p>
-        <input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"  />
+       <!-- <input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"/>-->
+        <a href="#myModal" role="button" class="btn" data-toggle="modal">Add to Favorites</a>
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Add {{name}} to Favorites!</h3>
+        </div>
+        <div class="modal-body">
+          <form id="popup" name="pop">
+            <h3>Tags:</h3>
+            <textarea rows="4" name="tags" cols="50">
+            </textarea>
+            <h3>Notes:</h3>
+            <textarea rows="4" name="Notes" cols="50">
+            </textarea>
+            <div class="modal-footer">    
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary" data-dismiss="modal" onclick="saveBookMark({{object}} , tags.value, Notes.value)">Save</button>
+            </div>
+          </form>
+          
+        </div>
+      
+      
+              
+            </div>
     </div>
     {{/each}}
 </script>

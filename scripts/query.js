@@ -2,10 +2,6 @@ var Action = {
     search: 0,
     business: 1
 };
-
-
-
-
 /*
 
 Queries Yelp Business and Search APIs and calls provided callback on success.
@@ -68,9 +64,6 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
     var parameterMap = OAuth.getParameterMap(message.parameters);
     parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
-    // console.log(parameterMap);
-
-   // $('body').bind()
     $.ajax({
         'url': message.action,
         'data': parameterMap,
@@ -111,7 +104,6 @@ var searchQuery = function(term, location, offset){
 /* Get JSON object from search API, remove unnecessary fields, and return object. */
 var onSearchSuccess = function(json, opt_term, opt_location, opt_offset){
     var obj = json;
-    alert('OFFSET: ' + opt_offset);
     addFavoritesView(obj.businesses, obj.total, opt_term, opt_location, opt_offset);
 
 };
