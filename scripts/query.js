@@ -98,6 +98,7 @@ var searchQuery = function(term, location){
     return results;
 };
 
+/* Get JSON object from search API, remove unnecessary fields, and return object. */
 var onSearchSuccess = function(json){
     var obj = parseData(json);
 
@@ -114,6 +115,7 @@ var onSearchSuccess = function(json){
     results.total = obj.total;
 };
 
+/* Return appropriate Yelp API error. */
 var onSearchError = function(json){
     var err = parseData(json);
 
