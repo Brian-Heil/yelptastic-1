@@ -12,28 +12,82 @@
 <script src="scripts/vendor/bootstrap.js" type="text/javascript"></script>
 <script src="scripts/vendor/bootstrap.min.js" type="text/javascript"></script>
 <script src="scripts/vendor/handlebars-1.0.rc.1.js" type="text/javascript"></script>
+<script src="scripts/vendor/underscore.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 <script type="text/javascript" src="scripts/views.js"></script>
+<script type="text/javascript" src="scripts/query.js"></script>
+
 <!-- Add template scrips-->
+<!-- Modal -->
+  
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
    <div class="thumbnailContainer">
-      <h3>{{title}}</h3>
+      <h3>{{name}}</h3>
       <div class="thumbnail">
         <img src="{{image}}" alt="" width="150" height="100">
       </div> 
       <p>"{{quote}}"</p>
         <p>Tags:{{tags}}</p>
         <p>Rating: <img src="{{ratingImage}}"></p>
-        <p><input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"  /></p>
+       <!-- <input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"/>-->
+        <a href="#myModal" role="button" class="btn" data-toggle="modal">Add to Favorites</a>
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Add {{name}} to Favorites!</h3>
+        </div>
+        <div class="modal-body">
+          <form id="popup" name="pop">
+            <h3>Tags:</h3>
+            <textarea rows="4" name="tags" cols="50">
+            </textarea>
+            <h3>Notes:</h3>
+            <textarea rows="4" name="Notes" cols="50">
+            </textarea>
+            <div class="modal-footer">    
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary" data-dismiss="modal" onclick="saveBookMark({{object}} , tags.value, Notes.value)">Save</button>
+            </div>
+          </form>
+          
+        </div>
+      
+      
+              
+            </div>
+    </div>
+    {{/each}}
+</script>
+<script id="browse" type="text/x-handlebars-template">
+  {{#each this}}
+   <div class="thumbnailContainer">
+      <h3>{{name}}</h3>
+      <div class="thumbnail">
+        <img src="{{image}}" alt="" width="150" height="100">
+      </div> 
+      <p>"{{quote}}"</p>
+        <p>Tags:{{tags}}</p>
+        <p>Rating: <img src="{{ratingImage}}"></p>
     </div>
     {{/each}}
 </script>
 <script>
 //  alert('This is running');
   $('document').ready(function() {
-//    alert('Search:' + document.search1.search_favs.value);
+      $('body').bind('Search', function(){
+        addFavoritesView();
+      });
+      $('body').bind('Home', function(){
+        alert('Successful');
+        $('.columnCenter').empty();
+        //addFavoritesView();
+      });
+    
+    
+    
+
      //var source = $('#results').html();
      //var template = Handlebars.compile(source);
     
@@ -62,7 +116,8 @@
      
      //var string = template(data);
      //alert(string);
-    addFavoritesView();
+    //addFavoritesView();
+  //  browseFavorites();
      //addQuery(data, 0);
    // $('body').append(string);
   });
@@ -85,7 +140,7 @@
                 <form id="searchbar" name="search1">
                   <input type="text" id="searchbox" placeholder="Search Favorites" name="search_favs">
                   <input type="text" id="locationbox" placeholder="Near" name="search_location">     
-                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="search()">
+                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="">
                </form>
               </div>
               </div>
@@ -93,14 +148,13 @@
                  <form id="searchbar" name="search2">
                   <input type="text" id="searchbox" placeholder="Search Business" name="search1">
                   <input type="text" id="locationbox" placeholder="Near" name="search_loc">     
-                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="alert('Searching Yelp For: ' + search2.search1.value + 'at' + search2.search_loc.value)">
+                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="searchYelp(search2.search1.value, search2.search_loc.value)">
                  </form>
               </div>
      </div>
   </div>
   <ul class="breadcrumb">
-    <li><a href="#">Home</a> <span class="divider">/</span></li>
-    <li class="active">Home</li>
+      <li class="active1">Home</li> 
   </ul>
   <div id="contentContainer">
     <div class="columnLeft">          

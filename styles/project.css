@@ -6,6 +6,13 @@
   text-align: center;
   margin: auto;
 }
+.modal-body {
+  overflow-y: auto; 
+  max-height: 400px;
+  height: 330px;
+  padding: 15px;
+}
+
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
   -webkit-appearance: button;
    -moz-border-radius: 2px;
@@ -44,17 +51,19 @@ img {
   margin-left:10px;
 }
 p {
-  margin-top: 5px;
-  margin-left:auto;
-  margin-right:auto;
-  font-size:75%;
-  line-height:12px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 75%;
+  line-height: 12px;
   width: 200px;
 }
 h3 {
-  font-size: 24.5px;
+  font-size: 15.5px;
   height: 20px;
+  display: block;
   margin-bottom: 15px;
+  line-height: 18px;
 }
 .thumbnailContainer {
   -moz-border-radius: 2px;
