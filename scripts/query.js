@@ -33,8 +33,8 @@ var queryYelp = function(query, search_type, callback, error) {
 
 
     var parameters = [];
-    parameters.push(['term', query.terms]);
-    parameters.push(['location', query.near]);
+    parameters.push(['term', query.term]);
+    parameters.push(['location', query.location]);
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
     parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
@@ -112,7 +112,7 @@ var onSearchSuccess = function(json){
     });
 
     var results = {};
-    results.businesses = businesses;
+    results.businesses = obj.businesses;
     results.total = obj.total;
 };
 
