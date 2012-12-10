@@ -12,28 +12,31 @@
 <script src="scripts/vendor/bootstrap.js" type="text/javascript"></script>
 <script src="scripts/vendor/bootstrap.min.js" type="text/javascript"></script>
 <script src="scripts/vendor/handlebars-1.0.rc.1.js" type="text/javascript"></script>
+<script src="scripts/vendor/underscore.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 <script type="text/javascript" src="scripts/views.js"></script>
+<script type="text/javascript" src="scripts/query.js"></script>
+
 <!-- Add template scrips-->
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
    <div class="thumbnailContainer">
-      <h3>{{title}}</h3>
+      <h3>{{name}}</h3>
       <div class="thumbnail">
         <img src="{{image}}" alt="" width="150" height="100">
       </div> 
       <p>"{{quote}}"</p>
         <p>Tags:{{tags}}</p>
         <p>Rating: <img src="{{ratingImage}}"></p>
-        <p><input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"  /></p>
+        <input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"  />
     </div>
     {{/each}}
 </script>
 <script id="browse" type="text/x-handlebars-template">
   {{#each this}}
    <div class="thumbnailContainer">
-      <h3>{{title}}</h3>
+      <h3>{{name}}</h3>
       <div class="thumbnail">
         <img src="{{image}}" alt="" width="150" height="100">
       </div> 
@@ -87,7 +90,7 @@
      //var string = template(data);
      //alert(string);
     //addFavoritesView();
-    browseFavorites();
+  //  browseFavorites();
      //addQuery(data, 0);
    // $('body').append(string);
   });
@@ -110,7 +113,7 @@
                 <form id="searchbar" name="search1">
                   <input type="text" id="searchbox" placeholder="Search Favorites" name="search_favs">
                   <input type="text" id="locationbox" placeholder="Near" name="search_location">     
-                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="search()">
+                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="">
                </form>
               </div>
               </div>
@@ -118,7 +121,7 @@
                  <form id="searchbar" name="search2">
                   <input type="text" id="searchbox" placeholder="Search Business" name="search1">
                   <input type="text" id="locationbox" placeholder="Near" name="search_loc">     
-                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="alert('Searching Yelp For: ' + search2.search1.value + 'at' + search2.search_loc.value)">
+                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="searchYelp(search2.search1.value, search2.search_loc.value)">
                  </form>
               </div>
      </div>
