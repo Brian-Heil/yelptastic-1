@@ -3,7 +3,32 @@
  */
 var searchYelp = function (term, near) {
   var results = searchQuery(term, near);
-  addFavoritesView(results);
+  /*var data = [{
+     title: 'Yelp',
+     image_url: 'http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg',
+     snippet_text: 'Sometimes we ask questions without reading an email thoroughly as many of us did for the last event.  In honor of Yelp, the many questions they kindly...',
+    // tags: 'sucky',
+     rating_image_url_small:'http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_3.png',
+   },{title: 'cool',
+     image_url: 'http://placehold.it/300x200',
+     snippet_text: 'this sucks',
+    // tags: 'sucky',
+     rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+   },{title: 'cool',
+     image_url: 'http://placehold.it/300x200',
+     snippet_text: 'this sucks',
+    // tags: 'sucky',
+     rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+   },{title: 'cool',
+     image_url: 'http://placehold.it/300x200',
+     snippet_text: 'this sucks',
+    // tags: 'sucky',
+     rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
+       }];*/
+  
+  
+  
+  addFavoritesView(results.businesses);
 
 }
 
@@ -85,6 +110,7 @@ var addFavoritesView = function(data) {
     // tags: 'sucky',
      rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
        });*/
+    alert(data);
     addQuery(data, 0);
 }
 
