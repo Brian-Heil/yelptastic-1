@@ -30,10 +30,34 @@
     </div>
     {{/each}}
 </script>
+<script id="browse" type="text/x-handlebars-template">
+  {{#each this}}
+   <div class="thumbnailContainer">
+      <h3>{{title}}</h3>
+      <div class="thumbnail">
+        <img src="{{image}}" alt="" width="150" height="100">
+      </div> 
+      <p>"{{quote}}"</p>
+        <p>Tags:{{tags}}</p>
+        <p>Rating: <img src="{{ratingImage}}"></p>
+    </div>
+    {{/each}}
+</script>
 <script>
 //  alert('This is running');
   $('document').ready(function() {
-//    alert('Search:' + document.search1.search_favs.value);
+      $('body').bind('Search', function(){
+        addFavoritesView();
+      });
+      $('body').bind('Home', function(){
+        alert('Successful');
+        $('.columnCenter').empty();
+        //addFavoritesView();
+      });
+    
+    
+    
+
      //var source = $('#results').html();
      //var template = Handlebars.compile(source);
     
@@ -62,7 +86,8 @@
      
      //var string = template(data);
      //alert(string);
-    addFavoritesView();
+    //addFavoritesView();
+    browseFavorites();
      //addQuery(data, 0);
    // $('body').append(string);
   });
@@ -99,8 +124,7 @@
      </div>
   </div>
   <ul class="breadcrumb">
-    <li><a href="#">Home</a> <span class="divider">/</span></li>
-    <li class="active">Home</li>
+      <li class="active1">Home</li> 
   </ul>
   <div id="contentContainer">
     <div class="columnLeft">          
