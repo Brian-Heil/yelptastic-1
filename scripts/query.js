@@ -82,6 +82,7 @@ var parseData = function(json){
   return JSON && JSON.parse(json) || $.parseJSON(json);
 };
 
+/* Frontend API method to search Yelp with provided query and location. */
 var searchQuery = function(term, location){
     var query = {};
     query['term'] = term;
