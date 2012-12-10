@@ -1,6 +1,6 @@
 Comments so far:
 
-'Search Yelp'
+Search Yelp
 ------------------------------
 Logo and search boxes need to be spaced so that breadcrumb bar doesn't overextend results
 
@@ -16,4 +16,8 @@ Favorite button restyle
 
 Remove tags in search results in 'Search Yelp'
 
------------------------------------------------------
+
+
+Other
+------------------------------------
+First-run should ask for username
