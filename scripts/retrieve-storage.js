@@ -12,7 +12,7 @@ function searchFavorites (query){
 function getFavoriteCategories(){
     var feedback = [];
     var resultList = localStorage.getItem("results");
-    //returns the list of lists (of categories); from here Varun will try to find the broad-level category that this category belongs to
+    //returns the list of lists (of categories); 
     _.each(resultList.businesses, function(x){
        feedback.push(x.categories);
     }
@@ -79,4 +79,9 @@ function removeA(arr) {
         }
     }
     return arr;
+}
+function saveBookmark(business, tags, notes){
+    business["tags"] = tags;
+    business["notes"] = notes;
+    addBusinessToFavorite(business);
 }
