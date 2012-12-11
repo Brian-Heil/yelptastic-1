@@ -257,10 +257,48 @@ var parseYelpCategories = function (term, location, categories) {
         	
         	categories_wrapper = categories_wrapper + '<div class="accordion-group">';
             categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
-            categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '">';      
+            categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '" ';
+            
+            if (typeof categories[i][j] != string)
+            {
+            	categories_wrapper = categories_wrapper + 'href ="#sub' + subCategoryTag +  '" ';
+            }
+            
+            categories_wrapper = categories_wrapper + '>';      
+
             categories_wrapper = categories_wrapper + subCategory;                                
             categories_wrapper = categories_wrapper + '</a>';
             categories_wrapper = categories_wrapper + '</div>';
+            
+            
+            if (typeof categories[i][j] != string)
+            {
+            	categories_wrapper = categories_wrapper + '<div id="sub'+ subCategory + '" class="accordion-body collapse">';
+                categories_wrapper = categories_wrapper + '<div class="accordion-inner" style="margin-left:1em; margin-right:1em">';
+            	
+            	for (var k in categories[i][j])
+            	{
+            		
+            		var subSubCategory = k;
+            		var subSubCategoryTag = categories[i][j][k];
+                    
+                    categories_wrapper = categories_wrapper + '<div class="accordion-group">';
+                    categories_wrapper = categories_wrapper + '<div class = "accordion-heading">';
+                    categories_wrapper = categories_wrapper + '<a class="accordion-toggle">';
+                    categories_wrapper = categories_wrapper + subSubCategory;
+                    categories_wrapper = categories_wrapper + '</a>';
+                    categories_wrapper = categories_wrapper + '</div>';
+                    categories_wrapper = categories_wrapper + '</div>';
+            		
+            		
+            	}
+            	
+            	    categories_wrapper = categories_wrapper + '</div>';                
+                    categories_wrapper = categories_wrapper + '</div>';
+            	
+            }
+            
+            
             categories_wrapper = categories_wrapper + '</div>';     
         }
            
