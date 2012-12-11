@@ -119,8 +119,6 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
 * Takes in the results and appends them to the thumbnails grids
 */
 var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, opt_cat) {
-    var target = document.getElementById('columnCenter');
-    var spinner = new Spinner(opts).stop(target);
     $('.columnCenter').empty();
     $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
     var data = [];
@@ -150,6 +148,8 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
     var source = $('#results').html();
     var template = Handlebars.compile(source);
     var string = template(data);
+    var target = document.getElementById('columnCenter');
+    var spinner = new Spinner(opts).stop(target);
     $thumbnailswrapper.append(string);
     if (opt_total > 20) {
         $buttonRow = $('<div class="buttonRow"></div>');
@@ -179,6 +179,8 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
 */
 var browseBookmarks = function (results, opt_int) {
     $('.columnCenter').empty();
+    var target = document.getElementById('columnCenter');
+    var spinner = new Spinner(opts).spin(target);
     $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
     $buttonRow = $('<div class="buttonRow"></div>');
     var data = [];
@@ -236,6 +238,7 @@ var browseBookmarks = function (results, opt_int) {
     var accordsource = $('#filters').html();
     var accordtemplate = Handlebars.compile(accordsource);
     var accordstring = template({funcname:'filterfavorites', results:JSON.stringify(results)});
+    spinner.stop();
     $('.columnRight').append(accordstring);
     $thumbnailswrapper.append(string);
     if (data.length >= 20) {
