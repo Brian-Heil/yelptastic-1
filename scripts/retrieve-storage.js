@@ -21,7 +21,7 @@ function getFavoriteCategories(){
     var cats = [];   //a list of 'answer' lists; each element in cats is a list containing the hierachy for each business
 
     _.each(feedback, function(innerCat){
-        cats.push(getBroadCategories(answer, innerCat, allCategories));
+        cats.push(getBroadCategories(answer, innerCat, categories));
         answer =[];
     });
     return cats;
@@ -32,7 +32,7 @@ function getBroadCategories(answers, innerCat, globalCategories){
     for(var ky in globalCategories){
         if(typeof globalCategories == 'object'){
             answers.push(globalCategories);
-            getBroadCategories(answers, globalCategories[ky])
+            getBroadCategories(answers, globalCategories[ky]);
         }else if(typeof globalCategories == 'string'){
             if(globalCategories == innerCat){
                  return answers; //return the list which contains the hierachy of categories for this business 
@@ -85,11 +85,11 @@ function removeA(arr) {
 function saveBookmark(business, tags, notes){
     business.tags = tags;
     business.notes = notes;
-    Date d = new Date();
+    var d = new Date();
     var day = d.getDate();
     var month = d.getMonth() + 1;
     var time = d.getTime();
     var year = d.getFullYear();
-    business.dateAdded = time + " " month + "/" + day +"/"+ year;
+    business.dateAdded = time + " " + month + "/" + day +"/"+ year;
     addBusinessToFavorite(business);
 }
