@@ -29,7 +29,6 @@ var searchYelp = function (term, near, category_filters, offset) {
                                 '<strong>Error!</strong> Please include the appropriate info in the appropriate fields.'+
                                 '</div>');
         }
-
     }
 };
 
@@ -181,7 +180,6 @@ var browseBookmarks = function (results, opt_int) {
                 views:results[i].review_count,
                 distance:results[i].distance,
                 address:results[i].location.display_address[0] +" " + results[i].location.display_address[1]+" "+ results[i].location.display_address[2]
-
             });
         }
     } else {
@@ -238,9 +236,7 @@ var saveFavorite = function (jsonString, tags1, notes1) {
     saveBookmark(object1, tags1, notes1);
 };
 
-
 var parseYelpCategories = function (term, location, categories) {
-
     var categories_wrapper = '<div class="accordion" id="categories">';
     for (var i in categories)
     {
@@ -248,7 +244,6 @@ var parseYelpCategories = function (term, location, categories) {
         var genCategoryTag = i;
         genCategoryTag = genCategoryTag.replace(/ /g, "_");
         genCategoryTag = genCategoryTag.replace(/&/g, "And");
-
 
         categories_wrapper = categories_wrapper + '<div class="accordion-group" id="' + genCategoryTag + '">';
         categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
@@ -275,8 +270,6 @@ var parseYelpCategories = function (term, location, categories) {
         categories_wrapper = categories_wrapper + '</div>';
         categories_wrapper = categories_wrapper + '</div>';
         categories_wrapper = categories_wrapper + '</div>';
-
-
     }
 
     categories_wrapper = categories_wrapper + "</div>";
