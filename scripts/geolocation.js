@@ -6,10 +6,13 @@ var codedLatLng;
 var bounds = new google.maps.LatLngBounds();
 var distances = {};
 
-function initialize() {
-	geocoder = new google.maps.Geocoder();
+function Geolocation(){
+	this.geocoder = new google.maps.Geocoder();
+	this.decodedAddress = undefined;
+	this.codedLatLng = undefined;
+	this.bounds = new google.maps.LatLngBounds();
+	this.distances = {};
 }
-
 
 /*
 	Function to take a longitude and latitude value and return an address.
@@ -17,7 +20,7 @@ function initialize() {
 
 	eg. var address = codeLatLng("43.714224,-73.961452");
 */
-function codeLatLng(location) {
+Geolocation.prototype.codedLatLng = function(location) {
 	var latlngStr = location.split(',', 2);
 	var lat = parseFloat(latlngStr[0]);
 	var lng = parseFloat(latlngStr[1]);
@@ -35,7 +38,7 @@ function codeLatLng(location) {
 	});
 
 	return decodedAddress;
-}
+};
 
 
 /*
@@ -44,17 +47,17 @@ function codeLatLng(location) {
 
 	eg. var latLng = codeAddress("Sydney, NSW");
 */
-function codeAddress(address) {
+Geolocation.prototype.codeAddress = function(address) {
 	geocoder.geocode( { 'address': address}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
-			codedLatLng = results[0].geometry.location;
+			this.codedLatLng = results[0].geometry.location;
 		} else {
 			alert('Geocode was not successful for the following reason: ' + status);
 		}
 	});
 
-	return codedLatLng;
-}
+	return this.codedLatLng;
+};
 
 /*
 	Function to take a origin and a list of destinations and calculate distances.
@@ -62,7 +65,7 @@ function codeAddress(address) {
 
 	eg. calculateDistances("Columbia University, NY", ["Tom's Diner, Morningside Heights", "Hamilton Deli, NYC"]);
 */
-function calculateDistances(origin, destinations) {
+Geolocation.prototype.calculateDistances = function(origin, destinations) {
 	var service = new google.maps.DistanceMatrixService();
 	service.getDistanceMatrix(
 	{
@@ -72,10 +75,10 @@ function calculateDistances(origin, destinations) {
 		unitSystem: google.maps.UnitSystem.IMPERIAL,
 		avoidHighways: false,
 		avoidTolls: false
-	}, parseDistances);
+	}, this.parseDistances);
 
-	return distances;
-}
+	return this.distances;
+};
 
 /*
 	Callback function to take Google Maps API results and populate a map of distance objects.
@@ -90,7 +93,7 @@ function calculateDistances(origin, destinations) {
 
 	Distances are in miles and durations are in seconds.
 */
-function parseDistances(response, status) {
+Geolocation.prototype.parseDistances = function(response, status) {
 	if (status != google.maps.DistanceMatrixStatus.OK) {
 		alert('Error was: ' + status);
 	} else {
@@ -99,7 +102,7 @@ function parseDistances(response, status) {
 
 		for (var i = 0; i < origins.length; i++) {
 			var results = response.rows[i].elements;
-			distances[origins[i]] = [];
+			this.distances[origins[i]] = [];
 
 			for (var j = 0; j < results.length; j++) {
 				var distanceResult = {
@@ -108,8 +111,8 @@ function parseDistances(response, status) {
 					duration: results[j].duration.value
 				};
 
-				distances[origins[i]].push(distanceResult);
+				this.distances[origins[i]].push(distanceResult);
 			}
 		}
 	}
-}
+};
