@@ -1,112 +1,139 @@
+function searchFavorites(query) {
+	var feedback = [];
+	var resultList = JSON.parse(localStorage.getItem("results"));
+	if (resultList == null) {
+		return feedback;
+	} else {
+		_.each(resultList, function(x) {
+			if (x.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+				feedback.push(x);
+			} else if (x.tags.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+				feedback.push(x);
 
-function searchFavorites (query){
-    var feedback = [];
-    var resultList = JSON.parse(localStorage.getItem("results"));
-    if(resultList == null){
-    	return feedback;
-    }else{
-    _.each(resultList, function(x){
-        if(x.name.toLowerCase().indexOf(query.toLowerCase()) > -1){
-        	feedback.push(x);
-        } else if (x.tags.toLowerCase().indexOf(query.toLowerCase()) > -1){
-        	feedback.push(x);
-        	
-        } else if (x.notes.toLowerCase().indexOf(query.toLowerCase()) > -1){
-            feedback.push(x);
-        }
-    });
-    }
-    return feedback;
+			} else if (x.notes.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+				feedback.push(x);
+			}
+		});
+	}
+	return feedback;
 }
 
-function getFavoriteCategories(){
-    var feedback = [];
-    var resultList = JSON.parse(localStorage.getItem("results"));
-    //returns the list of lists (of categories); 
-    _.each(resultList, function(x){
-       feedback.push(x.categories);
-    }
- );
-    var answer = []; //a temp variable used in getBroadCategories which will be filled which a business's category hierachy
-    var cats = [];   //a list of 'answer' lists; each element in cats is a list containing the hierachy for each business
 
-    _.each(feedback, function(innerCat){
-        cats.push(getBroadCategories(answer, innerCat, categories));
-        answer =[];
-    });
-    return cats;
+function getFavoriteCategories() {
+
+	var feedback = {};
+	var resultList = JSON.parse(localStorage.getItem("results"));
+	//returns the list of lists (of categories);
+	_.each(resultList, function(x) {
+		feedback[x.name] = [];
+		_.each(x.categories, function(y) {
+			feedback[x.name].push(y[1]);
+			//	alert(y[1]);
+		});
+	});
+	var answer = {};
+	//a temp variable used in getBroadCategories which will be filled which a business's category hierachy
+	var cats = [];
+	//a list of 'answer' lists; each element in cats is a list containing the hierachy for each business
+
+	_.each(feedback, function(innerCat, ky) {
+
+		//	alert(innerCat); works- shows the strings of the categories
+		cats.push(getBroadCategories(answer, innerCat, categories));
+		answer = {};
+	});
+	//alert(cats);
+	return cats;
 }
+
 //this function needs testing
 
-function getBroadCategories(answers, innerCat, globalCategories){
-    for(var ky in globalCategories){
-        if(typeof globalCategories == 'object'){
-            answers.push(globalCategories);
-            getBroadCategories(answers, globalCategories[ky]);
-        }else if(typeof globalCategories == 'string'){
-            if(globalCategories == innerCat){
-                 return answers; //return the list which contains the hierachy of categories for this business 
-                 //first element in the list is the inner most category and the last element is the broad category
-            }//else, the category of the item is not this one.
-        }
-        answers = [];  //clear the array and look at the next category in the global list
-    }    
+function getBroadCategories(answers, innerCat, globalCategories) {
+	
+	for (var singleCat in innerCat) {
+		answers[singleCat] = [];
+		var hierarchy = [];
+		//alert(globalCategories);
+		answers[singleCat] = findStrings(singleCat, hierarchy, globalCategories);
+
+	}
+	return answers;
 }
 
-function getFavoritesWithinCategory (query){
-    var feedback = [];
-    var resultList = JSON.parse(localStorage.getItem("results"));
+function findStrings(singleCat, catsForThisCat, globalCategories) {
+	for (var ky in globalCategories) {
+		if ( typeof globalCategories == 'object') {
+			catsForThisCat.push(globalCategories);
+			findStrings(singleCat, catsForThisCat, globalCategories[ky]);
+		} else if ( typeof globalCategories == 'string') {
 
-   _.each(resultList, function(x){
-        if(x.categories == query){
-            feedback.push(x);
-        }
-    });
-    return feedback;
+			if (globalCategories.toLowerCase().search(singleCat.toLowerCase()) > -1) {
+				alert(singleCat);
+				return catsForThisCat;
+				//return the list which contains the hierachy of categories for this business
+				//first element in the list is the inner most category and the last element is the broad category
+			} else {
+				//alert(catsForThisCat);
+				
+				catsForThisCat = [];
+			}//else, the category of the item is not this one.
+		}
+	}
 }
 
-function addBusinessToFavorite (business){
+function getFavoritesWithinCategory(query) {
+	var feedback = [];
+	var resultList = JSON.parse(localStorage.getItem("results"));
 
-    var resultList = JSON.parse(localStorage.getItem("results"));
-    if(resultList == null){
-    	resultList = [];   	
-    	
+	_.each(resultList, function(x) {
+		if (x.categories == query) {
+			feedback.push(x);
+		}
+	});
+	return feedback;
+}
+
+function addBusinessToFavorite(business) {
+
+	var resultList = JSON.parse(localStorage.getItem("results"));
+	if (resultList == null) {
+		resultList = [];
+
+	}
+	resultList.push(business);
+	localStorage.setItem("results", JSON.stringify(resultList));
+}
+
+function deleteBusinessFromStorage(business) {
+	var resultList = JSON.parse(localStorage.getItem("results"));
+	removeA(resultList, business);
+	localStorage.setItem("results", JSON.stringify(resultList));
+}
+
+function removeA(array, item) {
+	    for(var i in array){
+        if(array[i]==item){
+            array.splice(i,1);
+            break;
+            }
     }
-   resultList.push(business);
-   localStorage.setItem("results", JSON.stringify(resultList));
+	return array;
 }
 
-function deleteBusinessFromStorage(business){
-    var resultList = JSON.parse(localStorage.getItem("results"));
-    removeA(resultList, business);
-    localStorage.setItem("results", JSON.stringify(resultList));
-}
-
-function removeA(arr) {
-    var what, a = arguments, L = a.length, ax;
-    while (L > 1 && arr.length) {
-        what = a[--L];
-        while ((ax= arr.indexOf(what)) !== -1) {
-            arr.splice(ax, 1);
-        }
-    }
-    return arr;
-}
-
-function saveBookmark(business, tags, notes){
+function saveBookmark(business, tags, notes) {
 	if (tags == undefined) {
 		tags = " ";
 	}
-	if (notes == undefined){
+	if (notes == undefined) {
 		notes = " ";
 	}
-    business.tags = tags;
-    business.notes = notes;
-    var d = new Date();
-    var day = d.getDate();
-    var month = d.getMonth() + 1;
-    var time = d.getTime();
-    var year = d.getFullYear();
-    business.dateAdded = time + " " + month + "/" + day +"/"+ year;
-    addBusinessToFavorite(business);
+	business.tags = tags;
+	business.notes = notes;
+	var d = new Date();
+	var day = d.getDate();
+	var month = d.getMonth() + 1;
+	var time = d.getTime();
+	var year = d.getFullYear();
+	business.dateAdded = time + " " + month + "/" + day + "/" + year;
+	addBusinessToFavorite(business);
 }
