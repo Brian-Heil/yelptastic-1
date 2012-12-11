@@ -37,16 +37,26 @@ function filterFavorites(criterion, filter, results) {
 			destinations[x.name] = latlng;
 
 		});
-		var go = new Geolocation;
-		var locObj = new google.maps.LatLng(go.getCurrentLocation.latitude, go.getCurrentLocation.longitude);
-		calculateDistances(locObj, Object.values(destinations));
+		var geo = new Geolocation;
+		var locObj = new google.maps.LatLng(geo.getCurrentLocation.latitude, geo.getCurrentLocation.longitude);
+		var mapping = calculateDistances(locObj, Object.values(destinations));
+		for (var i=0; i< mapping.values.length; i++){
+			if ((mapping.values[i])[distance] <= criterion){
+				feedback(destinations[i]);
+			}
+		}
 		return findDistance(x) <= criterion;
 		//within 'criterion' miles
 	} else if (filter == "category" || filter == "categories") {
-		var answer = [];
-		feedback = _.filter(results, function(x) {
-			return Object.values(businessAndCategories).indexOf(criterion) > -1;
-		});
+		
+		getFavoriteCategories();
+		 _.each(results, function(x) {
+			for(thisList in businessAndCategories){
+				if((typeof thisList[x] != "undefined") && thisList[x].contains(criterion)){
+					feedback.push(x);
+				}
+			}
+		});	
 	}
 	return feedback;
 }
