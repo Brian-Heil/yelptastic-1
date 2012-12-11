@@ -31,7 +31,6 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
 
     var parameters = [];
-    alert('location: ' + query.location);
     parameters.push(['term', query.term]);
     parameters.push(['location', query.location]);
     parameters.push(['category-filters', query.categories]);
@@ -46,7 +45,6 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
     /**If the search type is business, query.id must be provided */
     if (search_type === Action.search) {
-      alert('Running Search');
         message = {
             'action': 'http://api.yelp.com/v2/search',
             'method': 'GET',
@@ -83,6 +81,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
     });
 
     check.error(function() {
+       history.pushState({}, 'Yelptastic- Error', '#Error');
        $('body').empty();
        $('body').append('<div class="hero-unit">'+
     '<h1>An error occured in connecting with the YELP</h1>' +

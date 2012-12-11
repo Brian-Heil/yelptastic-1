@@ -6,6 +6,19 @@
   text-align: center;
   margin: auto;
 }
+.alert {
+  width:1280px;
+}
+
+.btn-danger {
+  display: block;
+  position: relative;
+  height: 14px;
+  width: 28px;
+  left: 97px;
+  font-size: 70%;
+}
+
 .modal-body {
   overflow-y: auto; 
   max-height: 400px;
@@ -23,6 +36,12 @@
   display: block;
   margin: auto;
 }
+.btn {
+  margin-top: 5px;
+  float: left;
+  margin-right: -26px;
+
+}
 
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
   -webkit-appearance: button;
@@ -36,9 +55,9 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 }
 #logo {
   float: left;
-  margin-left: 40px;
+  margin-left: 57px;
   height: 100px;
-  width: 219px;
+  width: 243px;
   text-align: left;
   position: relative;
   background-image: url('http://i.imgur.com/aIRpe.jpg');
@@ -85,7 +104,7 @@ h3 {
   display: block;
   width: 250px;
   border-style: solid;
-  height: 300px;
+  height: 350px;
   position: relative;
   float: left;
   margin-left: 20px;
@@ -151,12 +170,13 @@ form {
   height: 30px;
   display: block;
   position: relative;
-  float: left;
+  float: right;
 }
 .tab-content {
   overflow: hidden;
   height: 50px;
   width: 660px;
+  float:right;
   position: relative;
 }
 #searchbox {
