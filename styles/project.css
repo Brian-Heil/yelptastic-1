@@ -8,9 +8,17 @@
 }
 .alert {
   width:1280px;
-  
-  
 }
+
+.btn-danger {
+  display: block;
+  position: relative;
+  height: 14px;
+  width: 28px;
+  left: 97px;
+  font-size: 70%;
+}
+
 .modal-body {
   overflow-y: auto; 
   max-height: 400px;
@@ -27,6 +35,12 @@
   position: relative;
   display: block;
   margin: auto;
+}
+.btn {
+  margin-top: 5px;
+  float: left;
+  margin-right: -26px;
+
 }
 
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
@@ -90,7 +104,7 @@ h3 {
   display: block;
   width: 250px;
   border-style: solid;
-  height: 300px;
+  height: 350px;
   position: relative;
   float: left;
   margin-left: 20px;

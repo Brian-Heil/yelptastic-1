@@ -19,15 +19,16 @@
 <script type="text/javascript" src="scripts/query.js"></script>
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
-    <a href="{{url}}"  target="_blank"><div class="thumbnailContainer">
-      <h3>{{name}}</h3>
+   <div class="thumbnailContainer">
+       <a href="{{url}}"  target="_blank"><h3>{{name}}</h3></a>
       <div class="thumbnail">
       <img src="{{image}}" alt="" width="150" height="100">
       </div>
       <p>"{{quote}}"</p>
       <p>Phone:{{phonenumber}}</p>
-        <p>Rating: <img src="{{ratingImage}}"></p>
-       <!-- <input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"/>-->
+      <p>{{address}}</p>
+
+        <p><img src="{{ratingImage}}">({{views}} reviews)</p>
         <a href="#myModal{{n}}" role="button" class="btn" data-toggle="modal">Add to Favorites</a>
         <div id="myModal{{n}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
@@ -36,10 +37,8 @@
         </div>
         <div class="modal-body">
           <form id="popup" name="pop">
-            <h3>Tags:</h3>
             <textarea rows="4" name="tags" cols="50">
             </textarea>
-            <h3>Notes:</h3>
             <textarea rows="4" name="Notes" cols="50">
             </textarea>
             <div class="modal-footer">
@@ -49,20 +48,24 @@
           </form>
         </div>
             </div>
-    </div></a>
+    </div>
     {{/each}}
 </script>
 <script id="browse" type="text/x-handlebars-template">
   {{#each this}}
-    <a href="{{url}}"  target="_blank"><div class="thumbnailContainer">
-      <h3>{{name}}</h3>
+   <div class="thumbnailContainer">
+       <button type="button" onclick="alert('hello');deleteBusinessFromStorage({{object}});" id="#delete"class="btn btn-link"><i class="icon-trash"></i></button>
+
+       <a href="{{url}}"  target="_blank"><h3>{{name}}</h3></a>
       <div class="thumbnail">
         <img src="{{image}}" alt="" width="150" height="100">
       </div>
       <p>"{{quote}}"</p>
         <p>Tags:{{tags}}</p>
-        <p>Rating: <img src="{{ratingImage}}"></p>
-    </div></a>
+        <p>{{address}}</p>
+        <p><img src="{{ratingImage}}">({{views}} reviews)</p>
+        <a href="#" class="btn btn-large btn-danger" rel="popover" data-content="{{notes}}" data-original-title="Notes">Notes</a>
+    </div>
     {{/each}}
 </script>
 <script>
@@ -101,29 +104,26 @@
 </script>
 <body>
 <div id="pageWrapper">
-  <!--Test Divs-->
   <div id= "headContainer">
      <h1><div id="logo"></div></h1>
      <ul class="nav nav-tabs">
       <li class="active"><a href="#search_favorites" data-toggle="tab">Search Favorites</a></li>
-      <li><a href="#search_yelp" data-toggle="tab">Search Yelp</a></li>
+      <li><a href="#search_yelp" data-toggle="tab">Add Favorites</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
               <div class="tab-pane fade active in" id="search_favorites">
                 <div class="searchContainer">
                 <form id="searchbar" name="search1">
                   <input type="text" id="searchbox" placeholder="Search Favorites" name="search_favs">
-                  <input type="text" id="locationbox" placeholder="Near" name="search_location">
-                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="getBookmarks(search1.search_favs.value)">
+                  <button class="btn" type="submit"  onsubmit="getBookmarks(search1.search_favs.value);  return false;" onclick="getBookmarks(search1.search_favs.value); return false;">Search</button>
                </form>
               </div>
               </div>
               <div class="tab-pane fade" id="search_yelp">
                  <form id="searchbar" name="search2" >
                   <input type="text" id="searchbox" placeholder="Search Business" name="search1">
-                  <input type="text" id="locationbox" placeholder="Near" name="search_loc">     
-                  <input type="submit" onsubmit="searchYelp(search2.search1.value, search2.search_loc.value);  return false;" id="searchbutton" value="Search" name="searchButton2" onclick="searchYelp(search2.search1.value, search2.search_loc.value); return false;">
-
+                  <input type="text" id="locationbox" placeholder="Near" name="search_loc">    
+                  <button class="btn" type="submit" onsubmit="searchYelp(search2.search1.value, search2.search_loc.value);  return false;" onclick="searchYelp(search2.search1.value, search2.search_loc.value); return false;">Search</button>
                  </form>
               </div>
      </div>
