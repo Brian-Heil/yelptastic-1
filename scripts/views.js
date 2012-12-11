@@ -240,14 +240,14 @@ var browseBookmarks = function (results, opt_int) {
     $thumbnailswrapper.append(string);
     if (data.length >= 20) {
         if (opt_int >= 20) {
-            $see_prev = $('<button class="btn" value="Previous" name="nextButton">');
+            $see_prev = $('<button class="btn" value="Previous" name="nextButton">Previous</button>');
             $see_prev.click(function() {
                 addQuery(results, opt_int-1);
             });
             $buttonRow.append($see_prev);
         }
         if (opt_int + 20 <= data.length) {
-            $see_all = $('<button class="btn" value="Next" name="prevButton">');
+            $see_all = $('<button class="btn" value="Next" name="prevButton">Next</button>');
             $see_all.click(function() {
                 addQuery(results, opt_int + 20);
             });
