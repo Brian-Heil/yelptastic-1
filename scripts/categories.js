@@ -867,4 +867,4 @@ var allcategories = {
 		"Wholesale Stores": "wholesale_stores",
 		"Wigs": "wigs"
 	}
-}
+};

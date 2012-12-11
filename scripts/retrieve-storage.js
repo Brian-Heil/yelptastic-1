@@ -21,7 +21,7 @@ function getFavoriteCategories(){
     var cats = [];   //a list of 'answer' lists; each element in cats is a list containing the hierachy for each business
 
     _.each(feedback, function(innerCat){
-        cats.push(getBroadCategories(answer, innerCat, allCategories));
+        cats.push(getBroadCategories(answer, innerCat, categories));
         answer =[];
     });
     return cats;
