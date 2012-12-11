@@ -14,10 +14,10 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
         //
         // Update with your auth tokens.
         //
-        consumerKey: "5A_gzfTqsJUuuXq2-ote7w",
-        consumerSecret: "oDgb06VHZI91mhhm2CcmIlsDnX0",
-        accessToken: "gn5XPAGmIGGIoGGNtks-qdasM_xDB0rg",
-        accessTokenSecret: "QvOkVYrWObttNN7VM7KbGHQhClM",
+        consumerKey: "NF2QJBcOZ9OrrRKZrUOaRQ",
+        consumerSecret: "8By0AEZ6ULL7lwSBwUryf0GJClc",
+        accessToken: "vI55EV-W9M8zAiGfZXrNcpjsDGIVr6XY",
+        accessTokenSecret: "_etOpqJqgJKHa-8TXoLYFQjp57k",
         serviceProvider: {
             signatureMethod: "HMAC-SHA1"
         }
