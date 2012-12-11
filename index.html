@@ -60,6 +60,13 @@
   
   
 </script>
+<script id ="radial" type="text/x-handlebars-templates">
+   <h2>Sort by Rating: </h2>
+   <p>
+  <p><input type="button" name="rating" onclick="sort{{func}}('rating', 'ASCENDING', {{object}})" value="Rating Ascending"/></p>
+  <p><input type="button" name="rating"onclick="sort{{func}}('rating', 'DESCENDING', {{object}})" value="Rating Descending"/></p>
+  </p>
+</script>
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
    <div class="thumbnailContainer">
@@ -216,6 +223,7 @@
                   <button class="btn" type="submit" onsubmit="searchYelp(search2.search1.value, search2.search_loc.value);  return false;" onclick="searchYelp(search2.search1.value, search2.search_loc.value); return false;">Search</button>
                  </form>
               </div>
+             
      </div>
   </div>
   <div id="middle"><ul class="breadcrumb">

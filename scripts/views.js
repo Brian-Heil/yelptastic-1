@@ -29,13 +29,21 @@ var home = function() {
    if (current != 'Home'){
         $('.active1').remove();
         $('.columnCenter').empty();
+        $('.columnLeft').empty();
         $('.breadcrumb').empty();
         $('.breadcrumb').append('<li class="active1">Home</li> ');
         history.pushState({}, 'Yelptastic- Browse Favorite', '#Home');
     }
   var results = JSON.parse(localStorage.getItem("results"));
-  lastLookup.push(results);
-  browseBookmarks(results, 0);
+  if (results.length == 0) {
+    $('.columnCenter').append('<div class="hero-unit">'+
+    '<p><h1>You currently do not have any favorites saved.</h1></p>' +
+  '<p><h1>Select add favorites to begin browsing and adding favorites</h1></p>'+ '</div>');
+  } else {
+    lastLookup.push(results);
+    browseBookmarks(results, 0);
+  }
+  
   
 }
 
@@ -170,8 +178,11 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
         });
     }
     var source = $('#results').html();
+    var source2 = $('#radial').html();
     var template = Handlebars.compile(source);
+    var template2 = Handlebars.compile(source2);
     var string = template(data);
+    var string2 = template2({func:'Results', object:JSON.stringify(results),});
     var target = document.getElementById('columnCenter');
     var spinner = new Spinner(opts).stop(target);
 
@@ -201,6 +212,8 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
         }
         $thumbnailswrapper.append($buttonRow);
     }
+    $('.columnRight').empty();
+    $('.columnRight').append(string2);
     $('.columnCenter').append($thumbnailswrapper);
     window.scroll();
 };
@@ -262,6 +275,11 @@ var browseBookmarks = function (results, opt_int) {
             });
         }
     }
+     var source2 = $('#radial').html();
+    var template2 = Handlebars.compile(source2);
+    var string2 = template2({func:'Favorites', object:JSON.stringify(results)});
+    
+    
     var source = $('#browse').html();
     var template = Handlebars.compile(source);
     var string = template(data);
@@ -294,6 +312,7 @@ var browseBookmarks = function (results, opt_int) {
     var template1 = Handlebars.compile(source1);
     var string1 = template1({funcname:'filterFavorites', results:JSON.stringify(results)});
     $('.columnRight').empty();
+    $('.columnRight').append(string2);
     $('.columnRight').append(string1);
     $thumbnailswrapper.append($buttonRow);
     $('.columnCenter').append($thumbnailswrapper);
