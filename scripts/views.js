@@ -231,23 +231,47 @@ var saveFavorite = function (jsonString, tags1, notes1) {
 
 
 var parseYelpCategories = function (term, location, categories) {
-	//var categories_array = JSON.parse(categories);
-	//$categories_wrapper = categories_array[0][1][12][1][0][0];
-	//alert($categories_wrapper);
-	// $categories_wrapper = '<div class="accordion" id="categories"> <div class="accordion-group"> <div class="accordion-heading">';
-	// // for (var i = 0; i < categories_array.length; i++)
-	// // {
-		// // for (var j = 0; j < categories_array[i][1].length; j++)
-		// // {
-			// // $categories_wrapper.append(' <a class="accordion-toggle" data-toggle="collapse" data-parent="#categories" href="#' + categories_array[i][0][j] sub1">
-        // // General Category
-      // // </a>');
-// // 			
-			// // if (categories[i][1][j][1].length != 1)
-			// // {
-// // 				
-			// // }
-		// // }
-	// // }
-			
+
+	var categories_wrapper = '<div class="accordion" id="categories">';
+	for (var i in categories)
+	{
+		var genCategory = i;
+		var genCategoryTag = i;
+		genCategoryTag = genCategoryTag.replace(/ /g, "_");
+		genCategoryTag = genCategoryTag.replace(/&/g, "And");
+		
+
+    	categories_wrapper = categories_wrapper + '<div class="accordion-group" id="' + genCategoryTag + '">';        
+        categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
+        categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + genCategoryTag + '" href="#sub' + genCategoryTag + '">';
+		categories_wrapper = categories_wrapper + genCategory;
+        categories_wrapper = categories_wrapper + '</a>';
+        categories_wrapper = categories_wrapper + '</div>';
+        categories_wrapper = categories_wrapper + '<div id="sub' + genCategoryTag + '" class="accordion-body collapse">';
+        categories_wrapper = categories_wrapper + '<div class="accordion-inner">';
+        
+        for (var j in categories[i])
+        {
+        	var subCategory = j;
+        	var subCategoryTag = categories[i][j];
+        	
+        	categories_wrapper = categories_wrapper + '<div class="accordion-group">';
+            categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
+            categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '">';      
+            categories_wrapper = categories_wrapper + subCategory;                                
+            categories_wrapper = categories_wrapper + '</a>';
+            categories_wrapper = categories_wrapper + '</div>';
+            categories_wrapper = categories_wrapper + '</div>';     
+        }
+           
+        categories_wrapper = categories_wrapper + '</div>';
+        categories_wrapper = categories_wrapper + '</div>';
+        categories_wrapper = categories_wrapper + '</div>';
+
+		
+	}
+	
+	categories_wrapper = categories_wrapper + "</div>";
+	
+	$('.columnLeft').append(categories_wrapper);
 }
