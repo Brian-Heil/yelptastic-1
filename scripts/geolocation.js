@@ -44,6 +44,8 @@ Geolocation.prototype.getCurrentLocation = function(){
 	else {
 		alert('I\'m sorry, but Geolocation is not supported in your current browser.');
 	}
+
+	return this.currentLocation;
 };
 
 /*
