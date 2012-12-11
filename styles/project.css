@@ -14,8 +14,14 @@
 }
 #error {
   margin:auto;
-  height:720px;
-  width:1024px;
+  height:500px;
+  width:700px;
+}
+#middle {
+  width: 1300px;
+  position: relative;
+  display: block;
+  margin: auto;
 }
 
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
@@ -49,7 +55,6 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 }
 img {
   height:inherit;
-  width:inherit;
 }
 
  button {

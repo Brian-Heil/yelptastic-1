@@ -71,15 +71,12 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
         'url': message.action,
         'data': parameterMap,
         'cache': true,
-        'dataType': 'jsonp',
         'timeout':1000,
+        'dataType': 'jsonp',
         'jsonpCallback': 'cb',
         'success':function (response){
           onSearchSuccess(response, opt_term, opt_location, opt_cat, opt_offset);
         },
-        'error': function() {
-        },
-        
     });
     check.success(function() {
       console.log('Yes! Success!');
@@ -87,8 +84,16 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
     check.error(function() {
        $('body').empty();
-       $('body').append('<h3>An error has occured</h3>');
-       $('body').append('<div id="error"><img src="http://cdn.memegenerator.net/instances/400x/31664563.jpg"></div>');
+       $('body').append('<div class="hero-unit">'+
+    '<h1>An error occured in connecting with the YELP</h1>' +
+  '<p><h3>Please refresh the page and try again.</h3></p>'+
+  //'<p>' +
+  //  '<a class="btn btn-primary btn-large">'+
+    //  'Learn more'+
+    //'</a>'+
+  //'</p>' +
+'</div>');
+    $('body').append('<div id="error"><img src="http://cdn.memegenerator.net/instances/400x/31664563.jpg"></div>');
   });
     
     

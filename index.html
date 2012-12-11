@@ -17,7 +17,6 @@
 <script type="text/javascript" src="scripts/retrieve-storage.js"></script>
 <script type="text/javascript" src="scripts/views.js"></script>
 <script type="text/javascript" src="scripts/query.js"></script>
-
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
     <a href="{{url}}"  target="_blank"><div class="thumbnailContainer">
@@ -29,8 +28,8 @@
       <p>Phone:{{phonenumber}}</p>
         <p>Rating: <img src="{{ratingImage}}"></p>
        <!-- <input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"/>-->
-        <a href="#myModal" role="button" class="btn" data-toggle="modal">Add to Favorites</a>
-        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <a href="#myModal{{n}}" role="button" class="btn" data-toggle="modal">Add to Favorites</a>
+        <div id="myModal{{n}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="myModalLabel">Add {{name}} to Favorites!</h3>
@@ -48,11 +47,7 @@
             <button class="btn btn-primary" data-dismiss="modal" onclick="saveFavorite({{object}} , tags.value, Notes.value)">Save</button>
             </div>
           </form>
-
         </div>
-
-
-
             </div>
     </div></a>
     {{/each}}
@@ -77,22 +72,40 @@
     });
 
       $('body').bind('Search', function(){
-        addFavoritesView();
+        addFavoritesView({});
+        $('.active1').remove();
+        $('.columnCenter').empty();
+        $('.breadcrumb').empty();
+        $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
+        $('.breadcrumb').append('<li class="active1">Search</li> ');
+        $('body').unbind('Search');
+        addQuery(lastSearch[0], lastSearch[1], lastSearch[2], lastSearch[3], lastSearch[4], lastSearch[5]);
+        lastSearch.length=0;        
+
+      });
+      $('body').bind('Lookup', function(e){
+        $('.columnCenter').empty();
+        $('.breadcrumb').empty();
+        $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
+        $('.breadcrumb').append('<li class="active1">Lookup</li> ');
+        $('body').unbind('Lookup');
+        browseBookmarks(lastLookup.pop(), 0);
+        lastLookup.length=0;
       });
       $('body').bind('Home', function(){
         alert('Successful');
         $('.columnCenter').empty();
         $('.breadcrumb').empty();
         $('.breadcrumb').append('<li class="active1">Home</li> ');
+        $('.breadcrumb').unbind('Home');
+
+
       });
       $('searchbar').submit(function () {
-          sendContactForm();
-         
+          sendContactForm();  
       });
   });
 </script>
-
-
 <body>
 <div id="pageWrapper">
   <!--Test Divs-->
@@ -115,20 +128,16 @@
               <div class="tab-pane fade" id="search_yelp">
                  <form id="searchbar" name="search2" >
                   <input type="text" id="searchbox" placeholder="Search Business" name="search1">
-<<<<<<< HEAD
                   <input type="text" id="locationbox" placeholder="Near" name="search_loc">     
                   <input type="submit" onsubmit="searchYelp(search2.search1.value, search2.search_loc.value);  return false;" id="searchbutton" value="Search" name="searchButton2" onclick="searchYelp(search2.search1.value, search2.search_loc.value); return false;">
-=======
-                  <input type="text" id="locationbox" placeholder="Near" name="search_loc">
-                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="searchYelp(search2.search1.value, search2.search_loc.value)">
->>>>>>> 3e8f3acc79a5a9944c52c6b2b66c26f12160d876
+
                  </form>
               </div>
      </div>
   </div>
-  <ul class="breadcrumb">
+  <div id="middle"><ul class="breadcrumb">
       <li class="active1">Home</li>
-  </ul>
+  </ul></div>
   <div id="contentContainer">
     <div class="columnLeft">          
     <div class="accordion" id="categories">
