@@ -9,7 +9,7 @@ Queries Yelp Business and Search APIs and calls provided callback on success.
 search_type can either be search or business
 
 */
-var queryYelp = function(query, search_type, callback, error, opt_term, opt_location, opt_offset) {
+var queryYelp = function(query, search_type, callback, error, opt_term, opt_location, opt_cat, opt_offset) {
     var auth = {
         //
         // Update with your auth tokens.
@@ -33,6 +33,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
     var parameters = [];
     parameters.push(['term', query.term]);
     parameters.push(['location', query.location]);
+    parameters.push(['category-filters', query.categories]);
     parameters.push(['offset', query.offset]);    
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
@@ -51,6 +52,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
             'parameters': parameters
         };
     }
+ 
     else if (search_type === Action.business) {
         message = {
             'action': 'http://api.yelp.com/v2/business/' + query.id,
@@ -71,7 +73,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
         'dataType': 'jsonp',
         'jsonpCallback': 'cb',
         'success':function (response){
-          onSearchSuccess(response, opt_term, opt_location, opt_offset);
+          onSearchSuccess(response, opt_term, opt_location, opt_cat, opt_offset);
         },
         'error': error
     });
@@ -86,13 +88,14 @@ var parseData = function(json){
 };
 
 /* Frontend API method to search Yelp with provided query and location. */
-var searchQuery = function(term, location, offset){
+var searchQuery = function(term, location, category_filters, offset){
     var query = {};
     query['term'] = term;
     query['location'] = location;
+    query['categories'] = category_filters;
     query['offset'] = offset;
 
-    queryYelp(query, Action.search, onSearchSuccess, onSearchError, term, location, offset);
+    queryYelp(query, Action.search, onSearchSuccess, onSearchError, term, location, category_filters, offset);
     // var categories = _.chain(results.businesses).map(function(business){
     //     return business.categories;
     // }).union().value();
@@ -102,10 +105,9 @@ var searchQuery = function(term, location, offset){
 };
 
 /* Get JSON object from search API, remove unnecessary fields, and return object. */
-var onSearchSuccess = function(json, opt_term, opt_location, opt_offset){
+var onSearchSuccess = function(json, opt_term, opt_location, opt_cat, opt_offset){
     var obj = json;
-    addFavoritesView(obj.businesses, obj.total, opt_term, opt_location, opt_offset);
-
+    addFavoritesView(obj.businesses, obj.total, opt_term, opt_location, opt_cat, opt_offset);
 };
 
 /* Return appropriate Yelp API error. */
