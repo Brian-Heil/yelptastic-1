@@ -127,7 +127,7 @@
             <h3>Are you sure you want to delete the bookmark: {{name}}?</h3>
           </div>
 
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Do noFt Delete</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Do Not Delete</button>
             <button class="btn btn-primary" onclick="deleteBusinessFromStorage({{object}});">Delete</button>
         </div>
        <a href="{{url}}"  target="_blank"><h3>{{name}}</h3></a>
@@ -202,7 +202,7 @@
 <body>
 <div id="pageWrapper">
   <div id= "headContainer">
-     <h1><div id="logo"></div></h1>
+     <h1><div id="logo" onclick="window.location ='index.html';"></div></h1>
      <ul class="nav nav-tabs">
       <li class="active"><a href="#search_favorites" data-toggle="tab">Search Favorites</a></li>
       <li><a href="#search_yelp" data-toggle="tab">Add Favorites</a></li>
