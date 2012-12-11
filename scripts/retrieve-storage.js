@@ -81,7 +81,13 @@ function removeA(arr) {
     return arr;
 }
 function saveBookmark(business, tags, notes){
-    business["tags"] = tags;
-    business["notes"] = notes;
+    business.tags = tags;
+    business.notes = notes;
+    Date d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth() + 1;
+    var time = d.getTime();
+    var year = d.getFullYear();
+    business.dateAdded = time + " " month + "/" + day +"/"+ year;
     addBusinessToFavorite(business);
 }
