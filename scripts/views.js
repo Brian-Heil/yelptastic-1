@@ -316,6 +316,6 @@ var parseYelpCategories = function (term, location, categories) {
 	}
 	
 	categories_wrapper = categories_wrapper + "</div>";
-	
+	console.log(categories_wrapper);
 	$('.columnLeft').append(categories_wrapper);
 }
