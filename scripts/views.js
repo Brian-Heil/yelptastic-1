@@ -196,6 +196,7 @@ var browseBookmarks = function (results, opt_int) {
         ratingImage:results[i].rating_img_url,
         tags:results[i].tags,
         url:results[i].url,
+        object:JSON.stringify(results[i]),
         views:results[i].review_count,
         distance:results[i].distance,
         address:results[i].location.display_address[0] +" " + results[i].location.display_address[1]+" " + results[i].location.display_address[2],
