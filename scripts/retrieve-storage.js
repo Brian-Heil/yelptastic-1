@@ -61,7 +61,7 @@ function addBusinessToFavorite (business){
         resultList = localStorage.getItem("results");
         resultList.push(business);
    }else{
-       resultList[0] = business; 
+       resultList[0] = business;
    }
      localStorage.setItem("results", resultList);
 }
