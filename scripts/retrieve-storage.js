@@ -6,7 +6,12 @@ function searchFavorites (query){
     	return feedback;
     }else{
     _.each(resultList, function(x){
-        if(x.name.search(query) > -1 || x.tags.search(query) > -1 || x.notes.search(query) > -1){
+        if(x.name.toLowerCase().indexOf(query.toLowerCase()) > -1){
+        	feedback.push(x);
+        } else if (x.tags.toLowerCase().indexOf(query.toLowerCase()) > -1){
+        	feedback.push(x);
+        	
+        } else if (x.notes.toLowerCase().indexOf(query.toLowerCase()) > -1){
             feedback.push(x);
         }
     });
