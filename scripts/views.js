@@ -94,6 +94,10 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
     addQuery(data, opt_offset, total, opt_term, opt_location, opt_cat);
 };
 
+var metersToMiles = function(meters){
+    return meters * 0.000621371192;
+};
+
 /*
 * Takes in the results and appends them to the thumbnails grids
 */
@@ -120,7 +124,7 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
             phonenumber:results[i].display_phone,
             n:i.toString(),
             views:results[i].review_count,
-            distance:results[i].distance,
+            distance:metersToMiles(results[i].distance),
             address:results[i].location.display_address[0] +" " + results[i].location.display_address[1]+" " + results[i].location.display_address[2]
         });
     }
@@ -179,9 +183,8 @@ var browseBookmarks = function (results, opt_int) {
                 url:results[i].url,
                 notes:results[i].notes,
                 views:results[i].review_count,
-                distance:results[i].distance,
+                distance:metersToMiles(results[i].distance),
                 address:results[i].location.display_address[0] +" " + results[i].location.display_address[1]+" "+ results[i].location.display_address[2]
-
             });
         }
     } else {
@@ -202,7 +205,7 @@ var browseBookmarks = function (results, opt_int) {
                 notes:results[i].notes,
                 object:JSON.stringify(results[i]),
                 views:results[i].review_count,
-                distance:results[i].distance,
+                distance:metersToMiles(results[i].distance),
                 address:results[i].location.display_address[0] +" " + results[i].location.display_address[1]+" " + results[i].location.display_address[2]
             });
         }
@@ -285,7 +288,6 @@ var parseYelpCategories = function (term, location, categories) {
             categories_wrapper = categories_wrapper + subCategory;
             categories_wrapper = categories_wrapper + '</a>';
             categories_wrapper = categories_wrapper + '</div>';
-
 
             if (typeof categories[i][j] != "string")
             {
