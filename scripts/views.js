@@ -265,7 +265,7 @@ var parseYelpCategories = function (term, location, categories) {
             categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
             categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '" ';
             
-            if (typeof categories[i][j] != string)
+            if (typeof categories[i][j] != "string")
             {
             	categories_wrapper = categories_wrapper + 'href ="#sub' + subCategoryTag +  '" ';
             }
@@ -277,7 +277,7 @@ var parseYelpCategories = function (term, location, categories) {
             categories_wrapper = categories_wrapper + '</div>';
             
             
-            if (typeof categories[i][j] != string)
+            if (typeof categories[i][j] != "string")
             {
             	categories_wrapper = categories_wrapper + '<div id="sub'+ subCategory + '" class="accordion-body collapse">';
                 categories_wrapper = categories_wrapper + '<div class="accordion-inner" style="margin-left:1em; margin-right:1em">';
