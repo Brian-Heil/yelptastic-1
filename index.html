@@ -17,6 +17,47 @@
 <script type="text/javascript" src="scripts/retrieve-storage.js"></script>
 <script type="text/javascript" src="scripts/views.js"></script>
 <script type="text/javascript" src="scripts/query.js"></script>
+<script id="filters" type="text/x-handlebars-template">
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+              Ratings
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+              <button class="btn btn-large btn-block btn-primary" onclick="{{funcname}}(1, 'rating', {{results}} )" type="button">1 Star</button>
+              <button class="btn btn-large btn-block" type="button" onclick="{{funcname}}(2, 'rating', {{results}} )" >2 Star</button>
+              <button class="btn btn-large btn-block btn-primary" onclick="{{funcname}}(3, 'rating', {{results}} )" type="button">3 Star</button>
+              <button class="btn btn-large btn-block" type="button" onclick="{{funcname}}(4, 'rating', {{results}} )" >4 Star</button>
+              <button class="btn btn-large btn-block btn-primary" type="button" onclick="{{funcname}}(5, 'rating', {{results}} )" >5 Star</button>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+              Distance
+            </a>
+          </div>
+          <div id="collapseTwo" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <button class="btn btn-large btn-block btn-primary" type="button" onclick="{{funcname}}(1, 'distance', {{results}} )" >Distance less than 1 mile </button>
+              <button class="btn btn-large btn-block" type="button"onclick="{{funcname}}(3, 'distance', {{results}} )">Distance less than 3 miles</button>
+              <button class="btn btn-large btn-block btn-primary" type="button"onclick="{{funcname}}(7, 'distance', {{results}} )">Distance less than 7 miles</button>
+              <button class="btn btn-large btn-block" type="button"onclick="{{funcname}}(13, 'distance', {{results}} )">Distance less than 13 miles</button>
+              <button class="btn btn-large btn-block btn-primary" type="button"onclick="{{funcname}}(20, 'distance', {{results}} )">Diestance less than 20 miles</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+</script>
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
    <div class="thumbnailContainer">
@@ -184,42 +225,8 @@
     </ul>-->
     </div>
     <div class="columnRight">
-      <div class="accordion" id="accordion2">
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-              Prices
-            </a>
-          </div>
-          <div id="collapseOne" class="accordion-body collapse in">
-            <div class="accordion-inner">
-              <button class="btn btn-large btn-block btn-primary" type="button">1 Star</button>
-              <button class="btn btn-large btn-block" type="button">2 Star</button>
-              <button class="btn btn-large btn-block btn-primary" type="button">3 Star</button>
-              <button class="btn btn-large btn-block" type="button">4 Star</button>
-              <button class="btn btn-large btn-block btn-primary" type="button">5 Star</button>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-              Distance
-            </a>
-          </div>
-          <div id="collapseTwo" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <button class="btn btn-large btn-block btn-primary" type="button">Distance less than 1 mile </button>
-              <button class="btn btn-large btn-block" type="button">Distance less than 3 miles</button>
-              <button class="btn btn-large btn-block btn-primary" type="button">Distance less than 7 miles</button>
-              <button class="btn btn-large btn-block" type="button">Distance less than 13 miles</button>
-              <button class="btn btn-large btn-block btn-primary" type="button">Diestance less than 20 miles</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      RAWWR
+</div>
 </div>
 <footer class="footer">
   <div class="container">
