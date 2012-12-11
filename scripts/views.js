@@ -6,6 +6,8 @@ var lastTerm = [];
 * Search the yelp api
 */
 var searchYelp = function (term, near, category_filters, offset) {
+    var target = document.getElementById('columnCenter');
+    var spinner = new Spinner(opts).spin(target);
     var opt_int;
     var opt_cat;
     if (offset == undefined) {
@@ -22,6 +24,7 @@ var searchYelp = function (term, near, category_filters, offset) {
         searchQuery(term, near, opt_cat, opt_int);
     } else {
         if(bool[0]) {
+            spinner.stop();
             bool = [];
             bool.push(false);
             $('#middle').append('<div class="alert">' +
@@ -98,6 +101,8 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
 * Takes in the results and appends them to the thumbnails grids
 */
 var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, opt_cat) {
+    var target = document.getElementById('columnCenter');
+    var spinner = new Spinner(opts).stop(target);
     $('.columnCenter').empty();
     $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
     var data = [];
@@ -288,7 +293,6 @@ var parseYelpCategories = function (term, location, categories) {
             categories_wrapper = categories_wrapper + subCategory;
             categories_wrapper = categories_wrapper + '</a>';
             categories_wrapper = categories_wrapper + '</div>';
-
 
             if (typeof categories[i][j] != "string")
             {
