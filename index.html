@@ -87,7 +87,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputPassword">Notes</label>
+              <label class="control-label" for="inputEmail">Notes</label>
               <div class="controls">
                 <input type="text" id="inputEmail" name="notes" placeholder="Notes">
               </div>
@@ -95,7 +95,7 @@
             <div class="control-group">
               <div class="controls">
                  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                 <button class="btn btn-primary" data-dismiss="modal" onclick="saveFavorite({{object}} , tags.value, notes.value)">Save</button>
+                 <button class="btn btn-primary" type="submit" data-dismiss="modal" onclick="saveFavorite({{object}} , tags.value, notes.value)" onsubmit="saveFavorite({{object}} , tags.value, notes.value)">Save</button>
               </div>
             </div>
           </form>
