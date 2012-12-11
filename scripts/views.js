@@ -63,35 +63,35 @@ var browseFavorites = function(data) {
 /*
 * Displays the view for searching yelp.
 */
-
 var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, opt_offset) {
-//$('.breadcrumbs').removeClass('.active');
-var current = $('.active1').text();
-$('.alert').remove();
-bool = [];
-bool.push(true);
+    //$('.breadcrumbs').removeClass('.active');
+    var current = $('.active1').text();
+    $('.alert').remove();
+    bool = [];
+    bool.push(true);
 
-lastSearch.push(data);
-lastSearch.push(total);
-lastSearch.push(opt_term);
-lastSearch.push(opt_location);
-lastSearch.push(opt_cat);
-lastSearch.push(opt_offset);
-if (current != 'Search'){
-    $('.active1').remove();
+    lastSearch.push(data);
+    lastSearch.push(total);
+    lastSearch.push(opt_term);
+    lastSearch.push(opt_location);
+    lastSearch.push(opt_cat);
+    lastSearch.push(opt_offset);
+    if (current != 'Search'){
+        $('.active1').remove();
+        $('.columnCenter').empty();
+        $('.breadcrumb').empty();
+        $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
+        $('.breadcrumb').append('<li class="active1">Search</li> ');
+        history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
+    }
+    $('.columnLeft').empty();
     $('.columnCenter').empty();
-    $('.breadcrumb').empty();
-    $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
-    $('.breadcrumb').append('<li class="active1">Search</li> ');
-    history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
-}
-$('.columnLeft').empty();
-$('.columnCenter').empty();
-var allcategories = $.getJSON("scripts/categories.json", function(y){
-    parseYelpCategories(opt_term, opt_location, y);
-});
 
-addQuery(data, opt_offset, total, opt_term, opt_location, opt_cat);
+    var allcategories = $.getJSON("scripts/categories.json", function(y){
+        parseYelpCategories(opt_term, opt_location, y);
+    });
+
+    addQuery(data, opt_offset, total, opt_term, opt_location, opt_cat);
 };
 
 /*
@@ -149,7 +149,7 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
     }
     $('.columnCenter').append($thumbnailswrapper);
     window.scroll();
-}
+};
 
 /*
 * Takes in the results and appends them to the thumbnails grids
