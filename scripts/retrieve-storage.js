@@ -119,7 +119,7 @@ function removeA(array, item) {
 
 function metersToMiles(meters){
     return meters * 0.000621371192;
-};
+}
 
 function saveBookmark(business, tags, notes) {
 	if (tags == undefined) {
