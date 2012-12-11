@@ -110,13 +110,15 @@ function deleteBusinessFromStorage(business) {
 	alert('Printing: ' + business  );
 	 alert('Printing2: ' + JSON.stringify(resultList) );
 
-	var temp = removeA(resultList, business[0]);
+	var temp = removeA(resultList, business);
 	localStorage.setItem("results", JSON.stringify(temp));
+	getBookmarks(lastLookup(0));
 }
 
 function removeA(array, item) {
-	    for(var i in array){
-        if(array[i]==item) {
+	 for(var i in array){
+    if(array[i].id == item.id) {
+            alert('deleting');
             array.splice(i,1);
             break;
             }
