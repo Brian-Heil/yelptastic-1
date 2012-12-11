@@ -23,7 +23,7 @@ var opts = {
 /*
 * Search the yelp api
 */
-var searchYelp = function (term, near, category_filters, offset) {
+var searchYelp = function (term, near, category_filter, offset) {
     var target = document.getElementById('columnCenter');
     $('.columnCenter').empty();
     var spinner = new Spinner(opts).spin(target);
@@ -34,10 +34,10 @@ var searchYelp = function (term, near, category_filters, offset) {
     } else {
         opt_int = offset;
     }
-    if (category_filters == undefined) {
+    if (category_filter == undefined) {
         opt_cat = "";
     } else {
-        opt_cat = category_filters;
+        opt_cat = category_filter;
     }
     if (near && term){
         searchQuery(term, near, opt_cat, opt_int);
@@ -106,6 +106,7 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
         $('.breadcrumb').append('<li class="active1">Search</li> ');
         history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
     }
+    
     $('.columnLeft').empty();
     $('.columnCenter').empty();
 
@@ -277,14 +278,83 @@ var saveFavorite = function (jsonString, tags1, notes1) {
 var parseYelpCategories = function (term, location, categories) {
 
     var categories_wrapper = '<div class="accordion" id="categories">';
+    
+    var missing_identifiers = 
+    {
+    	"Active Life" : "active",
+    	"Diving" : "diving",
+    	"Fitness & Instruction" : "fitness",
+    	"Parks" : "parks",
+	    "Arts & Entertainment" : "arts",
+	    "Festivals" : "festivals",
+	    "Automotive" : "auto",
+	    "Beauty and Spas" : "beautysvc",
+	    "Hair Removal" : "hairremoval",
+	    "Hair Salons" : "hair",
+	    "Bicycles" : "bicycles",
+	    "Education" : "education",
+	    "Specialty Schools" : "specialtyschools",
+	    "Event Planning & Services" : "eventservices",
+	    "Photographers" : "photographers",
+	    "Financial Services" : "financialservices",
+	    "Food" : "food",
+	    "Specialty Food" : "gourmet",	    
+	    "Health and Medical" : "health",
+	    "Dentists" : "dentists",
+	    "Diagnostic Services" : "diagnostics",
+	    "Doctors" : "physicians",
+	    "Medical Centers" : "medcenters",
+	    "Home Services"  : "homeservices",
+	    "Hotels & Travel" : "hotelstravel",
+	    "Transportaion" : "transport",
+	    "Local Flavor" : "localflavor",
+	    "Local Services" : "localservices",
+	    "IT Services & Computer Repair" : "itservices",
+	    "Mass Media" : "massmedia",
+	    "Nightlife" : "nightlife",
+	    "Bars" : "bars",
+	    "Pets" : "pets",
+	    "Pet Services" : "petservices",
+	    "Professional Services" : "professional",
+	    "Lawyers" : "lawyers",
+	    "Public Services & Government" : "publicservicesgovt",
+	    "Real Estate" : "realestate",
+	    "Religious Organizations" : "religiousorgs",
+	    "Restaurants" : "restaurants",
+	    "African" : "african",
+	    "Caribbean" : "caribbean",
+	    "Chinese" : "chinese",
+	    "Italian" : "italian",
+	    "Japanese" : "japanese",
+	    "Latin American" : "latin",
+	    "Malaysian" : "malaysian",
+	    "Middle Eastern" : "mideastern",
+	    "Polish" : "polish",
+	    "Spanish" : "spanish",
+	    "Shopping" : "shopping",
+	    "Arts & Crafts" : "artsandcrafts",
+	    "Books, Mags, Music and Video" : "media",
+	    "Fashion" : "fashion",
+	    "Flowers & Gifts" : "flowers",
+	    "Home & Garden" : "homeandgarden",
+	    "Sporting Goods" : "sportgoods"
+	   };
+    
+    
     for (var i in categories)
     {
         var genCategory = i;
-        var genCategoryTag = i;
-        genCategoryTag = genCategoryTag.replace(/ /g, "_");
-        genCategoryTag = genCategoryTag.replace(/&/g, "And");
+        var genCategoryTag = missing_identifiers[i];
         categories_wrapper = categories_wrapper + '<div class="accordion-group" id="' + genCategoryTag + '">';
-        categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
+        categories_wrapper = categories_wrapper + '<div class="accordion-heading" onclick="searchYelp(';
+        categories_wrapper = categories_wrapper + "'" + term + "'";
+        categories_wrapper = categories_wrapper + ', ';
+        categories_wrapper = categories_wrapper + "'" + location + "'";
+        categories_wrapper = categories_wrapper + ', ';
+        categories_wrapper = categories_wrapper + "'" + genCategoryTag + "'";
+        categories_wrapper = categories_wrapper + ');">';
+//         onclick="searchYelp(' + term + ', ' + location + ', \"' + genCategoryTag + '\");"
+
         categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + genCategoryTag + '" href="#sub' + genCategoryTag + '">';
         categories_wrapper = categories_wrapper + genCategory;
         categories_wrapper = categories_wrapper + '</a>';
@@ -298,13 +368,21 @@ var parseYelpCategories = function (term, location, categories) {
             var subCategoryTag = categories[i][j];
             if (typeof categories[i][j] != "string")
             {
-                subCategoryTag = subCategory;
-                subCategoryTag = subCategoryTag.replace(/ /g, "_");
-                subCategoryTag = subCategoryTag.replace(/&/g, "And");
+                subCategoryTag = missing_identifiers[j];
             }
 
             categories_wrapper = categories_wrapper + '<div class="accordion-group">';
-            categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
+            categories_wrapper = categories_wrapper + '<div class="accordion-heading"  onclick="searchYelp(';
+        	categories_wrapper = categories_wrapper + "'" + term + "'";
+        	categories_wrapper = categories_wrapper + ', ';
+        	categories_wrapper = categories_wrapper + "'" + location + "'";
+        	categories_wrapper = categories_wrapper + ', ';
+        	categories_wrapper = categories_wrapper + "'" + genCategoryTag; 
+        	categories_wrapper = categories_wrapper + ", ";
+        	categories_wrapper = categories_wrapper + subCategoryTag;
+        	categories_wrapper = categories_wrapper +"'";
+        	categories_wrapper = categories_wrapper + ');">';
+//             onclick="searchYelp(' + term + ', ' + location + ', "' + genCategoryTag + ', ' + subCategoryTag + '");"
             categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '" ';
 
             if (typeof categories[i][j] != "string")
@@ -320,7 +398,7 @@ var parseYelpCategories = function (term, location, categories) {
 
             if (typeof categories[i][j] != "string")
             {
-                categories_wrapper = categories_wrapper + '<div id="sub'+ subCategory + '" class="accordion-body collapse">';
+                categories_wrapper = categories_wrapper + '<div id="sub'+ subCategoryTag + '" class="accordion-body collapse">';
                 categories_wrapper = categories_wrapper + '<div class="accordion-inner" style="margin-left:1em; margin-right:1em">';
 
                 for (var k in categories[i][j])
@@ -328,8 +406,22 @@ var parseYelpCategories = function (term, location, categories) {
                     var subSubCategory = k;
                     var subSubCategoryTag = categories[i][j][k];
 
+ 
                     categories_wrapper = categories_wrapper + '<div class="accordion-group">';
-                    categories_wrapper = categories_wrapper + '<div class = "accordion-heading">';
+            		categories_wrapper = categories_wrapper + '<div class="accordion-heading"  onclick="searchYelp(';
+        			categories_wrapper = categories_wrapper + "'" + term + "'";
+        			categories_wrapper = categories_wrapper + ', ';
+        			categories_wrapper = categories_wrapper + "'" + location + "'";
+        			categories_wrapper = categories_wrapper + ', ';
+        			categories_wrapper = categories_wrapper + "'" + genCategoryTag; 
+        			categories_wrapper = categories_wrapper + ", ";
+        			categories_wrapper = categories_wrapper + subCategoryTag;
+        			categories_wrapper = categories_wrapper + ", ";
+        			categories_wrapper = categories_wrapper + subSubCategoryTag;
+        			categories_wrapper = categories_wrapper +"'";
+        			categories_wrapper = categories_wrapper + ');">';
+//  onclick="searchYelp(' + term + ', ' + location + ', "' + genCategoryTag + ', ' + subCategoryTag + ', ' + subSubCategoryTag + '");"               
+
                     categories_wrapper = categories_wrapper + '<a class="accordion-toggle">';
                     categories_wrapper = categories_wrapper + subSubCategory;
                     categories_wrapper = categories_wrapper + '</a>';
