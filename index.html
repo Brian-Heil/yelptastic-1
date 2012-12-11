@@ -15,21 +15,20 @@
 <script src="scripts/vendor/underscore.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+<script type="text/javascript" src="scripts/retrieve-storage.js"></script>
 <script type="text/javascript" src="scripts/views.js"></script>
 <script type="text/javascript" src="scripts/query.js"></script>
 
-<!-- Add template scrips-->
-<!-- Modal -->
   
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
-   <div class="thumbnailContainer">
+    <a href="{{url}}"  target="_blank"><div class="thumbnailContainer">
       <h3>{{name}}</h3>
       <div class="thumbnail">
-        <img src="{{image}}" alt="" width="150" height="100">
+      <img src="{{image}}" alt="" width="150" height="100">
       </div> 
       <p>"{{quote}}"</p>
-        <p>Tags:{{tags}}</p>
+      <p>Phone:{{phonenumber}}</p>
         <p>Rating: <img src="{{ratingImage}}"></p>
        <!-- <input id="{{n}}" onclick="alert('{{title}}')" type="button" value="{{button}}"/>-->
         <a href="#myModal" role="button" class="btn" data-toggle="modal">Add to Favorites</a>
@@ -48,7 +47,7 @@
             </textarea>
             <div class="modal-footer">    
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary" data-dismiss="modal" onclick="saveBookMark({{object}} , tags.value, Notes.value)">Save</button>
+            <button class="btn btn-primary" data-dismiss="modal" onclick="saveFavorite({{object}} , tags.value, Notes.value)">Save</button>
             </div>
           </form>
           
@@ -57,12 +56,12 @@
       
               
             </div>
-    </div>
+    </div></a>
     {{/each}}
 </script>
 <script id="browse" type="text/x-handlebars-template">
   {{#each this}}
-   <div class="thumbnailContainer">
+    <a href="{{url}}"  target="_blank"><div class="thumbnailContainer">
       <h3>{{name}}</h3>
       <div class="thumbnail">
         <img src="{{image}}" alt="" width="150" height="100">
@@ -70,11 +69,10 @@
       <p>"{{quote}}"</p>
         <p>Tags:{{tags}}</p>
         <p>Rating: <img src="{{ratingImage}}"></p>
-    </div>
+    </div></a>
     {{/each}}
 </script>
 <script>
-//  alert('This is running');
   $('document').ready(function() {
       $('body').bind('Search', function(){
         addFavoritesView();
@@ -82,46 +80,10 @@
       $('body').bind('Home', function(){
         alert('Successful');
         $('.columnCenter').empty();
-        //addFavoritesView();
+        $('.breadcrumb').empty();
+        $('.breadcrumb').append('<li class="active1">Home</li> ');
       });
-    
-    
-    
-
-     //var source = $('#results').html();
-     //var template = Handlebars.compile(source);
-    
-     var data = new Array({
-       title: 'Yelp',
-       image_url: 'http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg',
-       snippet_text: 'Sometimes we ask questions without reading an email thoroughly as many of us did for the last event.  In honor of Yelp, the many questions they kindly...',
-      // tags: 'sucky',
-       rating_image_url_small:'http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_3.png',
-     },{title: 'cool',
-       image_url: 'http://placehold.it/300x200',
-       snippet_text: 'this sucks',
-      // tags: 'sucky',
-       rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
-     },{title: 'cool',
-       image_url: 'http://placehold.it/300x200',
-       snippet_text: 'this sucks',
-      // tags: 'sucky',
-       rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
-     },{title: 'cool',
-       image_url: 'http://placehold.it/300x200',
-       snippet_text: 'this sucks',
-      // tags: 'sucky',
-       rating_image_url_small: 'http://media3.ak.yelpcdn.com/static/201012161053250406/img/ico/stars/stars_large_3.png',
-     });
-     
-     //var string = template(data);
-     //alert(string);
-    //addFavoritesView();
-  //  browseFavorites();
-     //addQuery(data, 0);
-   // $('body').append(string);
   });
-  
 </script>
 
 
@@ -140,7 +102,7 @@
                 <form id="searchbar" name="search1">
                   <input type="text" id="searchbox" placeholder="Search Favorites" name="search_favs">
                   <input type="text" id="locationbox" placeholder="Near" name="search_location">     
-                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="">
+                  <input type="button" id="searchbutton" value="Search" name="searchButton" onclick="getBookmarks(search1.search_favs.value)">
                </form>
               </div>
               </div>

@@ -56,7 +56,7 @@ function getFavoritesWithinCategory (query){
 }
 
 function addBusinessToFavorite (business){
-    var resultList = [];
+    var resultList = new Array();
     if(typeof localStorage.getItem("results") != 'undefined'){
         resultList = localStorage.getItem("results");
    }
@@ -80,7 +80,8 @@ function removeA(arr) {
     }
     return arr;
 }
-function saveBookmark(business, tags, notes){
+var saveBookmark = function(business, tags, notes){
+    alert('Testing');
     business["tags"] = tags;
     business["notes"] = notes;
     addBusinessToFavorite(business);
