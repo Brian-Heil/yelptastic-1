@@ -20,10 +20,13 @@
 }
 
 .modal-body {
-  overflow-y: auto; 
-  max-height: 400px;
-  height: 330px;
-  padding: 15px;
+  float: left;
+display: block;
+margin: auto;
+overflow-y: auto;
+max-height: 323px;
+height: 170px;
+padding: 15px;
 }
 #error {
   margin:auto;
@@ -38,9 +41,6 @@
 }
 .btn {
   margin-top: 5px;
-  float: left;
-  margin-right: -26px;
-
 }
 
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
@@ -90,11 +90,11 @@ p {
   width: 200px;
 }
 h3 {
-  font-size: 15.5px;
-  height: 20px;
+  font-size: 14.5px;
+  height: 9px;
   display: block;
-  margin-bottom: 15px;
-  line-height: 18px;
+  margin-bottom: 0px;
+  line-height: 0px;
 }
 .thumbnailContainer {
   -moz-border-radius: 2px;
