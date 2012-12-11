@@ -63,7 +63,7 @@
       <p>"{{quote}}"</p>
         <p>Tags:{{tags}}</p>
         <p>{{address}}</p>
-        <p><img src="{{ratingImage}}">({{views}} reviews)</p>
+        <p><img src="{{ratingImage}}">  ({{views}} reviews)</p>
         <a href="#" class="btn btn-large btn-danger" rel="popover" data-content="{{notes}}" data-original-title="Notes">Notes</a>
     </div>
     {{/each}}
@@ -115,7 +115,7 @@
                 <div class="searchContainer">
                 <form id="searchbar" name="search1">
                   <input type="text" id="searchbox" placeholder="Search Favorites" name="search_favs">
-                  <button class="btn" type="submit"  onsubmit="getBookmarks(search1.search_favs.value);  return false;" onclick="getBookmarks(search1.search_favs.value); return false;">Search</button>
+                  <button class="btn btn-primary" type="submit" onsubmit="getBookmarks(search1.search_favs.value);  return false;" onclick="getBookmarks(search1.search_favs.value); return false;">Search</button>
                </form>
               </div>
               </div>
