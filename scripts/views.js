@@ -15,9 +15,7 @@ var searchYelp = function (term, near, category_filters, offset) {
   } else {
     var opt_cat = category_filters;
   }
-  alert($('#middle').size());
-  if (near){
-    alert('SEARCHING');
+  if (near && term){
     searchQuery(term, near, opt_cat, opt_int);
   } else {
     if(bool[0]) {
@@ -25,7 +23,7 @@ var searchYelp = function (term, near, category_filters, offset) {
       bool.push(false);
       $('#middle').append('<div class="alert">' +
       '<button type="button" onclick="bool.pop(); bool.push(true);" class="close" data-dismiss="alert">&times;</button>'+
-      '<strong>Warning!</strong> Please include the appropriate info in the appropriate fields.'+
+      '<strong>Error!</strong> Please include the appropriate info in the appropriate fields.'+
       '</div>');
     }
   
@@ -52,8 +50,10 @@ var browseFavorites = function(data) {
     alert('PUSHING DATA');
     lastLookup.push(data);
     $('.active1').remove();
-    $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+ ')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
-    $('.breadcrumb').append('<li class="active1">' + 'Lookup' +'</li> ');
+  $('.columnCenter').empty();
+        $('.breadcrumb').empty();
+        $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
+        $('.breadcrumb').append('<li class="active1">Lookup</li> ');
     history.pushState({}, 'Yelptastic- Browse Favorite', '#bookmarksearch');
   }
   $('.columnCenter').empty();
@@ -81,8 +81,10 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
   lastSearch.push(opt_offset);
   if (current != 'Search'){
     $('.active1').remove();
-    $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
-    $('.breadcrumb').append('<li class="active1">' + 'Search' +'</li> ');
+     $('.columnCenter').empty();
+     $('.breadcrumb').empty();
+     $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
+     $('.breadcrumb').append('<li class="active1">Search</li> ');
     history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
   }
   $('.columnLeft').empty();

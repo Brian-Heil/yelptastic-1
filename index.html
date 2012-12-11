@@ -72,34 +72,27 @@
     });
 
       $('body').bind('Search', function(){
-        addFavoritesView({});
         $('.active1').remove();
         $('.columnCenter').empty();
         $('.breadcrumb').empty();
         $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
         $('.breadcrumb').append('<li class="active1">Search</li> ');
-        $('body').unbind('Search');
         addQuery(lastSearch[0], lastSearch[1], lastSearch[2], lastSearch[3], lastSearch[4], lastSearch[5]);
         lastSearch.length=0;        
 
       });
-      $('body').bind('Lookup', function(e){
+      $('body').bind('Lookup', function(){
         $('.columnCenter').empty();
         $('.breadcrumb').empty();
         $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
         $('.breadcrumb').append('<li class="active1">Lookup</li> ');
-        $('body').unbind('Lookup');
         browseBookmarks(lastLookup.pop(), 0);
         lastLookup.length=0;
       });
       $('body').bind('Home', function(){
-        alert('Successful');
         $('.columnCenter').empty();
         $('.breadcrumb').empty();
         $('.breadcrumb').append('<li class="active1">Home</li> ');
-        $('.breadcrumb').unbind('Home');
-
-
       });
       $('searchbar').submit(function () {
           sendContactForm();  

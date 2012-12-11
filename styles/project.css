@@ -6,6 +6,11 @@
   text-align: center;
   margin: auto;
 }
+.alert {
+  width:1280px;
+  
+  
+}
 .modal-body {
   overflow-y: auto; 
   max-height: 400px;
@@ -36,9 +41,9 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 }
 #logo {
   float: left;
-  margin-left: 40px;
+  margin-left: 57px;
   height: 100px;
-  width: 219px;
+  width: 243px;
   text-align: left;
   position: relative;
   background-image: url('http://i.imgur.com/aIRpe.jpg');
@@ -151,12 +156,13 @@ form {
   height: 30px;
   display: block;
   position: relative;
-  float: left;
+  float: right;
 }
 .tab-content {
   overflow: hidden;
   height: 50px;
   width: 660px;
+  float:right;
   position: relative;
 }
 #searchbox {
