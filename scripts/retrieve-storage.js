@@ -13,7 +13,7 @@ function searchFavorites (query){
 
 function getFavoriteCategories(){
     var feedback = [];
-    var resultList = localStorage.getItem("results");
+    var resultList = JSON.parse(localStorage.getItem("results"));
     //returns the list of lists (of categories); 
     _.each(resultList.businesses, function(x){
        feedback.push(x.categories);
@@ -47,7 +47,7 @@ function getBroadCategories(answers, innerCat, globalCategories){
 
 function getFavoritesWithinCategory (query){
     var feedback = [];
-    var resultList = localStorage.getItem("results");
+    var resultList = JSON.parse(localStorage.getItem("results"));
 
    _.each(resultList.businesses, function(x){
         if(x.categories == query){
@@ -59,16 +59,17 @@ function getFavoritesWithinCategory (query){
 
 function addBusinessToFavorite (business){
     var resultList =[];
-    resultList = localStorage.getItem("results");
-    if (resultList === null) {
-        resultList = [];
-        resultList.push(business);
-   }
-     localStorage.setItem("results", JSON.stringify(resultList));
+    if (localStorage.getItem("infiniteScrollEnabled") === null) {
+      resultList = JSON.parse(localStorage.getItem("infiniteScrollEnabled"));
+      resultList.push(business);
+    }else {
+      resultList.push(business);
+    }
+   localStorage.setItem("results", JSON.stringify(resultList));
 }
 
 function deleteBusinessFromStorage(business){
-    var resultList = localStorage.getItem("results");
+    var resultList = JSON.parse(localStorage.getItem("results"));
     removeA(resultList, business);
     localStorage.setItem("results", JSON.stringify(resultList));
 }
