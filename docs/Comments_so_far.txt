@@ -2,24 +2,29 @@ Comments so far:
 
 Search Yelp
 ------------------------------
-Logo and search boxes need to be spaced so that breadcrumb bar doesn't overextend results
+* Space out search results more
+* Search button restyle
+* Rename "Search Yelp" to "Add Favorite"
+* Remove alerts
+* When displaying error page, modify URL state
+* If location box has data, and business is empty, we search and don't display an error.
+* Spinner to show we're doing something when searching
+* Instead of underlining all text when something is focused, just highlight the box.
+* Not displaying location or distance
+* When entering notes and tags, make boxes and labels horizontal instead of vertical.
 
-Space out search results more
 
-Search results rating isn't working
-
-Search button in 'Search Yelp' should be a form, so enter works
-
-Breadcrumb bar error: Home/Search/Search
-
-Favorite button restyle
-
-Remove tags in search results in 'Search Yelp'
-
+Search Favorites
+----------------------------------
+* No indication that a result is selected when you hover mouse over it (link text doesn't have underlines)
+* When search results show up, black border sometimes appears
+* Cannot press enter to search, only Search button works
 
 Other
-------------------------------------
-First-run should ask for username
+--------------------------
+* Breadcrumb bar error: Home/Lookup/Search/Lookup when you add bookmark, and then go to search for it.
+* Breadcrumb bar error: Home/Search/Search
+* First-run should ask for username - IGNORED
 
 
 -----------------------------------------------------
@@ -29,8 +34,6 @@ TO DO
 Add 'date added' parameter to the favorite
 
 Implement filtering
-
-Fix the bug that does not fetch the rating
 
 Implement sorting - where it is on the page?
     Sort by rating, price, distance, date added to favorites
