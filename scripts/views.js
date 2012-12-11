@@ -24,6 +24,7 @@ var opts = {
 */
 var searchYelp = function (term, near, category_filters, offset) {
     var target = document.getElementById('columnCenter');
+    $('.columnCenter').empty();
     var spinner = new Spinner(opts).spin(target);
     var opt_int;
     var opt_cat;
