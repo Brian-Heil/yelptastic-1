@@ -58,6 +58,10 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
   }
   $('.columnLeft').empty();
   $('.columnCenter').empty();
+  var allcategories = $.getJSON("scripts/categories.json", function(y){
+  	  var x = y;
+  	  parseYelpCategories(opt_term, opt_location, x);
+  });
   addQuery(data, opt_offset, total, opt_term, opt_location, opt_cat);
 
 
@@ -192,4 +196,27 @@ var browseBookmarks = function (results, opt_int) {
 var saveFavorite = function (jsonString, tags1, notes1) {
   var object1 = jsonString;
   saveBookmark(object1, tags1, notes1);
+}
+
+
+var parseYelpCategories = function (term, location, categories) {
+	var categories_array = JSON.parse(categories);
+	$categories_wrapper = categories_array[0][1][12][1][0][0];
+	alert($categories_wrapper);
+	// $categories_wrapper = '<div class="accordion" id="categories"> <div class="accordion-group"> <div class="accordion-heading">';
+	// // for (var i = 0; i < categories_array.length; i++)
+	// // {
+		// // for (var j = 0; j < categories_array[i][1].length; j++)
+		// // {
+			// // $categories_wrapper.append(' <a class="accordion-toggle" data-toggle="collapse" data-parent="#categories" href="#' + categories_array[i][0][j] sub1">
+        // // General Category
+      // // </a>');
+// // 			
+			// // if (categories[i][1][j][1].length != 1)
+			// // {
+// // 				
+			// // }
+		// // }
+	// // }
+			
 }
