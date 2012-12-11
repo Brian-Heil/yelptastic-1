@@ -33,17 +33,27 @@
         <div id="myModal{{n}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 id="myModalLabel">Add {{name}} to Favorites!</h3>
+          Add {{name}} to Favorites!
         </div>
         <div class="modal-body">
-          <form id="popup" name="pop">
-            <textarea rows="4" name="tags" cols="50">
-            </textarea>
-            <textarea rows="4" name="Notes" cols="50">
-            </textarea>
-            <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary" data-dismiss="modal" onclick="saveFavorite({{object}} , tags.value, Notes.value)">Save</button>
+          <form class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputEmail">Tags</label>
+              <div class="controls">
+                <input type="text" id="inputEmail" name="tags" placeholder="Tags">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputPassword">Notes</label>
+              <div class="controls">
+                <input type="password" id="inputPassword" name="notes" placeholder="Notes">
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                 <button class="btn btn-primary" data-dismiss="modal" onclick="saveFavorite({{object}} , tags.value, notes.value)">Save</button>
+              </div>
             </div>
           </form>
         </div>
