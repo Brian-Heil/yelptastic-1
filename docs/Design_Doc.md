@@ -1,9 +1,11 @@
-Title: Yelptastic Design Document
-Author: Varun Ravishankar
-Date: December 10, 2012
-Affiliation: Columbia University
-Email: vr2263@columbia.edu
-Web: varnholm.com/ui/yelptastic/index.html
+Title: Yelptastic Design Document  
+Author: Varun Ravishankar  
+		Jenee Benjamin  
+Date: December 10, 2012  
+Affiliation: Columbia University  
+Email: vr2263@columbia.edu  
+       jlb2229@columbia.edu  
+Web: varnholm.com/ui/yelptastic/index.html  
 
 # <img src="http://i.imgur.com/aIRpe.jpg" height="500px" width="200px" alt="Yelptastic Logo"/> #
 ## The Feiner Things ##
@@ -14,6 +16,8 @@ Orlando Pineda, omp2114
 Varun Ravishankar, vr2263  
 
 ## Overall Process
+
+
 
 * Brainstorming
 * Use Scenarios
