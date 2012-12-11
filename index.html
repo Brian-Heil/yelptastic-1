@@ -154,7 +154,7 @@
         $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
         $('.breadcrumb').append('<li class="active1">Search</li> ');
         addQuery(lastSearch[0], lastSearch[1], lastSearch[2], lastSearch[3], lastSearch[4], lastSearch[5]);
-        lastSearch.length=0;        
+        lastSearch.length=0;
 
       });
       $('body').bind('Lookup', function(){
@@ -206,7 +206,7 @@
   </ul></div>
   <div id="contentContainer">
     <div class="columnLeft"></div>          
-    <div class="columnCenter">
+    <div class="columnCenter" id="columnCenter">
       <!--<ul class="thumbnails">
           <div class="thumbnailContainer">
             <h3>{{title}}</h3>
