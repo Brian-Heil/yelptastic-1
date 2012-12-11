@@ -64,13 +64,13 @@ function addBusinessToFavorite (business){
         resultList = [];
         resultList.push(business);
    }
-     localStorage.setItem("results", resultList);
+     localStorage.setItem("results", JSON.stringify(resultList));
 }
 
 function deleteBusinessFromStorage(business){
     var resultList = localStorage.getItem("results");
     removeA(resultList, business);
-    localStorage.setItem("results", resultList);
+    localStorage.setItem("results", JSON.stringify(resultList));
 }
 
 function removeA(arr) {
