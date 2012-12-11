@@ -13,12 +13,14 @@ function searchFavorites(query) {
 			} else if (x.notes.toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
 			}
+			else if (x.location.display_address.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+				feedback.push(x);
+			}
 		});
 	}
 	return feedback;
 }
 function getFavoriteCategories() {
-
 	var feedback = {};
 	var resultList = JSON.parse(localStorage.getItem("results"));
 	//returns the list of lists (of categories);
@@ -46,7 +48,6 @@ function getFavoriteCategories() {
 //this function needs testing
 
 function getBroadCategories(answers, innerCat, globalCategories) {
-	
 	for (var singleCat in innerCat) {
 		answers[singleCat] = [];
 		var hierarchy = [];
@@ -69,7 +70,7 @@ function findStrings(singleCat, catsForThisCat, globalCategories) {
 				return catsForThisCat;
 				//return the list which contains the hierachy of categories for this business
 				//first element in the list is the inner most category and the last element is the broad category
-			} else {				
+			} else {
 				catsForThisCat = [];
 			}//else, the category of the item is not this one.
 		}
@@ -89,7 +90,6 @@ function getFavoritesWithinCategory(query) {
 }
 
 function addBusinessToFavorite(business) {
-
 	var resultList = JSON.parse(localStorage.getItem("results"));
 	if (resultList == null) {
 		resultList = [];
