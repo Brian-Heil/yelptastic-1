@@ -1,0 +1,34 @@
+Comments so far:
+
+'Search Yelp'
+------------------------------
+Logo and search boxes need to be spaced so that breadcrumb bar doesn't overextend results
+
+Space out search results more
+
+Search results rating isn't working
+
+Search button in 'Search Yelp' should be a form, so enter works
+
+Breadcrumb bar error: Home/Search/Search
+
+Favorite button restyle
+
+Remove tags in search results in 'Search Yelp'
+
+-----------------------------------------------------
+
+TO DO
+
+Add 'date added' parameter to the favorite
+
+Implement filtering
+
+Fix the bug that does not fetch the rating
+
+Implement sorting - where it is on the page?
+    Sort by rating, price, distance, date added to favorites
+
+Favorites homepage when there are no favorites
+
+Allow geolocation (automatic filling of the location search box)

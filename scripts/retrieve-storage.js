@@ -80,9 +80,15 @@ function removeA(arr) {
     }
     return arr;
 }
-var saveBookmark = function(business, tags, notes){
-    alert('Testing');
-    business["tags"] = tags;
-    business["notes"] = notes;
+
+function saveBookmark(business, tags, notes){
+    business.tags = tags;
+    business.notes = notes;
+    Date d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth() + 1;
+    var time = d.getTime();
+    var year = d.getFullYear();
+    business.dateAdded = time + " " month + "/" + day +"/"+ year;
     addBusinessToFavorite(business);
 }
