@@ -69,7 +69,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
         'url': message.action,
         'data': parameterMap,
         'cache': true,
-        'timeout':1000,
+        'timeout':3000,
         'dataType': 'jsonp',
         'jsonpCallback': 'cb',
         'success':function (response){
