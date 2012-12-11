@@ -80,6 +80,8 @@ Our final design took inspiration from Amazon, Newegg, and Yelp itself. We made 
 
 ## Prototyping and Testing Process ##
 
+Our prototyping process consisted of mockups drawn in Balsamiq and of sketches drawn on whiteboards. We chose not to use more sophisticated lo-fi prototyping techniques like paper prototypes because of their cumbersome nature and the time involved in making them. We found that we were better able to communicate our ideas through prototypes in Balsamiq, and that they were easy enough to make once you understood how to use the tools provided.
+
 Our first mockups involved lists of items that could be filtered and searched through, with a search bar at the top and a filter box similar to Amazon's filters on the right. ![bookmarks_page_mockup][] Categories would be displayed in a grid.
 
 When a user clicked on a category, they would be taken to another grid of subcategories. ![bookmarks_page_subcategory][]
