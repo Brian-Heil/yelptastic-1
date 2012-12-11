@@ -12,7 +12,7 @@ function searchFavorites (query){
 function getFavoriteCategories(){
     var feedback = [];
     var resultList = localStorage.getItem("results");
-    //returns the list of lists (of categories);
+    //returns the list of lists (of categories); 
     _.each(resultList.businesses, function(x){
        feedback.push(x.categories);
     }
@@ -21,7 +21,7 @@ function getFavoriteCategories(){
     var cats = [];   //a list of 'answer' lists; each element in cats is a list containing the hierachy for each business
 
     _.each(feedback, function(innerCat){
-        cats.push(getBroadCategories(answer, innerCat, allCategories));
+        cats.push(getBroadCategories(answer, innerCat, categories));
         answer =[];
     });
     return cats;
@@ -35,12 +35,12 @@ function getBroadCategories(answers, innerCat, globalCategories){
             getBroadCategories(answers, globalCategories[ky]);
         }else if(typeof globalCategories == 'string'){
             if(globalCategories == innerCat){
-                 return answers; //return the list which contains the hierachy of categories for this business
+                 return answers; //return the list which contains the hierachy of categories for this business 
                  //first element in the list is the inner most category and the last element is the broad category
             }//else, the category of the item is not this one.
         }
         answers = [];  //clear the array and look at the next category in the global list
-    }
+    }    
 }
 
 function getFavoritesWithinCategory (query){
@@ -57,11 +57,11 @@ function getFavoritesWithinCategory (query){
 
 function addBusinessToFavorite (business){
     var resultList =[];
-    if(typeof localStorage.getItem("results") != 'undefined' ){
+    if(typeof localStorage.getItem("results") != 'undefined' || localStorage.getItem("results") != 'undefined' != null){
         resultList = localStorage.getItem("results");
         resultList.push(business);
    }else{
-       resultList[0] = business;
+       resultList[0] = business; 
    }
      localStorage.setItem("results", resultList);
 }
