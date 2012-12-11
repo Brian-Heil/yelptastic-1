@@ -150,7 +150,15 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
     var string = template(data);
     var target = document.getElementById('columnCenter');
     var spinner = new Spinner(opts).stop(target);
-    $thumbnailswrapper.append(string);
+
+    if(results.length > 0){
+        $thumbnailswrapper.append(string);
+    }
+    else{
+        $("#columnCenter").text("Sorry, there are no businesses to display.");
+    }
+
+
     if (opt_total > 20) {
         $buttonRow = $('<div class="buttonRow"></div>');
 
