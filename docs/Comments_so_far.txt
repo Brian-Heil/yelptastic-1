@@ -12,6 +12,7 @@ Search Yelp
 * Instead of underlining all text when something is focused, just highlight the box.
 * Not displaying location or distance
 * When entering notes and tags, make boxes and labels horizontal instead of vertical.
+* Pagination button restyle
 
 
 Search Favorites
