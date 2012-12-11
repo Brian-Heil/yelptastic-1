@@ -12,6 +12,17 @@
   height: 330px;
   padding: 15px;
 }
+#error {
+  margin:auto;
+  height:500px;
+  width:700px;
+}
+#middle {
+  width: 1300px;
+  position: relative;
+  display: block;
+  margin: auto;
+}
 
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
   -webkit-appearance: button;
@@ -143,7 +154,7 @@ form {
   float: left;
 }
 .tab-content {
-  overflow: auto;
+  overflow: hidden;
   height: 50px;
   width: 660px;
   position: relative;

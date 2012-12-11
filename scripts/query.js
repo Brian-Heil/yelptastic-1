@@ -67,17 +67,36 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
     var parameterMap = OAuth.getParameterMap(message.parameters);
     parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
-    $.ajax({
+    var check = $.ajax({
         'url': message.action,
         'data': parameterMap,
         'cache': true,
+        'timeout':1000,
         'dataType': 'jsonp',
         'jsonpCallback': 'cb',
         'success':function (response){
           onSearchSuccess(response, opt_term, opt_location, opt_cat, opt_offset);
         },
-        'error': error
     });
+    check.success(function() {
+      console.log('Yes! Success!');
+    });
+
+    check.error(function() {
+       $('body').empty();
+       $('body').append('<div class="hero-unit">'+
+    '<h1>An error occured in connecting with the YELP</h1>' +
+  '<p><h3>Please refresh the page and try again.</h3></p>'+
+  //'<p>' +
+  //  '<a class="btn btn-primary btn-large">'+
+    //  'Learn more'+
+    //'</a>'+
+  //'</p>' +
+'</div>');
+    $('body').append('<div id="error"><img src="http://cdn.memegenerator.net/instances/400x/31664563.jpg"></div>');
+  });
+    
+    
 };
 
 /* Utility function to parse JSON and return JS object */
@@ -97,12 +116,6 @@ var searchQuery = function(term, location, category_filters, offset){
     query['offset'] = offset;
 
     queryYelp(query, Action.search, onSearchSuccess, onSearchError, term, location, category_filters, offset);
-    // var categories = _.chain(results.businesses).map(function(business){
-    //     return business.categories;
-    // }).union().value();
-
-    // results.categories = categories;
-
 };
 
 /* Get JSON object from search API, remove unnecessary fields, and return object. */
@@ -114,6 +127,6 @@ var onSearchSuccess = function(json, opt_term, opt_location, opt_cat, opt_offset
 /* Return appropriate Yelp API error. */
 var onSearchError = function(json){
     var err = parseData(json);
-
     console.error("Yelp API error", err);
+   
 };

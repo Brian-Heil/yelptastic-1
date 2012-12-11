@@ -1,3 +1,6 @@
+var lastLookup = [];
+var lastSearch = [];
+var bool = [true];
 /*
  * Search the yelp api
  */
@@ -12,8 +15,22 @@ var searchYelp = function (term, near, category_filters, offset) {
   } else {
     var opt_cat = category_filters;
   }
+  alert($('#middle').size());
+  if (near){
+    alert('SEARCHING');
+    searchQuery(term, near, opt_cat, opt_int);
+  } else {
+    if(bool[0]) {
+      bool = [];
+      bool.push(false);
+      $('#middle').append('<div class="alert">' +
+      '<button type="button" onclick="bool.pop(); bool.push(true);" class="close" data-dismiss="alert">&times;</button>'+
+      '<strong>Warning!</strong> Please include the appropriate info in the appropriate fields.'+
+      '</div>');
+    }
   
-  searchQuery(term, near, opt_cat, opt_int);
+  }
+  
 }
 
 /*
@@ -31,9 +48,11 @@ var getBookmarks = function(term) {
 var browseFavorites = function(data) {
   var current = $('.active1').text();
   alert("LOL: " + current);
-  if (current != 'Search'){
+  if (current != 'Lookup'){
+    alert('PUSHING DATA');
+    lastLookup.push(data);
     $('.active1').remove();
-    $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
+    $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+ ')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
     $('.breadcrumb').append('<li class="active1">' + 'Lookup' +'</li> ');
     history.pushState({}, 'Yelptastic- Browse Favorite', '#bookmarksearch');
   }
@@ -49,7 +68,17 @@ var browseFavorites = function(data) {
 var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, opt_offset) {
   //$('.breadcrumbs').removeClass('.active');
   var current = $('.active1').text();
+  $('.alert').remove();
+  bool = [];
+  bool.push(true);
+
   alert("LOL: " + current);
+  lastSearch.push(data);
+    lastSearch.push(total);
+  lastSearch.push(opt_term);
+  lastSearch.push(opt_location);
+  lastSearch.push(opt_cat);
+  lastSearch.push(opt_offset);
   if (current != 'Search'){
     $('.active1').remove();
     $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
@@ -90,6 +119,7 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
         object:JSON.stringify(results[i]),
         url:results[i].url,
         phonenumber:results[i].display_phone, 
+        n:i.toString(),
       });
   } 
   var source = $('#results').html();
@@ -138,11 +168,11 @@ var browseBookmarks = function (results, opt_int) {
       }
       $button = $('<button>Favorite</button>');
       data.push({
-        title:results[i].title,
+        name:results[i].name,
         image:image_url,
         quote:results[i].snippet_text,
         ratingImage:results[i].rating_img_url,
-        tags:'',
+        tags:results[i].tags,
         url:results[i].url,
       });
     }  
@@ -156,11 +186,11 @@ var browseBookmarks = function (results, opt_int) {
       $button = $('<button>Favorite</button>');
       alert(results[i].name);
       data.push({
-        title:results[i].title,
+        name:results[i].name,
         image:image_url,
         quote:results[i].snippet_text,
         ratingImage:results[i].rating_img_url,
-        tags:'',
+        tags:results[i].tags,
         url:results[i].url,
       });
     }  
@@ -195,14 +225,15 @@ var browseBookmarks = function (results, opt_int) {
  */
 var saveFavorite = function (jsonString, tags1, notes1) {
   var object1 = jsonString;
+  alert("ADDED" + object1.name);
   saveBookmark(object1, tags1, notes1);
 }
 
 
 var parseYelpCategories = function (term, location, categories) {
-	var categories_array = JSON.parse(categories);
-	$categories_wrapper = categories_array[0][1][12][1][0][0];
-	alert($categories_wrapper);
+	//var categories_array = JSON.parse(categories);
+	//$categories_wrapper = categories_array[0][1][12][1][0][0];
+	//alert($categories_wrapper);
 	// $categories_wrapper = '<div class="accordion" id="categories"> <div class="accordion-group"> <div class="accordion-heading">';
 	// // for (var i = 0; i < categories_array.length; i++)
 	// // {
