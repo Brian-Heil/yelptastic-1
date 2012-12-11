@@ -261,4 +261,5 @@ var parseYelpCategories = function (term, location, categories) {
 	
 	categories_wrapper = categories_wrapper + "</div>";
 	
+	$'.columnLeft'.append(categories_wrapper);
 }
