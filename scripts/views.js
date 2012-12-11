@@ -271,7 +271,7 @@ var browseBookmarks = function (results, opt_int) {
         $thumbnailswrapper.append(string);
     }
     else{
-        $("#columnCenter").text("Sorry, there are no favorites to display.");
+        $("#columnCenter").text("There are no favorites to display!");
     }
 
     if (data.length >= 20) {
