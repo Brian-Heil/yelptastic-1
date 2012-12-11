@@ -120,7 +120,7 @@
             <h3>Are you sure you want to delete the bookmark: {{name}}?</h3>
           </div>
             <button class="btn" data-dismiss="modal" aria-hidden="true">Don't Delete</button>
-            <button class="btn btn-primary" onclick="alert('hello');deleteBusinessFromStorage({{object}});">Delete</button>
+            <button class="btn btn-primary" onclick="deleteBusinessFromStorage({{object}});">Delete</button>
         </div>
        <a href="{{url}}"  target="_blank"><h3>{{name}}</h3></a>
       <div class="thumbnail">
@@ -183,10 +183,12 @@
         $('.columnCenter').empty();
         $('.breadcrumb').empty();
         $('.breadcrumb').append('<li class="active1">Home</li> ');
+        home();
       });
       $('searchbar').submit(function () {
           sendContactForm();  
       });
+      home();
   });
 </script>
 <body>

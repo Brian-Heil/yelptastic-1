@@ -20,6 +20,29 @@ var opts = {
     top: 'auto', // Top position relative to parent in px
     left: 'auto' // Left position relative to parent in px
 };
+
+/*
+ * Displays the home page
+ */
+var home = function() {
+      var current = $('.active1').text();
+   if (current != 'Home'){
+        $('.active1').remove();
+        $('.columnCenter').empty();
+        $('.breadcrumb').empty();
+        $('.breadcrumb').append('<li class="active1">Home</li> ');
+        history.pushState({}, 'Yelptastic- Browse Favorite', '#Home');
+    }
+  var results = JSON.parse(localStorage.getItem("results"));
+  lastLookup.push(results);
+  browseBookmarks(results, 0);
+  
+}
+
+
+
+
+
 /*
 * Search the yelp api
 */
@@ -194,7 +217,6 @@ var browseBookmarks = function (results, opt_int) {
                 image_url = 'http://s3-media3.ak.yelpcdn.com/assets/2/www/img/305e17fe6ed8/gfx/blank_biz_medium_sq.png';
             }
             $button = $('<button>Favorite</button>');
-            alert('results[i].location.display_address[0]');
             data.push({
                 name:results[i].name,
                 image:image_url,
@@ -257,7 +279,6 @@ var browseBookmarks = function (results, opt_int) {
     var source1 = $('#filts').html();
     var template1 = Handlebars.compile(source1);
     var string1 = template1({funcname:'filterFavorites', results:JSON.stringify(results)});
-    alert('Printing String: ' + string1);
     $('.columnRight').empty();
     $('.columnRight').append(string1);
     $thumbnailswrapper.append($buttonRow);
