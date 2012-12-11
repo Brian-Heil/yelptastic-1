@@ -155,14 +155,14 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
         $buttonRow = $('<div class="buttonRow"></div>');
 
         if (opt_int >= 20) {
-            $see_prev = $('<input type="button" value="Previous 20" name="nextButton">');
+            $see_prev = $('<button class="btn" value="Previous 20" name="nextButton">');
             $see_prev.click(function() {
                 searchYelp(opt_term, opt_location, opt_cat, opt_int-20);
             });
             $buttonRow.append($see_prev);
         }
         if (opt_int + 20 <= opt_total) {
-            $see_all = $('<input type="button" value="Next 20" name="prevButton">');
+            $see_all = $('<button class="btn" value="Next 20" name="prevButton">');
             $see_all.click(function() {
                 searchYelp(opt_term, opt_location, opt_cat, opt_int + 20);
             });
@@ -236,14 +236,14 @@ var browseBookmarks = function (results, opt_int) {
     $thumbnailswrapper.append(string);
     if (data.length >= 20) {
         if (opt_int >= 20) {
-            $see_prev = $('<input type="button" value="Previous" name="nextButton">');
+            $see_prev = $('<button class="btn" value="Previous" name="nextButton">Previous</button>');
             $see_prev.click(function() {
                 addQuery(results, opt_int-1);
             });
             $buttonRow.append($see_prev);
         }
         if (opt_int + 20 <= data.length) {
-            $see_all = $('<input type="button" value="Next" name="prevButton">');
+            $see_all = $('<button class="btn" value="Next" name="prevButton">Next</button>');
             $see_all.click(function() {
                 addQuery(results, opt_int + 20);
             });
