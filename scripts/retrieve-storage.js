@@ -28,7 +28,6 @@ function getFavoriteCategories() {
 		feedback[x.name] = [];
 		_.each(x.categories, function(y) {
 			feedback[x.name].push(y[1]);
-			//	alert(y[1]);
 		});
 	});
 	var answer = {};
@@ -72,9 +71,7 @@ function findStrings(singleCat, catsForThisCat, globalCategories) {
 				return catsForThisCat;
 				//return the list which contains the hierachy of categories for this business
 				//first element in the list is the inner most category and the last element is the broad category
-			} else {
-				//alert(catsForThisCat);
-				
+			} else {				
 				catsForThisCat = [];
 			}//else, the category of the item is not this one.
 		}
@@ -105,9 +102,7 @@ function addBusinessToFavorite(business) {
 }
 
 function deleteBusinessFromStorage(business) {
-  alert('Deleting');
 	var resultList = JSON.parse(localStorage.getItem("results"));
-
 	var temp = removeA(resultList, business);
 	localStorage.setItem("results", JSON.stringify(temp));
 	getBookmarks(lastTerm[0]);

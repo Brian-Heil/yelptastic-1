@@ -29,7 +29,6 @@ var searchYelp = function (term, near, category_filters, offset) {
                                 '<strong>Error!</strong> Please include the appropriate info in the appropriate fields.'+
                                 '</div>');
         }
-
     }
 };
 
@@ -148,7 +147,6 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
         }
         $thumbnailswrapper.append($buttonRow);
     }
-    alert('Appending thumbnailwrapper')
     $('.columnCenter').append($thumbnailswrapper);
     window.scroll();
 };
@@ -253,8 +251,6 @@ var parseYelpCategories = function (term, location, categories) {
         var genCategoryTag = i;
         genCategoryTag = genCategoryTag.replace(/ /g, "_");
         genCategoryTag = genCategoryTag.replace(/&/g, "And");
-
-
         categories_wrapper = categories_wrapper + '<div class="accordion-group" id="' + genCategoryTag + '">';
         categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
         categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + genCategoryTag + '" href="#sub' + genCategoryTag + '">';
@@ -268,23 +264,59 @@ var parseYelpCategories = function (term, location, categories) {
         {
             var subCategory = j;
             var subCategoryTag = categories[i][j];
+            if (typeof categories[i][j] != "string")
+            {
+                subCategoryTag = subCategory;
+                subCategoryTag = subCategoryTag.replace(/ /g, "_");
+                subCategoryTag = subCategoryTag.replace(/&/g, "And");
+            }
+
             categories_wrapper = categories_wrapper + '<div class="accordion-group">';
             categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
-            categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '">';
+            categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '" ';
+
+            if (typeof categories[i][j] != "string")
+            {
+                categories_wrapper = categories_wrapper + 'href ="#sub' + subCategoryTag +  '" ';
+            }
+
+            categories_wrapper = categories_wrapper + '>';
+
             categories_wrapper = categories_wrapper + subCategory;
             categories_wrapper = categories_wrapper + '</a>';
             categories_wrapper = categories_wrapper + '</div>';
+
+
+            if (typeof categories[i][j] != "string")
+            {
+                categories_wrapper = categories_wrapper + '<div id="sub'+ subCategory + '" class="accordion-body collapse">';
+                categories_wrapper = categories_wrapper + '<div class="accordion-inner" style="margin-left:1em; margin-right:1em">';
+
+                for (var k in categories[i][j])
+                {
+                    var subSubCategory = k;
+                    var subSubCategoryTag = categories[i][j][k];
+
+                    categories_wrapper = categories_wrapper + '<div class="accordion-group">';
+                    categories_wrapper = categories_wrapper + '<div class = "accordion-heading">';
+                    categories_wrapper = categories_wrapper + '<a class="accordion-toggle">';
+                    categories_wrapper = categories_wrapper + subSubCategory;
+                    categories_wrapper = categories_wrapper + '</a>';
+                    categories_wrapper = categories_wrapper + '</div>';
+                    categories_wrapper = categories_wrapper + '</div>';
+                }
+
+                categories_wrapper = categories_wrapper + '</div>';
+                categories_wrapper = categories_wrapper + '</div>';
+            }
             categories_wrapper = categories_wrapper + '</div>';
         }
 
         categories_wrapper = categories_wrapper + '</div>';
         categories_wrapper = categories_wrapper + '</div>';
         categories_wrapper = categories_wrapper + '</div>';
-
-
     }
-
     categories_wrapper = categories_wrapper + "</div>";
-
+    console.log(categories_wrapper);
     $('.columnLeft').append(categories_wrapper);
 };
