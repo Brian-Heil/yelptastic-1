@@ -87,7 +87,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputPassword">Notes</label>
+              <label class="control-label" for="inputEmail">Notes</label>
               <div class="controls">
                 <input type="text" id="inputEmail" name="notes" placeholder="Notes">
               </div>
@@ -95,7 +95,7 @@
             <div class="control-group">
               <div class="controls">
                  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                 <button class="btn btn-primary" data-dismiss="modal" onclick="saveFavorite({{object}} , tags.value, notes.value)">Save</button>
+                 <button class="btn btn-primary" type="submit" data-dismiss="modal" onclick="saveFavorite({{object}} , tags.value, notes.value)" onsubmit="saveFavorite({{object}} , tags.value, notes.value)">Save</button>
               </div>
             </div>
           </form>
@@ -107,8 +107,21 @@
 <script id="browse" type="text/x-handlebars-template">
   {{#each this}}
    <div class="thumbnailContainer">
-       <button type="button" onclick="alert('hello');deleteBusinessFromStorage({{object}});" id="#delete"class="btn btn-link"><i class="icon-trash"></i></button>
-
+       <!-- Button to trigger modal -->
+        <a href="#myModal" role="button" class="btn btn-link" data-toggle="modal"><i class="icon-trash"></i></a>
+       
+        <!-- Modal -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Warning!</h3>
+          </div>
+          <div class="modal-body">
+            <h3>Are you sure you want to delete the bookmark: {{name}}?</h3>
+          </div>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Don't Delete</button>
+            <button class="btn btn-primary" onclick="alert('hello');deleteBusinessFromStorage({{object}});">Delete</button>
+        </div>
        <a href="{{url}}"  target="_blank"><h3>{{name}}</h3></a>
       <div class="thumbnail">
         <img src="{{image}}" alt="" width="150" height="100">
