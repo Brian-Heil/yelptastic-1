@@ -39,12 +39,12 @@
           </div>
         </div>
         <div class="accordion-group">
-          <div class="accordion-heading">
+          <!--<div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
               Distance
             </a>
-          </div>
-          <div id="collapseTwo" class="accordion-body collapse">
+          </div>-->
+          <!--<div id="collapseTwo" class="accordion-body collapse">
             <div class="accordion-inner">
               <button class="btn btn-large btn-block btn-primary" type="button" onclick="{{funcname}}(1, 'distance', {{results}} )" >Distance less than 1 mile </button>
               <button class="btn btn-large btn-block" type="button"onclick="{{funcname}}(3, 'distance', {{results}} )">Distance less than 3 miles</button>
@@ -52,7 +52,7 @@
               <button class="btn btn-large btn-block" type="button"onclick="{{funcname}}(13, 'distance', {{results}} )">Distance less than 13 miles</button>
               <button class="btn btn-large btn-block btn-primary" type="button"onclick="{{funcname}}(20, 'distance', {{results}} )">Diestance less than 20 miles</button>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -128,7 +128,7 @@
           </div>
 
             <button class="btn" data-dismiss="modal" aria-hidden="true">Do Not Delete</button>
-            <button class="btn btn-primary" onclick="deleteBusinessFromStorage({{object}});">Delete</button>
+            <button class="btn btn-primary" onclick="deleteBusinessFromStorage({{object}}); $('myModal').modal('hide'); $('.body').removeClass('modal-open'); $('.modal-backdrop').remove()">Delete</button>
         </div>
        <a href="{{url}}"  target="_blank"><h3>{{name}}</h3></a>
       <div class="thumbnail">
@@ -138,7 +138,7 @@
         <p>Tags:{{tags}}</p>
         <p>{{address}}</p>
         <p><img src="{{ratingImage}}">  ({{views}} reviews)</p>
-        <a href="#" id='pop' class="btn btn-large btn-danger" rel="popover" data-content="{{notes}}" data-original-title="Notes">Notes</a>
+        <p align="left"><span class="label label-info">Notes</span>{{notes}}</p>
     </div>
     {{/each}}
 </script>

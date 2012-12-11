@@ -131,6 +131,7 @@ h3 {
 }
 .label {
   float:left;
+  margin-top: -3px;
 }
 .columnLeft {
   margin-top:10px;

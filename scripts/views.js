@@ -245,7 +245,8 @@ var browseBookmarks = function (results, opt_int) {
                 tags:results[i].tags,
                 object:JSON.stringify(results[i]),
                 url:results[i].url,
-                notes:results[i].notes,
+                notes:results[i].notes,                
+                n:i.toString(),
                 views:results[i].review_count,
                 distance:results[i].distance,
                 address:results[i].location.display_address[0] +" " + results[i].location.display_address[1]+" "+ results[i].location.display_address[2]
@@ -267,6 +268,7 @@ var browseBookmarks = function (results, opt_int) {
                 ratingImage:results[i].rating_img_url,
                 tags:results[i].tags,
                 url:results[i].url,
+                n:i.toString(),
                 notes:results[i].notes,
                 object:JSON.stringify(results[i]),
                 views:results[i].review_count,

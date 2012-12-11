@@ -3,7 +3,7 @@ function searchFavorites(query) {
 	var resultList = JSON.parse(localStorage.getItem("results"));
 	if (resultList == null) {
 		return feedback;
-	} else {
+	} /*else {
 		_.each(resultList, function(x) {
 			if (x.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
@@ -12,12 +12,12 @@ function searchFavorites(query) {
 
 			} else if (x.notes.toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
-			}
-			else if (x.location.display_address.join(' ').toLowerCase().indexOf(query.toLowerCase()) > -1) {
+			}*/
+			/*else if (x.location.display_address.join(' ').toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
-			}
-		});
-	}
+			}*/
+		//});
+	//}
 	return feedback;
 }
 
