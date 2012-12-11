@@ -13,6 +13,9 @@ function searchFavorites(query) {
 			} else if (x.notes.toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
 			}
+			else if (x.location.display_address.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+				feedback.push(x);
+			}
 		});
 	}
 	return feedback;
@@ -58,7 +61,6 @@ function getFavoriteCategories() {
 		feedback[x.name] = [];
 		_.each(x.categories, function(y) {
 			feedback[x.name].push(y[1]);
-			
 		});
 	});
 	var answer = {};
@@ -76,7 +78,6 @@ function getFavoriteCategories() {
 //this function needs testing
 //innerCat has Traditional(American), Gluten-Free | Mexican, Catering 
 function getBroadCategories(busName, answers, innerCat, globalCategories) {
-	
 	for (var singleCat in innerCat) {
 		answers[singleCat] = [];
 		var hierarchy = [];
@@ -107,10 +108,7 @@ function findStrings(busName, singleCat, catsForThisCat, globalCategories, stati
 				//return the list which contains the hierachy of categories for this business
 				//first element in the list is the inner most category and the last element is the broad category
 			} else {
-				
-				return "NF";
-			
-				
+				return "NF";			
 			}
 		}
 		
@@ -136,7 +134,6 @@ function getFavoritesWithinCategory(query) {
 }
 
 function addBusinessToFavorite(business) {
-
 	var resultList = JSON.parse(localStorage.getItem("results"));
 	if (resultList == null) {
 		resultList = [];
@@ -148,18 +145,23 @@ function addBusinessToFavorite(business) {
 
 function deleteBusinessFromStorage(business) {
 	var resultList = JSON.parse(localStorage.getItem("results"));
-	resultList = removeA(resultList, business);
-	localStorage.setItem("results", JSON.stringify(resultList));
+	var temp = removeA(resultList, business);
+	localStorage.setItem("results", JSON.stringify(temp));
+	getBookmarks(lastTerm[0]);
 }
 
 function removeA(array, item) {
-	    for(var i in array){
-        if(array[i]==item){
+	 for(var i in array){
+    if(array[i].id == item.id) {
             array.splice(i,1);
             break;
             }
     }
 	return array;
+}
+
+function metersToMiles(meters){
+    return meters * 0.000621371192;
 }
 
 function saveBookmark(business, tags, notes) {
@@ -171,6 +173,7 @@ function saveBookmark(business, tags, notes) {
 	}
 	business.tags = tags;
 	business.notes = notes;
+	business.distance = metersToMiles(business.distance);
 	var d = new Date();
 	var day = d.getDate();
 	var month = d.getMonth() + 1;

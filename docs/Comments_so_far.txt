@@ -3,14 +3,17 @@ Comments so far:
 Search Yelp
 ------------------------------
 * Space out search results more
-* Search button restyle
-* Rename "Search Yelp" to "Add Favorite"
-* Remove alerts
-* When displaying error page, modify URL state
-* If location box has data, and business is empty, we search and don't display an error.
+* Search button restyle - done
+* Rename "Search Yelp" to "Add Favorite" - done
+* Remove alerts - done
+* Have text indicating no results when search has no results
+* When displaying error page, modify URL state - done
+* When going back or forwards in history, change in URL state should also change the page
+* If location box has data, and business is empty, we search and don't display an error. - done
 * Spinner to show we're doing something when searching
 * Instead of underlining all text when something is focused, just highlight the box.
-* Not displaying location or distance
+* Not displaying location - done
+* Not displaying distance
 * When entering notes and tags, make boxes and labels horizontal instead of vertical.
 * Pagination button restyle
 
@@ -23,8 +26,8 @@ Search Favorites
 
 Other
 --------------------------
-* Breadcrumb bar error: Home/Lookup/Search/Lookup when you add bookmark, and then go to search for it.
-* Breadcrumb bar error: Home/Search/Search
+* Breadcrumb bar error: Home/Lookup/Search/Lookup when you add bookmark, and then go to search for it. - done
+* Breadcrumb bar error: Home/Search/Search - done
 * First-run should ask for username - IGNORED
 
 

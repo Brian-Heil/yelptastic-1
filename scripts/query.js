@@ -14,10 +14,10 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
         //
         // Update with your auth tokens.
         //
-        consumerKey: "F6WiA1nysCcqrs9VM6Zuyw",
-        consumerSecret: "Ig9Y2vsh3eZeWO-YxLJD5UwJVp8",
-        accessToken: "Wrr2_7x_xK8jck0G5gZEDUaTkxMEHdFa",
-        accessTokenSecret: "EylBOOoblBFuFOm_rZEaqc8QzKw",
+        consumerKey: "5A_gzfTqsJUuuXq2-ote7w",
+        consumerSecret: "oDgb06VHZI91mhhm2CcmIlsDnX0",
+        accessToken: "gn5XPAGmIGGIoGGNtks-qdasM_xDB0rg",
+        accessTokenSecret: "QvOkVYrWObttNN7VM7KbGHQhClM",
         serviceProvider: {
             signatureMethod: "HMAC-SHA1"
         }
@@ -31,11 +31,10 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
 
     var parameters = [];
-    alert('location: ' + query.location);
     parameters.push(['term', query.term]);
     parameters.push(['location', query.location]);
     parameters.push(['category-filters', query.categories]);
-    parameters.push(['offset', query.offset]);    
+    parameters.push(['offset', query.offset]);
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
     parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
@@ -46,14 +45,13 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
     /**If the search type is business, query.id must be provided */
     if (search_type === Action.search) {
-      alert('Running Search');
         message = {
             'action': 'http://api.yelp.com/v2/search',
             'method': 'GET',
             'parameters': parameters
         };
     }
- 
+
     else if (search_type === Action.business) {
         message = {
             'action': 'http://api.yelp.com/v2/business/' + query.id,
@@ -71,18 +69,19 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
         'url': message.action,
         'data': parameterMap,
         'cache': true,
-        'timeout':1000,
+        'timeout':3000,
         'dataType': 'jsonp',
         'jsonpCallback': 'cb',
         'success':function (response){
           onSearchSuccess(response, opt_term, opt_location, opt_cat, opt_offset);
-        },
+        }
     });
     check.success(function() {
       console.log('Yes! Success!');
     });
 
     check.error(function() {
+       history.pushState({}, 'Yelptastic- Error', '#Error');
        $('body').empty();
        $('body').append('<div class="hero-unit">'+
     '<h1>An error occured in connecting with the YELP</h1>' +
@@ -95,8 +94,6 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 '</div>');
     $('body').append('<div id="error"><img src="http://cdn.memegenerator.net/instances/400x/31664563.jpg"></div>');
   });
-    
-    
 };
 
 /* Utility function to parse JSON and return JS object */
@@ -128,5 +125,5 @@ var onSearchSuccess = function(json, opt_term, opt_location, opt_cat, opt_offset
 var onSearchError = function(json){
     var err = parseData(json);
     console.error("Yelp API error", err);
-   
+
 };

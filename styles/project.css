@@ -6,11 +6,27 @@
   text-align: center;
   margin: auto;
 }
+.alert {
+  width:1280px;
+}
+
+.btn-danger {
+  display: block;
+  position: relative;
+  height: 14px;
+  width: 28px;
+  left: 97px;
+  font-size: 70%;
+}
+
 .modal-body {
-  overflow-y: auto; 
-  max-height: 400px;
-  height: 330px;
-  padding: 15px;
+  float: left;
+display: block;
+margin: auto;
+overflow-y: auto;
+max-height: 323px;
+height: 170px;
+padding: 15px;
 }
 #error {
   margin:auto;
@@ -22,6 +38,9 @@
   position: relative;
   display: block;
   margin: auto;
+}
+.btn {
+  margin-top: 5px;
 }
 
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
@@ -36,9 +55,9 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 }
 #logo {
   float: left;
-  margin-left: 40px;
+  margin-left: 57px;
   height: 100px;
-  width: 219px;
+  width: 243px;
   text-align: left;
   position: relative;
   background-image: url('http://i.imgur.com/aIRpe.jpg');
@@ -71,11 +90,11 @@ p {
   width: 200px;
 }
 h3 {
-  font-size: 15.5px;
-  height: 20px;
+  font-size: 14.5px;
+  height: 9px;
   display: block;
-  margin-bottom: 15px;
-  line-height: 18px;
+  margin-bottom: 0px;
+  line-height: 0px;
 }
 .thumbnailContainer {
   -moz-border-radius: 2px;
@@ -85,7 +104,7 @@ h3 {
   display: block;
   width: 250px;
   border-style: solid;
-  height: 300px;
+  height: 350px;
   position: relative;
   float: left;
   margin-left: 20px;
@@ -151,12 +170,13 @@ form {
   height: 30px;
   display: block;
   position: relative;
-  float: left;
+  float: right;
 }
 .tab-content {
   overflow: hidden;
   height: 50px;
   width: 660px;
+  float:right;
   position: relative;
 }
 #searchbox {
