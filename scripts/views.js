@@ -1,13 +1,19 @@
 /*
  * Search the yelp api
  */
-var searchYelp = function (term, near, offset) {
+var searchYelp = function (term, near, category_filters, offset) {
   if (offset == undefined) {
     var opt_int = 0;
   } else {
     var opt_int = offset;
   }
-  searchQuery(term, near, opt_int);
+  if (category_filters == undefined) {
+    var opt_cat = "";
+  } else {
+    var opt_cat = category_filters;
+  }
+  
+  searchQuery(term, near, opt_cat, opt_int);
 }
 
 /*
@@ -39,7 +45,9 @@ var browseFavorites = function(data) {
 /*
  * Displays the view for searching yelp.
  */
-var addFavoritesView = function(data, total, opt_term, opt_location, opt_offset) {
+
+var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, opt_offset) {
+  //$('.breadcrumbs').removeClass('.active');
   var current = $('.active1').text();
   alert("LOL: " + current);
   if (current != 'Search'){
@@ -48,14 +56,17 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_offset)
     $('.breadcrumb').append('<li class="active1">' + 'Search' +'</li> ');
     history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
   }
+  $('.columnLeft').empty();
   $('.columnCenter').empty();
-  addQuery(data, opt_offset, total, opt_term, opt_location);
+  addQuery(data, opt_offset, total, opt_term, opt_location, opt_cat);
+
+
 }
 
 /*
  * Takes in the results and appends them to the thumbnails grids
  */
-var addQuery = function (results, opt_int, opt_total, opt_term, opt_location) {
+var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, opt_cat) {
   $('.columnCenter').empty();
   $thumbnailswrapper = $('<ul class="thumbnails"></ul>');  
   var data = [];
@@ -87,7 +98,7 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location) {
     if (opt_int >= 20) {
       $see_prev = $('<input type="button" value="Previous 20" name="nextButton">');
       $see_prev.click(function() {
-        searchYelp(opt_term, opt_location, opt_int-20);
+        searchYelp(opt_term, opt_location, opt_cat, opt_int-20);
        });
      $buttonRow.append($see_prev);
     }
@@ -95,7 +106,7 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location) {
       alert('Running <')
        $see_all = $('<input type="button" value="Next 20" name="prevButton">');
        $see_all.click(function() {
-          searchYelp(opt_term, opt_location, opt_int + 20);
+          searchYelp(opt_term, opt_location, opt_cat, opt_int + 20);
        });
      $buttonRow.append($see_all);
     }
