@@ -112,6 +112,7 @@ function deleteBusinessFromStorage(business) {
 
 	var temp = removeA(resultList, business);
 	localStorage.setItem("results", JSON.stringify(temp));
+	getBookmarks(lastLookup(0));
 }
 
 function removeA(array, item) {
