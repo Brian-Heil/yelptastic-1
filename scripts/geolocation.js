@@ -1,11 +1,5 @@
 // <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
-var geocoder;
-var decodedAddress;
-var codedLatLng;
-var bounds = new google.maps.LatLngBounds();
-var distances = {};
-
 function Geolocation(){
 	this.geocoder = new google.maps.Geocoder();
 	this.decodedAddress = undefined;
