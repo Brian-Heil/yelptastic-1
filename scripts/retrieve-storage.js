@@ -1,13 +1,13 @@
 
 function searchFavorites (query){
     var feedback = [];
-    var resultList = localStorage.getItem("results");
+    var resultList = JSON.parse(localStorage.getItem("results"));
     _.each(resultList.businesses, function(x){
         if(x.name.search(query) > -1 || x.tag.search(query) > -1 || x.notes.search(query) > -1){
             feedback.push(x);
         }
     });
-    alert('is Feedback empty?' + feedback.length);
+   // alert('is Feedback empty?' + feedback.length);
     return feedback;
 }
 
@@ -58,13 +58,14 @@ function getFavoritesWithinCategory (query){
 }
 
 function addBusinessToFavorite (business){
-    var resultList =[];
-    if (localStorage.getItem("infiniteScrollEnabled") === null) {
-      resultList = JSON.parse(localStorage.getItem("infiniteScrollEnabled"));
-      resultList.push(business);
-    }else {
-      resultList.push(business);
+
+    var resultList = JSON.parse(localStorage.getItem("results"));
+    if(resultList == null){
+   // 	alert("in here!");
+    	resultList = [];   	
+    	
     }
+   resultList.push(business);
    localStorage.setItem("results", JSON.stringify(resultList));
 }
 

@@ -1,3 +1,4 @@
+
 /*
  * Search the yelp api
  */
@@ -35,7 +36,7 @@ var browseFavorites = function(data) {
     $('.active1').remove();
     $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
     $('.breadcrumb').append('<li class="active1">' + 'Lookup' +'</li> ');
-  //  history.pushState({}, 'Yelptastic- Browse Favorite', '#bookmarksearch');
+    history.pushState({}, 'Yelptastic- Browse Favorite', '#bookmarksearch');
   }
   $('.columnCenter').empty();
 
@@ -54,10 +55,14 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
     $('.active1').remove();
     $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
     $('.breadcrumb').append('<li class="active1">' + 'Search' +'</li> ');
-  //  history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
+    history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
   }
   $('.columnLeft').empty();
   $('.columnCenter').empty();
+  var allcategories = $.getJSON("scripts/categories.json", function(y){
+  	  var x = y;
+  	  parseYelpCategories(opt_term, opt_location, x);
+  });
   addQuery(data, opt_offset, total, opt_term, opt_location, opt_cat);
 
 
@@ -123,6 +128,7 @@ var browseBookmarks = function (results, opt_int) {
   $('.columnCenter').empty();
   $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
   $buttonRow = $('<div class="buttonRow"></div>');
+  alert('Running browse bookmarks')
   var data = [];
   if (results.length >=20) {
     for (var i = opt_int; i < opt_int + 20; i ++) {
@@ -149,6 +155,7 @@ var browseBookmarks = function (results, opt_int) {
         var image_url = 'http://s3-media3.ak.yelpcdn.com/assets/2/www/img/305e17fe6ed8/gfx/blank_biz_medium_sq.png';
       }
       $button = $('<button>Favorite</button>');
+      alert(results[i].name);
       data.push({
         title:results[i].title,
         image:image_url,
@@ -189,6 +196,28 @@ var browseBookmarks = function (results, opt_int) {
  */
 var saveFavorite = function (jsonString, tags1, notes1) {
   var object1 = jsonString;
-  alert("The JSON: " + JSON.stringify(object1));  
   saveBookmark(object1, tags1, notes1);
+}
+
+
+var parseYelpCategories = function (term, location, categories) {
+	var categories_array = JSON.parse(categories);
+	$categories_wrapper = categories_array[0][1][12][1][0][0];
+	alert($categories_wrapper);
+	// $categories_wrapper = '<div class="accordion" id="categories"> <div class="accordion-group"> <div class="accordion-heading">';
+	// // for (var i = 0; i < categories_array.length; i++)
+	// // {
+		// // for (var j = 0; j < categories_array[i][1].length; j++)
+		// // {
+			// // $categories_wrapper.append(' <a class="accordion-toggle" data-toggle="collapse" data-parent="#categories" href="#' + categories_array[i][0][j] sub1">
+        // // General Category
+      // // </a>');
+// // 			
+			// // if (categories[i][1][j][1].length != 1)
+			// // {
+// // 				
+			// // }
+		// // }
+	// // }
+			
 }
