@@ -49,7 +49,6 @@ function filterFavorites(criterion, filter, results) {
 		return findDistance(x) <= criterion;
 		//within 'criterion' miles
 	} else if (filter == "category" || filter == "categories") {
-		
 		getFavoriteCategories();
 		 _.each(results, function(x) {
 			for(thisList in businessAndCategories){
@@ -57,10 +56,79 @@ function filterFavorites(criterion, filter, results) {
 					feedback.push(x);
 				}
 			}
-		});	
+		});
 	}
 	/*return*/browseFavorites(feedback);
 }
+
+function sortFavorites(criterion, order, results){
+	var feedback = [];
+	if (criterion == "rating") {
+		feedback = _.sortBy(results, function(x) {
+			return x.rating;
+		});
+	} else if (criterion == "distance") {
+		// var destinations = [];
+		// feedback = _.each(results, function(x) {
+		//	var lat = parseFloat(x.coordinate.latitude);
+		//	var lng = parseFloat(x.coordinate.longitude);
+		//	var latlng = new google.maps.LatLng(lat, lng);
+		//	destinations[x.name] = latlng;
+
+		// });
+		// var geo = new Geolocation;
+		// var locObj = new google.maps.LatLng(geo.getCurrentLocation.latitude, geo.getCurrentLocation.longitude);
+		// var mapping = calculateDistances(locObj, Object.values(destinations));
+		// for (var i=0; i< mapping.values.length; i++){
+		//	if ((mapping.values[i])[distance] <= criterion){
+		//		feedback(destinations[i]);
+		//	}
+		// }
+		// return findDistance(x);
+		//within 'criterion' miles
+	}
+
+	if(order == "DESCENDING"){
+		feedback.reverse();
+	}
+
+	browseFavorites(feedback);
+}
+
+function sortResults(criterion, order, results){
+	var feedback = [];
+	if (criterion == "rating") {
+		feedback = _.sortBy(results, function(x) {
+			return x.rating;
+		});
+	} else if (criterion == "distance") {
+		// var destinations = [];
+		// feedback = _.each(results, function(x) {
+		//	var lat = parseFloat(x.coordinate.latitude);
+		//	var lng = parseFloat(x.coordinate.longitude);
+		//	var latlng = new google.maps.LatLng(lat, lng);
+		//	destinations[x.name] = latlng;
+
+		// });
+		// var geo = new Geolocation;
+		// var locObj = new google.maps.LatLng(geo.getCurrentLocation.latitude, geo.getCurrentLocation.longitude);
+		// var mapping = calculateDistances(locObj, Object.values(destinations));
+		// for (var i=0; i< mapping.values.length; i++){
+		//	if ((mapping.values[i])[distance] <= criterion){
+		//		feedback(destinations[i]);
+		//	}
+		// }
+		// return findDistance(x);
+		//within 'criterion' miles
+	}
+
+	if(order == "DESCENDING"){
+		feedback.reverse();
+	}
+
+	addQuery(feedback);
+}
+
 var businessAndCategories = [];
 function getFavoriteCategories() {
 	businessAndCategories = [];

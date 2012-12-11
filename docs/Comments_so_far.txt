@@ -6,7 +6,7 @@ Search Yelp
 * Search button restyle - done
 * Rename "Search Yelp" to "Add Favorite" - done
 * Remove alerts - done
-* Have text indicating no results when search has no results
+* Have text indicating no results when search has no results - done
 * When displaying error page, modify URL state - done
 * When going back or forwards in history, change in URL state should also change the page
 * If location box has data, and business is empty, we search and don't display an error. - done
@@ -14,15 +14,15 @@ Search Yelp
 * Instead of underlining all text when something is focused, just highlight the box.
 * Not displaying location - done
 * Not displaying distance
-* When entering notes and tags, make boxes and labels horizontal instead of vertical.
-* Pagination button restyle
+* When entering notes and tags, make boxes and labels horizontal instead of vertical. - done
+* Pagination button restyle - done
 
 
 Search Favorites
 ----------------------------------
-* No indication that a result is selected when you hover mouse over it (link text doesn't have underlines)
-* When search results show up, black border sometimes appears
-* Cannot press enter to search, only Search button works
+* No indication that a result is selected when you hover mouse over it (link text doesn't have underlines) - done
+* When search results show up, black border sometimes appears - done
+* Cannot press enter to search, only Search button works - done
 
 Other
 --------------------------
@@ -36,6 +36,8 @@ Other
 TO DO
 
 Add 'date added' parameter to the favorite
+
+Add ability to search categories in the the favorites field.
 
 Implement filtering
 
