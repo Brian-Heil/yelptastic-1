@@ -56,11 +56,13 @@ function getFavoritesWithinCategory (query){
 }
 
 function addBusinessToFavorite (business){
-    var resultList = [];
-    if(typeof localStorage.getItem("results") != 'undefined'){
+    var resultList =[];
+    if(typeof localStorage.getItem("results") != 'undefined' ){
         resultList = localStorage.getItem("results");
+        resultList.push(business);
+   }else{
+       resultList[0] = business; 
    }
-     resultList.push(business);
      localStorage.setItem("results", resultList);
 }
 
