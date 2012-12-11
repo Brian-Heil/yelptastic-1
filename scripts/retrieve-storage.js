@@ -21,7 +21,6 @@ function searchFavorites(query) {
 	return feedback;
 }
 
-
 function getFavoriteCategories() {
 	var feedback = {};
 	var resultList = JSON.parse(localStorage.getItem("results"));
@@ -118,6 +117,10 @@ function removeA(array, item) {
 	return array;
 }
 
+function metersToMiles(meters){
+    return meters * 0.000621371192;
+};
+
 function saveBookmark(business, tags, notes) {
 	if (tags == undefined) {
 		tags = " ";
@@ -127,6 +130,7 @@ function saveBookmark(business, tags, notes) {
 	}
 	business.tags = tags;
 	business.notes = notes;
+	business.distance = metersToMiles(business.distance);
 	var d = new Date();
 	var day = d.getDate();
 	var month = d.getMonth() + 1;
