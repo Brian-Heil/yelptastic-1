@@ -13,6 +13,9 @@ function searchFavorites(query) {
 			} else if (x.notes.toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
 			}
+			else if (x.location.display_address.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+				feedback.push(x);
+			}
 		});
 	}
 	return feedback;
