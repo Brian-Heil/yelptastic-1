@@ -12,7 +12,7 @@ function searchFavorites (query){
 function getFavoriteCategories(){
     var feedback = [];
     var resultList = localStorage.getItem("results");
-    //returns the list of lists (of categories); 
+    //returns the list of lists (of categories);
     _.each(resultList.businesses, function(x){
        feedback.push(x.categories);
     }
@@ -32,15 +32,15 @@ function getBroadCategories(answers, innerCat, globalCategories){
     for(var ky in globalCategories){
         if(typeof globalCategories == 'object'){
             answers.push(globalCategories);
-            getBroadCategories(answers, globalCategories[ky])
+            getBroadCategories(answers, globalCategories[ky]);
         }else if(typeof globalCategories == 'string'){
             if(globalCategories == innerCat){
-                 return answers; //return the list which contains the hierachy of categories for this business 
+                 return answers; //return the list which contains the hierachy of categories for this business
                  //first element in the list is the inner most category and the last element is the broad category
             }//else, the category of the item is not this one.
         }
         answers = [];  //clear the array and look at the next category in the global list
-    }    
+    }
 }
 
 function getFavoritesWithinCategory (query){
@@ -83,11 +83,11 @@ function removeA(arr) {
 function saveBookmark(business, tags, notes){
     business.tags = tags;
     business.notes = notes;
-    Date d = new Date();
+    var d = new Date();
     var day = d.getDate();
     var month = d.getMonth() + 1;
     var time = d.getTime();
     var year = d.getFullYear();
-    business.dateAdded = time + " " month + "/" + day +"/"+ year;
+    business.dateAdded = time + " " + month + "/" + day +"/"+ year;
     addBusinessToFavorite(business);
 }
