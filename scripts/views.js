@@ -119,8 +119,6 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
 * Takes in the results and appends them to the thumbnails grids
 */
 var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, opt_cat) {
-    var target = document.getElementById('columnCenter');
-    var spinner = new Spinner(opts).stop(target);
     $('.columnCenter').empty();
     $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
     var data = [];
@@ -150,19 +148,21 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
     var source = $('#results').html();
     var template = Handlebars.compile(source);
     var string = template(data);
+    var target = document.getElementById('columnCenter');
+    var spinner = new Spinner(opts).stop(target);
     $thumbnailswrapper.append(string);
     if (opt_total > 20) {
         $buttonRow = $('<div class="buttonRow"></div>');
 
         if (opt_int >= 20) {
-            $see_prev = $('<input type="button" value="Previous 20" name="nextButton">');
+            $see_prev = $('<button class="btn" value="Previous 20" name="nextButton">');
             $see_prev.click(function() {
                 searchYelp(opt_term, opt_location, opt_cat, opt_int-20);
             });
             $buttonRow.append($see_prev);
         }
         if (opt_int + 20 <= opt_total) {
-            $see_all = $('<input type="button" value="Next 20" name="prevButton">');
+            $see_all = $('<button class="btn" value="Next 20" name="prevButton">');
             $see_all.click(function() {
                 searchYelp(opt_term, opt_location, opt_cat, opt_int + 20);
             });
@@ -179,6 +179,8 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
 */
 var browseBookmarks = function (results, opt_int) {
     $('.columnCenter').empty();
+    var target = document.getElementById('columnCenter');
+    var spinner = new Spinner(opts).spin(target);
     $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
     $buttonRow = $('<div class="buttonRow"></div>');
     var data = [];
@@ -233,27 +235,30 @@ var browseBookmarks = function (results, opt_int) {
     var source = $('#browse').html();
     var template = Handlebars.compile(source);
     var string = template(data);
-    var accordsource = $('#filters').html();
-    var accordtemplate = Handlebars.compile(accordsource);
-    var accordstring = template({funcname:'filterfavorites', results:JSON.stringify(results)});
-    $('.columnRight').append(accordstring);
+    spinner.stop();
     $thumbnailswrapper.append(string);
     if (data.length >= 20) {
         if (opt_int >= 20) {
-            $see_prev = $('<input type="button" value="Previous" name="nextButton">');
+            $see_prev = $('<button class="btn" value="Previous" name="nextButton">Previous</button>');
             $see_prev.click(function() {
                 addQuery(results, opt_int-1);
             });
             $buttonRow.append($see_prev);
         }
         if (opt_int + 20 <= data.length) {
-            $see_all = $('<input type="button" value="Next" name="prevButton">');
+            $see_all = $('<button class="btn" value="Next" name="prevButton">Next</button>');
             $see_all.click(function() {
                 addQuery(results, opt_int + 20);
             });
             $buttonRow.append($see_all);
         }
     }
+    var source1 = $('#filts').html();
+    var template1 = Handlebars.compile(source1);
+    var string1 = template1({funcname:'filterFavorites', results:JSON.stringify(results)});
+    alert('Printing String: ' + string1);
+    $('.columnRight').empty();
+    $('.columnRight').append(string1);
     $thumbnailswrapper.append($buttonRow);
     $('.columnCenter').append($thumbnailswrapper);
     $('#pop').popover();

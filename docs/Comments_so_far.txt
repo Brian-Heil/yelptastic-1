@@ -10,7 +10,7 @@ Search Yelp
 * When displaying error page, modify URL state - done
 * When going back or forwards in history, change in URL state should also change the page
 * If location box has data, and business is empty, we search and don't display an error. - done
-* Spinner to show we're doing something when searching
+* Spinner to show we're doing something when searching - done
 * Instead of underlining all text when something is focused, just highlight the box.
 * Not displaying location - done
 * Not displaying distance
