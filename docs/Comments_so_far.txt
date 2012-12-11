@@ -37,6 +37,8 @@ TO DO
 
 Add 'date added' parameter to the favorite
 
+Add ability to search categories in the the favorites field.
+
 Implement filtering
 
 Implement sorting - where it is on the page?

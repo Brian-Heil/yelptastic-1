@@ -33,7 +33,8 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
     var parameters = [];
     parameters.push(['term', query.term]);
     parameters.push(['location', query.location]);
-    parameters.push(['category-filters', query.categories]);
+    console.log(query.categories);
+    parameters.push(['category_filter', query.categories]);
     parameters.push(['offset', query.offset]);
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
