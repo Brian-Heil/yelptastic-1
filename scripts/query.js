@@ -34,7 +34,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
     parameters.push(['term', query.term]);
     parameters.push(['location', query.location]);
     parameters.push(['category-filters', query.categories]);
-    parameters.push(['offset', query.offset]);    
+    parameters.push(['offset', query.offset]);
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
     parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
@@ -51,7 +51,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
             'parameters': parameters
         };
     }
- 
+
     else if (search_type === Action.business) {
         message = {
             'action': 'http://api.yelp.com/v2/business/' + query.id,
@@ -74,7 +74,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
         'jsonpCallback': 'cb',
         'success':function (response){
           onSearchSuccess(response, opt_term, opt_location, opt_cat, opt_offset);
-        },
+        }
     });
     check.success(function() {
       console.log('Yes! Success!');
@@ -94,8 +94,6 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 '</div>');
     $('body').append('<div id="error"><img src="http://cdn.memegenerator.net/instances/400x/31664563.jpg"></div>');
   });
-    
-    
 };
 
 /* Utility function to parse JSON and return JS object */
@@ -127,5 +125,5 @@ var onSearchSuccess = function(json, opt_term, opt_location, opt_cat, opt_offset
 var onSearchError = function(json){
     var err = parseData(json);
     console.error("Yelp API error", err);
-   
+
 };
