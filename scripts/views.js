@@ -2,10 +2,30 @@ var lastLookup = [];
 var lastSearch = [];
 var bool = [true];
 var lastTerm = [];
+var opts = {
+    lines: 13, // The number of lines to draw
+    length: 7, // The length of each line
+    width: 4, // The line thickness
+    radius: 10, // The radius of the inner circle
+    corners: 1, // Corner roundness (0..1)
+    rotate: 0, // The rotation offset
+    color: '#000', // #rgb or #rrggbb
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    shadow: false, // Whether to render a shadow
+    hwaccel: false, // Whether to use hardware acceleration
+    className: 'spinner', // The CSS class to assign to the spinner
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    top: 'auto', // Top position relative to parent in px
+    left: 'auto' // Left position relative to parent in px
+};
 /*
 * Search the yelp api
 */
 var searchYelp = function (term, near, category_filters, offset) {
+    var target = document.getElementById('columnCenter');
+    $('.columnCenter').empty();
+    var spinner = new Spinner(opts).spin(target);
     var opt_int;
     var opt_cat;
     if (offset == undefined) {
@@ -22,6 +42,7 @@ var searchYelp = function (term, near, category_filters, offset) {
         searchQuery(term, near, opt_cat, opt_int);
     } else {
         if(bool[0]) {
+            spinner.stop();
             bool = [];
             bool.push(false);
             $('#middle').append('<div class="alert">' +
@@ -127,19 +148,21 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
     var source = $('#results').html();
     var template = Handlebars.compile(source);
     var string = template(data);
+    var target = document.getElementById('columnCenter');
+    var spinner = new Spinner(opts).stop(target);
     $thumbnailswrapper.append(string);
     if (opt_total > 20) {
         $buttonRow = $('<div class="buttonRow"></div>');
 
         if (opt_int >= 20) {
-            $see_prev = $('<input type="button" value="Previous 20" name="nextButton">');
+            $see_prev = $('<button class="btn" value="Previous 20" name="nextButton">');
             $see_prev.click(function() {
                 searchYelp(opt_term, opt_location, opt_cat, opt_int-20);
             });
             $buttonRow.append($see_prev);
         }
         if (opt_int + 20 <= opt_total) {
-            $see_all = $('<input type="button" value="Next 20" name="prevButton">');
+            $see_all = $('<button class="btn" value="Next 20" name="prevButton">');
             $see_all.click(function() {
                 searchYelp(opt_term, opt_location, opt_cat, opt_int + 20);
             });
@@ -156,6 +179,8 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
 */
 var browseBookmarks = function (results, opt_int) {
     $('.columnCenter').empty();
+    var target = document.getElementById('columnCenter');
+    var spinner = new Spinner(opts).spin(target);
     $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
     $buttonRow = $('<div class="buttonRow"></div>');
     var data = [];
@@ -210,24 +235,30 @@ var browseBookmarks = function (results, opt_int) {
     var source = $('#browse').html();
     var template = Handlebars.compile(source);
     var string = template(data);
+    spinner.stop();
     $thumbnailswrapper.append(string);
     if (data.length >= 20) {
         if (opt_int >= 20) {
-            $see_prev = $('<input type="button" value="Previous" name="nextButton">');
+            $see_prev = $('<button class="btn" value="Previous" name="nextButton">Previous</button>');
             $see_prev.click(function() {
                 addQuery(results, opt_int-1);
             });
             $buttonRow.append($see_prev);
         }
         if (opt_int + 20 <= data.length) {
-            $see_all = $('<input type="button" value="Next" name="prevButton">');
+            $see_all = $('<button class="btn" value="Next" name="prevButton">Next</button>');
             $see_all.click(function() {
                 addQuery(results, opt_int + 20);
             });
             $buttonRow.append($see_all);
         }
     }
-
+    var source1 = $('#filts').html();
+    var template1 = Handlebars.compile(source1);
+    var string1 = template1({funcname:'filterFavorites', results:JSON.stringify(results)});
+    alert('Printing String: ' + string1);
+    $('.columnRight').empty();
+    $('.columnRight').append(string1);
     $thumbnailswrapper.append($buttonRow);
     $('.columnCenter').append($thumbnailswrapper);
     $('#pop').popover();
@@ -312,7 +343,6 @@ var parseYelpCategories = function (term, location, categories) {
     {
         var genCategory = i;
         var genCategoryTag = missing_identifiers[i];
-
         categories_wrapper = categories_wrapper + '<div class="accordion-group" id="' + genCategoryTag + '">';
         categories_wrapper = categories_wrapper + '<div class="accordion-heading" onclick="searchYelp(';
         categories_wrapper = categories_wrapper + "'" + term + "'";
@@ -355,7 +385,6 @@ var parseYelpCategories = function (term, location, categories) {
             categories_wrapper = categories_wrapper + subCategory;
             categories_wrapper = categories_wrapper + '</a>';
             categories_wrapper = categories_wrapper + '</div>';
-
 
             if (typeof categories[i][j] != "string")
             {

@@ -11,12 +11,55 @@
 <script src="scripts/vendor/bootstrap.min.js" type="text/javascript"></script>
 <script src="scripts/vendor/handlebars-1.0.rc.1.js" type="text/javascript"></script>
 <script src="scripts/vendor/underscore.js" type="text/javascript"></script>
+<script src="scripts/vendor/spin.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://jquery-jsonp.googlecode.com/files/jquery.jsonp-1.0.4.min.js"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 <script type="text/javascript" src="scripts/retrieve-storage.js"></script>
 <script type="text/javascript" src="scripts/views.js"></script>
 <script type="text/javascript" src="scripts/query.js"></script>
+<script type="text/javascript" src="scripts/categories.js"></script>
+
+<script id="filts" type="text/x-handlebars-template">
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+              Ratings
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+              <button class="btn btn-large btn-block btn-primary" onclick="{{funcname}}(1, 'rating', {{results}} )" type="button">1 Star</button>
+              <button class="btn btn-large btn-block" type="button" onclick="{{funcname}}(2, 'rating', {{results}} )" >2 Star</button>
+              <button class="btn btn-large btn-block btn-primary" onclick="{{funcname}}(3, 'rating', {{results}} )" type="button">3 Star</button>
+              <button class="btn btn-large btn-block" type="button" onclick="{{funcname}}(4, 'rating', {{results}} )" >4 Star</button>
+              <button class="btn btn-large btn-block btn-primary" type="button" onclick="{{funcname}}(5, 'rating', {{results}} )" >5 Star</button>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+              Distance
+            </a>
+          </div>
+          <div id="collapseTwo" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <button class="btn btn-large btn-block btn-primary" type="button" onclick="{{funcname}}(1, 'distance', {{results}} )" >Distance less than 1 mile </button>
+              <button class="btn btn-large btn-block" type="button"onclick="{{funcname}}(3, 'distance', {{results}} )">Distance less than 3 miles</button>
+              <button class="btn btn-large btn-block btn-primary" type="button"onclick="{{funcname}}(7, 'distance', {{results}} )">Distance less than 7 miles</button>
+              <button class="btn btn-large btn-block" type="button"onclick="{{funcname}}(13, 'distance', {{results}} )">Distance less than 13 miles</button>
+              <button class="btn btn-large btn-block btn-primary" type="button"onclick="{{funcname}}(20, 'distance', {{results}} )">Diestance less than 20 miles</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+</script>
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
    <div class="thumbnailContainer">
@@ -84,6 +127,27 @@
       refresh();
     });
 
+      var opts = {
+            lines: 13, // The number of lines to draw
+            length: 7, // The length of each line
+            width: 4, // The line thickness
+            radius: 10, // The radius of the inner circle
+            corners: 1, // Corner roundness (0..1)
+            rotate: 0, // The rotation offset
+            color: '#000', // #rgb or #rrggbb
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage
+            shadow: false, // Whether to render a shadow
+            hwaccel: false, // Whether to use hardware acceleration
+            className: 'spinner', // The CSS class to assign to the spinner
+            zIndex: 2e9, // The z-index (defaults to 2000000000)
+            top: 'auto', // Top position relative to parent in px
+            left: 'auto' // Left position relative to parent in px
+      };
+
+      var target = document.getElementById('columnCenter');
+      var spinner = new Spinner(opts).stop(target);
+
       $('body').bind('Search', function(){
         $('.active1').remove();
         $('.columnCenter').empty();
@@ -91,7 +155,7 @@
         $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ 'Home' + '\''+')"><a href="#' + 'Home' +'">' + 'Home' + '</a> <span class="divider">/</span><li>');
         $('.breadcrumb').append('<li class="active1">Search</li> ');
         addQuery(lastSearch[0], lastSearch[1], lastSearch[2], lastSearch[3], lastSearch[4], lastSearch[5]);
-        lastSearch.length=0;        
+        lastSearch.length=0;
 
       });
       $('body').bind('Lookup', function(){
@@ -143,7 +207,7 @@
   </ul></div>
   <div id="contentContainer">
     <div class="columnLeft"></div>          
-    <div class="columnCenter">
+    <div class="columnCenter" id="columnCenter">
       <!--<ul class="thumbnails">
           <div class="thumbnailContainer">
             <h3>{{title}}</h3>
@@ -184,8 +248,7 @@
     </ul>-->
     </div>
     <div class="columnRight">
-    </div>
-  </div>
+</div>
 </div>
 <footer class="footer">
   <div class="container">
