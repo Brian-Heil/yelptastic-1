@@ -20,10 +20,33 @@ var opts = {
     top: 'auto', // Top position relative to parent in px
     left: 'auto' // Left position relative to parent in px
 };
+
+/*
+ * Displays the home page
+ */
+var home = function() {
+      var current = $('.active1').text();
+   if (current != 'Home'){
+        $('.active1').remove();
+        $('.columnCenter').empty();
+        $('.breadcrumb').empty();
+        $('.breadcrumb').append('<li class="active1">Home</li> ');
+        history.pushState({}, 'Yelptastic- Browse Favorite', '#Home');
+    }
+  var results = JSON.parse(localStorage.getItem("results"));
+  lastLookup.push(results);
+  browseBookmarks(results, 0);
+  
+}
+
+
+
+
+
 /*
 * Search the yelp api
 */
-var searchYelp = function (term, near, category_filter, offset) {
+var searchYelp = function (term, near, category_filters, offset) {
     var target = document.getElementById('columnCenter');
     $('.columnCenter').empty();
     var spinner = new Spinner(opts).spin(target);
@@ -34,10 +57,10 @@ var searchYelp = function (term, near, category_filter, offset) {
     } else {
         opt_int = offset;
     }
-    if (category_filter == undefined) {
+    if (category_filters == undefined) {
         opt_cat = "";
     } else {
-        opt_cat = category_filter;
+        opt_cat = category_filters;
     }
     if (near && term){
         searchQuery(term, near, opt_cat, opt_int);
@@ -106,7 +129,6 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
         $('.breadcrumb').append('<li class="active1">Search</li> ');
         history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
     }
-    
     $('.columnLeft').empty();
     $('.columnCenter').empty();
 
@@ -152,7 +174,14 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
     var string = template(data);
     var target = document.getElementById('columnCenter');
     var spinner = new Spinner(opts).stop(target);
-    $thumbnailswrapper.append(string);
+
+    if(results.length > 0){
+        $thumbnailswrapper.append(string);
+    }
+    else{
+        $("#columnCenter").text("Sorry, there are no businesses to display.");
+    }
+
     if (opt_total > 20) {
         $buttonRow = $('<div class="buttonRow"></div>');
 
@@ -195,7 +224,6 @@ var browseBookmarks = function (results, opt_int) {
                 image_url = 'http://s3-media3.ak.yelpcdn.com/assets/2/www/img/305e17fe6ed8/gfx/blank_biz_medium_sq.png';
             }
             $button = $('<button>Favorite</button>');
-            alert('results[i].location.display_address[0]');
             data.push({
                 name:results[i].name,
                 image:image_url,
@@ -238,7 +266,14 @@ var browseBookmarks = function (results, opt_int) {
     var template = Handlebars.compile(source);
     var string = template(data);
     spinner.stop();
-    $thumbnailswrapper.append(string);
+
+    if(results.length > 0){
+        $thumbnailswrapper.append(string);
+    }
+    else{
+        $("#columnCenter").text("There are no favorites to display!");
+    }
+
     if (data.length >= 20) {
         if (opt_int >= 20) {
             $see_prev = $('<button class="btn" value="Previous" name="nextButton">Previous 20</button>');
@@ -258,7 +293,6 @@ var browseBookmarks = function (results, opt_int) {
     var source1 = $('#filts').html();
     var template1 = Handlebars.compile(source1);
     var string1 = template1({funcname:'filterFavorites', results:JSON.stringify(results)});
-    alert('Printing String: ' + string1);
     $('.columnRight').empty();
     $('.columnRight').append(string1);
     $thumbnailswrapper.append($buttonRow);
@@ -273,6 +307,7 @@ var saveFavorite = function (jsonString, tags1, notes1) {
     var object1 = jsonString;
     saveBookmark(object1, tags1, notes1);
 };
+
 
 
 var parseYelpCategories = function (term, location, categories) {
@@ -355,7 +390,7 @@ var parseYelpCategories = function (term, location, categories) {
         categories_wrapper = categories_wrapper + ');">';
 //         onclick="searchYelp(' + term + ', ' + location + ', \"' + genCategoryTag + '\");"
 
-        categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + genCategoryTag + '" href="#sub' + genCategoryTag + '">';
+        categories_wrapper = categories_wrapper + '<a class="accordion-toggle"  data-parent="#' + genCategoryTag + '">';
         categories_wrapper = categories_wrapper + genCategory;
         categories_wrapper = categories_wrapper + '</a>';
         categories_wrapper = categories_wrapper + '</div>';

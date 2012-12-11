@@ -24,7 +24,6 @@ function searchFavorites(query) {
 //filters are distance, rating, category
 function filterFavorites(criterion, filter, results) {
   
-  alert("FILTER RUNNING: " + criterion + " " + filter);
 	var feedback = [];
 	if (filter == "rating") {
 		feedback = _.filter(results, function(x) {
@@ -82,7 +81,7 @@ function getFavoriteCategories() {
 	
 
 	
-	});alert(businessAndCategories);
+	});
 	
 	return cats;
 }
