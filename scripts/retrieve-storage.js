@@ -107,18 +107,15 @@ function addBusinessToFavorite(business) {
 function deleteBusinessFromStorage(business) {
   alert('Deleting');
 	var resultList = JSON.parse(localStorage.getItem("results"));
-	alert('Printing: ' + business  );
-	 alert('Printing2: ' + JSON.stringify(resultList) );
 
 	var temp = removeA(resultList, business);
 	localStorage.setItem("results", JSON.stringify(temp));
-	getBookmarks(lastLookup(0));
+	getBookmarks(lastTerm[0]);
 }
 
 function removeA(array, item) {
 	 for(var i in array){
     if(array[i].id == item.id) {
-            alert('deleting');
             array.splice(i,1);
             break;
             }
