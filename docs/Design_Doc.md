@@ -16,6 +16,10 @@ Dan Mercado, dm2497
 Orlando Pineda, omp2114  
 Varun Ravishankar, vr2263  
 
+## Purpose
+
+Yelptastic is a web app that allows users to bookmark businesses on Yelp and let them sort, filter, and delete them as well. Yelptastic's code is located on [Github][].
+
 ## Overall Process
 
 Our overall process for creating Yelptastic followed a typical design cycle. We first up came up with use scenarios and then used them to create mockups. We iterated over the mockups many times, trying to decide the best way to display bookmarks, search through and add new bookmarks, and display a unified interface for searching and filtering through bookmarks by category, price, distance, and date added. Once we were satisfied with the mockups, we started programming the site. We broke up the process into two parts, the front-end and the back-end, and the group split up to work on each part. We would sync up our work when one group member completed a part, and finish integrating that portion on the site. Throughout the process, we looked through the site and evaluated our design decisions to better improve the user experience. We altered our search boxes to resolve consistency issues between other forms on the web and ours, worked on adding spacing to improve readability, and to improve our error handling. To sum up, we went through the following process:
