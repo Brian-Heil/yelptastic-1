@@ -23,6 +23,8 @@ function searchFavorites(query) {
 
 //filters are distance, rating, category
 function filterFavorites(criterion, filter, results) {
+  
+  alert("FILTER RUNNING: " + criterion + " " + filter);
 	var feedback = [];
 	if (filter == "rating") {
 		feedback = _.filter(results, function(x) {
@@ -48,7 +50,7 @@ function filterFavorites(criterion, filter, results) {
 			return Object.values(businessAndCategories).indexOf(criterion) > -1;
 		});
 	}
-	return feedback;
+	/*return*/browseFavorites(feedback);
 }
 var businessAndCategories = [];
 function getFavoriteCategories() {

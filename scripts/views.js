@@ -254,6 +254,7 @@ var browseBookmarks = function (results, opt_int) {
     var template1 = Handlebars.compile(source1);
     var string1 = template1({funcname:'filterFavorites', results:JSON.stringify(results)});
     alert('Printing String: ' + string1);
+    $('.columnRight').empty();
     $('.columnRight').append(string1);
     $thumbnailswrapper.append($buttonRow);
     $('.columnCenter').append($thumbnailswrapper);
