@@ -6,7 +6,7 @@ function searchFavorites (query){
     	return feedback;
     }else{
     _.each(resultList, function(x){
-        if(x.name.search(query) > -1 || x.tag.search(query) > -1 || x.notes.search(query) > -1){
+        if(x.name.search(query) > -1 || x.tags.search(query) > -1 || x.notes.search(query) > -1){
             feedback.push(x);
         }
     });
@@ -64,7 +64,6 @@ function addBusinessToFavorite (business){
 
     var resultList = JSON.parse(localStorage.getItem("results"));
     if(resultList == null){
-   // 	alert("in here!");
     	resultList = [];   	
     	
     }
