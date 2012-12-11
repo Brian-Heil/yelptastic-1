@@ -86,8 +86,7 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
   $('.columnLeft').empty();
   $('.columnCenter').empty();
   var allcategories = $.getJSON("scripts/categories.json", function(y){
-  	  var x = y;
-  	  parseYelpCategories(opt_term, opt_location, x);
+  	  parseYelpCategories(opt_term, opt_location, y);
   });
   addQuery(data, opt_offset, total, opt_term, opt_location, opt_cat);
 
