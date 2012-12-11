@@ -87,6 +87,8 @@ function calculateDistances(origin, destinations) {
 		origin2: [{destination: Destination, distance: Distance, duration, Duration},
 		{destination: Destination, distance: Distance, duration, Duration}]
 	}
+
+	Distances are in miles and durations are in seconds.
 */
 function parseDistances(response, status) {
 	if (status != google.maps.DistanceMatrixStatus.OK) {
