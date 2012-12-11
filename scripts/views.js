@@ -35,7 +35,7 @@ var browseFavorites = function(data) {
     $('.active1').remove();
     $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
     $('.breadcrumb').append('<li class="active1">' + 'Lookup' +'</li> ');
-    history.pushState({}, 'Yelptastic- Browse Favorite', '#bookmarksearch');
+  //  history.pushState({}, 'Yelptastic- Browse Favorite', '#bookmarksearch');
   }
   $('.columnCenter').empty();
 
@@ -54,7 +54,7 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
     $('.active1').remove();
     $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
     $('.breadcrumb').append('<li class="active1">' + 'Search' +'</li> ');
-    history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
+  //  history.pushState({}, 'Yelptastic- Yelp Search', '#yelpsearch');
   }
   $('.columnLeft').empty();
   $('.columnCenter').empty();
@@ -191,5 +191,6 @@ var browseBookmarks = function (results, opt_int) {
  */
 var saveFavorite = function (jsonString, tags1, notes1) {
   var object1 = jsonString;
+  alert("The JSON: " + JSON.stringify(object1));  
   saveBookmark(object1, tags1, notes1);
 }

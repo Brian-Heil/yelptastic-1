@@ -58,18 +58,22 @@ function getFavoritesWithinCategory (query){
 }
 
 function addBusinessToFavorite (business){
-    var resultList =[];
-    resultList = localStorage.getItem("results");
-    if (resultList === null) {
-        resultList = [];
-        resultList.push(business);
+    var resultList ={};
+    resultList = JSON.parse(localStorage.getItem("results"));
+    if (resultList == null) {
+        //resultList = [];
+       // resultList.push(business);
+   } else {
+       // resultList.push(business);
    }
-     localStorage.setItem("results", JSON.stringify(resultList));
+
+   localStorage.setItem("results", JSON.stringify(business));
 }
 
 function deleteBusinessFromStorage(business){
     var resultList = localStorage.getItem("results");
     removeA(resultList, business);
+    alert("RUNNING");
     localStorage.setItem("results", JSON.stringify(resultList));
 }
 
@@ -93,5 +97,6 @@ function saveBookmark(business, tags, notes){
     var time = d.getTime();
     var year = d.getFullYear();
     business.dateAdded = time + " " + month + "/" + day +"/"+ year;
+    alert(JSON.stringify(business));
     addBusinessToFavorite(business);
 }
