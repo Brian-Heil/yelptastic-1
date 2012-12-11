@@ -174,7 +174,14 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, op
     var string = template(data);
     var target = document.getElementById('columnCenter');
     var spinner = new Spinner(opts).stop(target);
-    $thumbnailswrapper.append(string);
+
+    if(results.length > 0){
+        $thumbnailswrapper.append(string);
+    }
+    else{
+        $("#columnCenter").text("Sorry, there are no businesses to display.");
+    }
+
     if (opt_total > 20) {
         $buttonRow = $('<div class="buttonRow"></div>');
 
@@ -259,7 +266,14 @@ var browseBookmarks = function (results, opt_int) {
     var template = Handlebars.compile(source);
     var string = template(data);
     spinner.stop();
-    $thumbnailswrapper.append(string);
+
+    if(results.length > 0){
+        $thumbnailswrapper.append(string);
+    }
+    else{
+        $("#columnCenter").text("There are no favorites to display!");
+    }
+
     if (data.length >= 20) {
         if (opt_int >= 20) {
             $see_prev = $('<button class="btn" value="Previous" name="nextButton">Previous 20</button>');
