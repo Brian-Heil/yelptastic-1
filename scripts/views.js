@@ -2,6 +2,23 @@ var lastLookup = [];
 var lastSearch = [];
 var bool = [true];
 var lastTerm = [];
+  var opts = {
+            lines: 13, // The number of lines to draw
+            length: 7, // The length of each line
+            width: 4, // The line thickness
+            radius: 10, // The radius of the inner circle
+            corners: 1, // Corner roundness (0..1)
+            rotate: 0, // The rotation offset
+            color: '#000', // #rgb or #rrggbb
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage
+            shadow: false, // Whether to render a shadow
+            hwaccel: false, // Whether to use hardware acceleration
+            className: 'spinner', // The CSS class to assign to the spinner
+            zIndex: 2e9, // The z-index (defaults to 2000000000)
+            top: 'auto', // Top position relative to parent in px
+            left: 'auto' // Left position relative to parent in px
+      };
 /*
 * Search the yelp api
 */
@@ -101,8 +118,8 @@ var addFavoritesView = function(data, total, opt_term, opt_location, opt_cat, op
 * Takes in the results and appends them to the thumbnails grids
 */
 var addQuery = function (results, opt_int, opt_total, opt_term, opt_location, opt_cat) {
-    var target = document.getElementById('columnCenter');
-    var spinner = new Spinner(opts).stop(target);
+    //var target = document.getElementById('columnCenter');
+   // var spinner = new Spinner(opts).stop(target);
     $('.columnCenter').empty();
     $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
     var data = [];
@@ -215,10 +232,6 @@ var browseBookmarks = function (results, opt_int) {
     var source = $('#browse').html();
     var template = Handlebars.compile(source);
     var string = template(data);
-    var accordsource = $('#filters').html();
-    var accordtemplate = Handlebars.compile(accordsource);
-    var accordstring = template({funcname:'filterfavorites', results:JSON.stringify(results)});
-    $('.columnRight').append(accordstring);
     $thumbnailswrapper.append(string);
     if (data.length >= 20) {
         if (opt_int >= 20) {
@@ -236,6 +249,11 @@ var browseBookmarks = function (results, opt_int) {
             $buttonRow.append($see_all);
         }
     }
+    var source1 = $('#filts').html();
+    var template1 = Handlebars.compile(source1);
+    var string1 = template1({funcname:'filterFavorites', results:JSON.stringify(results)});
+    alert('Printing String: ' + string1);
+    $('.columnRight').append(string1);
     $thumbnailswrapper.append($buttonRow);
     $('.columnCenter').append($thumbnailswrapper);
     $('#pop').popover();
