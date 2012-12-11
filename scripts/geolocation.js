@@ -5,18 +5,9 @@ var decodedAddress;
 var codedLatLng;
 var bounds = new google.maps.LatLngBounds();
 var distances = {};
-// var map;
-// var infowindow = new google.maps.InfoWindow();
-// var marker;
+
 function initialize() {
 	geocoder = new google.maps.Geocoder();
-	// var latlng = new google.maps.LatLng(40.730885,-73.997383);
-	// var mapOptions = {
-	//	zoom: 8,
-	//	center: latlng,
-	//	mapTypeId: 'roadmap'
-	// };
-	// map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 }
 
 
@@ -27,7 +18,6 @@ function initialize() {
 	eg. var address = codeLatLng("43.714224,-73.961452");
 */
 function codeLatLng(location) {
-	// var input = document.getElementById('latlng').value;
 	var latlngStr = location.split(',', 2);
 	var lat = parseFloat(latlngStr[0]);
 	var lng = parseFloat(latlngStr[1]);
@@ -35,14 +25,7 @@ function codeLatLng(location) {
 	geocoder.geocode({'latLng': latlng}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			if (results[1]) {
-				// map.setZoom(11);
-				// marker = new google.maps.Marker({
-				//	position: latlng,
-				//	map: map
-				// });
 				decodedAddress = results[1].formatted_address;
-				// infowindow.setContent(results[1].formatted_address);
-				// infowindow.open(map, marker);
 			} else {
 				alert('No results found');
 			}
@@ -65,11 +48,6 @@ function codeAddress(address) {
 	geocoder.geocode( { 'address': address}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			codedLatLng = results[0].geometry.location;
-			// map.setCenter(results[0].geometry.location);
-			// var marker = new google.maps.Marker({
-			//	map: map,
-			//	position: results[0].geometry.location
-			// });
 		} else {
 			alert('Geocode was not successful for the following reason: ' + status);
 		}
