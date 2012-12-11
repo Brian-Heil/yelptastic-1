@@ -1,6 +1,7 @@
 var lastLookup = [];
 var lastSearch = [];
 var bool = [true];
+var delet = [];
 var lastTerm = [];
 var opts = {
     lines: 13, // The number of lines to draw
