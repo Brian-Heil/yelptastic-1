@@ -77,6 +77,17 @@ function calculateDistances(origin, destinations) {
 	return distances;
 }
 
+/*
+	Callback function to take Google Maps API results and populate a map of distance objects.
+
+	Result format:
+
+	{
+		origin1: [{destination: Destination, distance: Distance, duration, Duration}],
+		origin2: [{destination: Destination, distance: Distance, duration, Duration},
+		{destination: Destination, distance: Distance, duration, Duration}]
+	}
+*/
 function parseDistances(response, status) {
 	if (status != google.maps.DistanceMatrixStatus.OK) {
 		alert('Error was: ' + status);
