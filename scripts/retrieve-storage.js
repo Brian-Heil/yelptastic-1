@@ -1,3 +1,4 @@
+
 function searchFavorites (query){
     var feedback = [];
     var resultList = localStorage.getItem("results");
@@ -6,6 +7,7 @@ function searchFavorites (query){
             feedback.push(x);
         }
     });
+    alert('is Feedback empty?' + feedback.length);
     return feedback;
 }
 
@@ -57,19 +59,18 @@ function getFavoritesWithinCategory (query){
 
 function addBusinessToFavorite (business){
     var resultList =[];
-    if(typeof localStorage.getItem("results") != 'undefined' || localStorage.getItem("results") != 'undefined' != null){
-        resultList = localStorage.getItem("results");
+    resultList = localStorage.getItem("results");
+    if (resultList === null) {
+        resultList = [];
         resultList.push(business);
-   }else{
-       resultList[0] = business; 
    }
-     localStorage.setItem("results", resultList);
+     localStorage.setItem("results", JSON.stringify(resultList));
 }
 
 function deleteBusinessFromStorage(business){
     var resultList = localStorage.getItem("results");
     removeA(resultList, business);
-    localStorage.setItem("results", resultList);
+    localStorage.setItem("results", JSON.stringify(resultList));
 }
 
 function removeA(arr) {
@@ -82,6 +83,7 @@ function removeA(arr) {
     }
     return arr;
 }
+
 function saveBookmark(business, tags, notes){
     business.tags = tags;
     business.notes = notes;

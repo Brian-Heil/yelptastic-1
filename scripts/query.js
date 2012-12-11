@@ -31,6 +31,7 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
 
     var parameters = [];
+    alert('location: ' + query.location);
     parameters.push(['term', query.term]);
     parameters.push(['location', query.location]);
     parameters.push(['category-filters', query.categories]);
