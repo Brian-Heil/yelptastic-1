@@ -261,6 +261,13 @@ var parseYelpCategories = function (term, location, categories) {
         	var subCategory = j;
         	var subCategoryTag = categories[i][j];
         	
+        	if (typeof categories[i][j] != "string")
+        	{
+        		subCategoryTag = subCategory;
+        		subCategoryTag = subCategoryTag.replace(/ /g, "_");
+				subCategoryTag = subCategoryTag.replace(/&/g, "And");
+        	}
+        	
         	categories_wrapper = categories_wrapper + '<div class="accordion-group">';
             categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
             categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '" ';
