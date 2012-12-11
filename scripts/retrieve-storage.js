@@ -18,69 +18,111 @@ function searchFavorites(query) {
 	return feedback;
 }
 
+//filters are distance, rating, category
+function filterFavorites(criterion, filter, results) {
+	var feedback = [];
+	if (filter == "rating") {
+		feedback = _.filter(results, function(x) {
+			return x.rating >= criterion;
+		});
+	} else if (filter == "distance") {
+		var destinations = [];
+		feedback = _.each(results, function(x) {
+			var lat = parseFloat(x.coordinate.latitude);
+			var lng = parseFloat(x.coordinate.longitude);
+			var latlng = new google.maps.LatLng(lat, lng);
+			destinations[x.name] = latlng;
 
+		});
+		var go = new Geolocation;
+		var locObj = new google.maps.LatLng(go.getCurrentLocation.latitude, go.getCurrentLocation.longitude);
+		calculateDistances(locObj, Object.values(destinations));
+		return findDistance(x) <= criterion;
+		//within 'criterion' miles
+	} else if (filter == "category" || filter == "categories") {
+		var answer = [];
+		feedback = _.filter(results, function(x) {
+			return Object.values(businessAndCategories).indexOf(criterion) > -1;
+		});
+	}
+	return feedback;
+}
+var businessAndCategories = [];
 function getFavoriteCategories() {
-
+	businessAndCategories = [];
 	var feedback = {};
+	var busName = "";
 	var resultList = JSON.parse(localStorage.getItem("results"));
 	//returns the list of lists (of categories);
 	_.each(resultList, function(x) {
 		feedback[x.name] = [];
 		_.each(x.categories, function(y) {
 			feedback[x.name].push(y[1]);
-			//	alert(y[1]);
+			
 		});
 	});
 	var answer = {};
-	//a temp variable used in getBroadCategories which will be filled which a business's category hierachy
-	var cats = [];
-	//a list of 'answer' lists; each element in cats is a list containing the hierachy for each business
-
+	var cats = {};
 	_.each(feedback, function(innerCat, ky) {
+		getBroadCategories(ky, answer, innerCat, allcategories);
+	
 
-		//	alert(innerCat); works- shows the strings of the categories
-		cats.push(getBroadCategories(answer, innerCat, categories));
-		answer = {};
-	});
-	//alert(cats);
+	
+	});alert(businessAndCategories);
+	
 	return cats;
 }
 
 //this function needs testing
-
-function getBroadCategories(answers, innerCat, globalCategories) {
+//innerCat has Traditional(American), Gluten-Free | Mexican, Catering 
+function getBroadCategories(busName, answers, innerCat, globalCategories) {
 	
 	for (var singleCat in innerCat) {
 		answers[singleCat] = [];
 		var hierarchy = [];
-		//alert(globalCategories);
-		answers[singleCat] = findStrings(singleCat, hierarchy, globalCategories);
-
+		var broadforthissub = findStrings(busName, innerCat[singleCat], hierarchy, globalCategories, globalCategories);
+		answers[singleCat].push(broadforthissub);
 	}
 	return answers;
 }
 
-function findStrings(singleCat, catsForThisCat, globalCategories) {
-	for (var ky in globalCategories) {
-		if ( typeof globalCategories == 'object') {
-			catsForThisCat.push(globalCategories);
-			findStrings(singleCat, catsForThisCat, globalCategories[ky]);
+function findStrings(busName, singleCat, catsForThisCat, globalCategories, staticGlobal) {
+	if ( typeof globalCategories == 'object') {
+		for (var ky in globalCategories) {
+			catsForThisCat.push(ky);
+		
+			if (typeof findStrings(busName, singleCat, catsForThisCat, globalCategories[ky], staticGlobal) == "object"){
+				
+			}else{
+				while(Object.keys(staticGlobal).indexOf(catsForThisCat.pop()) != -1){
+				}
+			}
+			
+		}
 		} else if ( typeof globalCategories == 'string') {
-
-			if (globalCategories.toLowerCase().search(singleCat.toLowerCase()) > -1) {
-				alert(singleCat);
+		
+			if (globalCategories.toLowerCase().indexOf(singleCat.toLowerCase()) > -1) {
+				saveThisHierachy(busName, singleCat, catsForThisCat);
 				return catsForThisCat;
 				//return the list which contains the hierachy of categories for this business
 				//first element in the list is the inner most category and the last element is the broad category
 			} else {
-				//alert(catsForThisCat);
 				
-				catsForThisCat = [];
-			}//else, the category of the item is not this one.
+				return "NF";
+			
+				
+			}
 		}
-	}
+		
+	
 }
 
+function saveThisHierachy(bus, subcategory, tree){
+	var bus_tree = {};
+	tree.push(subcategory);
+	bus_tree[bus] = tree;
+	businessAndCategories.push(JSON.stringify(bus_tree));
+}
 function getFavoritesWithinCategory(query) {
 	var feedback = [];
 	var resultList = JSON.parse(localStorage.getItem("results"));
@@ -106,7 +148,7 @@ function addBusinessToFavorite(business) {
 
 function deleteBusinessFromStorage(business) {
 	var resultList = JSON.parse(localStorage.getItem("results"));
-	removeA(resultList, business);
+	resultList = removeA(resultList, business);
 	localStorage.setItem("results", JSON.stringify(resultList));
 }
 
