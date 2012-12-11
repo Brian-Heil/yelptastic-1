@@ -1,4 +1,11 @@
-# <img src="http://i.imgur.com/aIRpe.jpg" height="500px" width="200px"/>
+Title: Yelptastic Design Document
+Author: Varun Ravishankar
+Date: December 10, 2012
+Affiliation: Columbia University
+Email: vr2263@columbia.edu
+Web: varnholm.com/ui/yelptastic/index.html
+
+# <img src="http://i.imgur.com/aIRpe.jpg" height="500px" width="200px" alt="Yelptastic Logo"/>
 ## The Feiner Things
 
 Jenee Benjamin, jlb2229  
@@ -34,4 +41,3 @@ Yelptastic is written in HTML, CSS, and Javascript. It uses many HTML5 features,
 * [Bootstrap](http://twitter.github.com/bootstrap/)
 * [Handlebars.js](http://handlebarsjs.com)
 * [ouath](http://oauth.googlecode.com)
-
