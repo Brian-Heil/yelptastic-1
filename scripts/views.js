@@ -269,7 +269,7 @@ var parseYelpCategories = function (term, location, categories) {
           }
           
           categories_wrapper = categories_wrapper + '<div class="accordion-group">';
-            categories_wrapper = categories_wrapper + '<div class="accordion-heading">';
+            categories_wrapper = categories_wrapper + '<div class="accordion-heading" onclick="alert(\'subcategory fuction onclick working\');" >';
             categories_wrapper = categories_wrapper + '<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + subCategoryTag + '" ';
             
             if (typeof categories[i][j] != "string")
