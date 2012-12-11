@@ -1,3 +1,4 @@
+
 function searchFavorites (query){
     var feedback = [];
     var resultList = localStorage.getItem("results");
@@ -84,7 +85,7 @@ function removeA(arr) {
 function saveBookmark(business, tags, notes){
     business.tags = tags;
     business.notes = notes;
-    Date d = new Date();
+    var d = new Date();
     var day = d.getDate();
     var month = d.getMonth() + 1;
     var time = d.getTime();
