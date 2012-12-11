@@ -2,12 +2,15 @@
 function searchFavorites (query){
     var feedback = [];
     var resultList = JSON.parse(localStorage.getItem("results"));
-    _.each(resultList.businesses, function(x){
+    if(resultList == null){
+    	return feedback;
+    }else{
+    _.each(resultList, function(x){
         if(x.name.search(query) > -1 || x.tag.search(query) > -1 || x.notes.search(query) > -1){
             feedback.push(x);
         }
     });
-   // alert('is Feedback empty?' + feedback.length);
+    }
     return feedback;
 }
 
@@ -15,7 +18,7 @@ function getFavoriteCategories(){
     var feedback = [];
     var resultList = JSON.parse(localStorage.getItem("results"));
     //returns the list of lists (of categories); 
-    _.each(resultList.businesses, function(x){
+    _.each(resultList, function(x){
        feedback.push(x.categories);
     }
  );
@@ -49,7 +52,7 @@ function getFavoritesWithinCategory (query){
     var feedback = [];
     var resultList = JSON.parse(localStorage.getItem("results"));
 
-   _.each(resultList.businesses, function(x){
+   _.each(resultList, function(x){
         if(x.categories == query){
             feedback.push(x);
         }
@@ -87,6 +90,12 @@ function removeA(arr) {
 }
 
 function saveBookmark(business, tags, notes){
+	if (tags == undefined) {
+		tags = " ";
+	}
+	if (notes == undefined){
+		notes = " ";
+	}
     business.tags = tags;
     business.notes = notes;
     var d = new Date();
