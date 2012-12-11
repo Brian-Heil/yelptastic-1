@@ -12,12 +12,12 @@
 <script src="scripts/vendor/bootstrap.min.js" type="text/javascript"></script>
 <script src="scripts/vendor/handlebars-1.0.rc.1.js" type="text/javascript"></script>
 <script src="scripts/vendor/underscore.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://jquery-jsonp.googlecode.com/files/jquery.jsonp-1.0.4.min.js"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 <script type="text/javascript" src="scripts/retrieve-storage.js"></script>
 <script type="text/javascript" src="scripts/views.js"></script>
 <script type="text/javascript" src="scripts/query.js"></script>
-
   
 <script id="results" type="text/x-handlebars-template">
   {{#each this}}
@@ -86,6 +86,10 @@
         $('.breadcrumb').empty();
         $('.breadcrumb').append('<li class="active1">Home</li> ');
       });
+      $('searchbar').submit(function () {
+          sendContactForm();
+         
+      });
   });
 </script>
 
@@ -110,10 +114,10 @@
               </div>
               </div>
               <div class="tab-pane fade" id="search_yelp">
-                 <form id="searchbar" name="search2">
+                 <form id="searchbar" name="search2" >
                   <input type="text" id="searchbox" placeholder="Search Business" name="search1">
                   <input type="text" id="locationbox" placeholder="Near" name="search_loc">     
-                  <input type="button" id="searchbutton" value="Search" name="searchButton2" onclick="searchYelp(search2.search1.value, search2.search_loc.value)">
+                  <input type="submit" onsubmit="searchYelp(search2.search1.value, search2.search_loc.value);  return false;" id="searchbutton" value="Search" name="searchButton2" onclick="searchYelp(search2.search1.value, search2.search_loc.value); return false;">
                  </form>
               </div>
      </div>

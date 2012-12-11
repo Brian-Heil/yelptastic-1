@@ -14,10 +14,10 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
         //
         // Update with your auth tokens.
         //
-        consumerKey: "RmwZbuexNTnUu0pCAzcXuQ",
-        consumerSecret: "3S6D6qH4K-hoBvMc6eQL22EjORg",
-        accessToken: "JAazeyDhcErQlEMSBZqpOHCFF4mixIec",
-        accessTokenSecret: "bEf62xhBTl1KoLYz6or-lRgGG_g",
+        consumerKey: "j2bIM4BPrGA0COjT0MJcIQ",
+        consumerSecret: "0ojjCuY0i_OpZvPzTAhcVUydAy0",
+        accessToken: "nFs2eLQDAkwXJ1UINtSX8wm0INwxKQsw",
+        accessTokenSecret: "D4erH10ILMN8iFnJBwRcfONvxBY",
         serviceProvider: {
             signatureMethod: "HMAC-SHA1"
         }
@@ -67,17 +67,31 @@ var queryYelp = function(query, search_type, callback, error, opt_term, opt_loca
 
     var parameterMap = OAuth.getParameterMap(message.parameters);
     parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
-    $.ajax({
+    var check = $.ajax({
         'url': message.action,
         'data': parameterMap,
         'cache': true,
         'dataType': 'jsonp',
+        'timeout':1000,
         'jsonpCallback': 'cb',
         'success':function (response){
           onSearchSuccess(response, opt_term, opt_location, opt_cat, opt_offset);
         },
-        'error': error
+        'error': function() {
+        },
+        
     });
+    check.success(function() {
+      console.log('Yes! Success!');
+    });
+
+    check.error(function() {
+       $('body').empty();
+       $('body').append('<h3>An error has occured</h3>');
+       $('body').append('<div id="error"><img src="http://cdn.memegenerator.net/instances/400x/31664563.jpg"></div>');
+  });
+    
+    
 };
 
 /* Utility function to parse JSON and return JS object */
@@ -97,12 +111,6 @@ var searchQuery = function(term, location, category_filters, offset){
     query['offset'] = offset;
 
     queryYelp(query, Action.search, onSearchSuccess, onSearchError, term, location, category_filters, offset);
-    // var categories = _.chain(results.businesses).map(function(business){
-    //     return business.categories;
-    // }).union().value();
-
-    // results.categories = categories;
-
 };
 
 /* Get JSON object from search API, remove unnecessary fields, and return object. */
@@ -114,6 +122,6 @@ var onSearchSuccess = function(json, opt_term, opt_location, opt_cat, opt_offset
 /* Return appropriate Yelp API error. */
 var onSearchError = function(json){
     var err = parseData(json);
-
     console.error("Yelp API error", err);
+   
 };

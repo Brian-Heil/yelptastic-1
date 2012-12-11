@@ -123,7 +123,6 @@ var browseBookmarks = function (results, opt_int) {
   $('.columnCenter').empty();
   $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
   $buttonRow = $('<div class="buttonRow"></div>');
-  alert('Running browse bookmarks')
   var data = [];
   if (results.length >=20) {
     for (var i = opt_int; i < opt_int + 20; i ++) {
@@ -150,7 +149,6 @@ var browseBookmarks = function (results, opt_int) {
         var image_url = 'http://s3-media3.ak.yelpcdn.com/assets/2/www/img/305e17fe6ed8/gfx/blank_biz_medium_sq.png';
       }
       $button = $('<button>Favorite</button>');
-      alert(results[i].name);
       data.push({
         title:results[i].title,
         image:image_url,
