@@ -6,7 +6,47 @@ function Geolocation(){
 	this.codedLatLng = undefined;
 	this.bounds = new google.maps.LatLngBounds();
 	this.distances = {};
+	this.currentLocation = undefined;
 }
+
+// Successful geolocation
+Geolocation.prototype.locateSuccess = function(loc){
+    // Set the user's location
+    this.currentLocation = {
+		latitude: loc.coords.latitude,
+		longitude: loc.coords.longitude
+	};
+};
+
+// Unsuccessful geolocation
+Geolocation.prototype.locateFail = function(geoPositionError){
+	switch (geoPositionError.code) {
+        case 0: // UNKNOWN_ERROR
+        alert('An unknown error occurred, sorry');
+        break;
+        case 1: // PERMISSION_DENIED
+        alert('Permission to use Geolocation was denied');
+        break;
+        case 2: // POSITION_UNAVAILABLE
+        alert('Couldn\'t find you...');
+        break;
+        case 3: // TIMEOUT
+        alert('The Geolocation request took too long and timed out');
+        break;
+        default:
+    }
+};
+
+Geolocation.prototype.getCurrentLocation = function(){
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(locateSuccess, locateFail);
+	}
+	else {
+		alert('I\'m sorry, but Geolocation is not supported in your current browser.');
+	}
+
+	return this.currentLocation;
+};
 
 /*
 	Function to take a longitude and latitude value and return an address.

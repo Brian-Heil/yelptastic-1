@@ -80,7 +80,31 @@ Our final design took inspiration from Amazon, Newegg, and Yelp itself. We made 
 
 ## Prototyping and Testing Process ##
 
+### Prototyping ###
 
+Our prototyping process consisted of mockups drawn in Balsamiq and of sketches drawn on whiteboards. We chose not to use more sophisticated lo-fi prototyping techniques like paper prototypes because of their cumbersome nature and the time involved in making them. We found that we were better able to communicate our ideas through prototypes in Balsamiq, and that they were easy enough to make once you understood how to use the tools provided.
+
+Our first mockups involved lists of items that could be filtered and searched through, with a search bar at the top and a filter box similar to Amazon's filters on the right. ![bookmarks_page_mockup][] Categories would be displayed in a grid.
+
+When a user clicked on a category, they would be taken to another grid of subcategories. ![bookmarks_page_subcategory][]
+
+Finally, a user could click on a subcategory and go to that category's results page. ![bookmarks_results_page][]
+
+For businesses with a category that was two or three tiers down (such as Restaurants > Chinese > Dim Sum), the user would need to click through two categories to see their actual result, and the user would need to click on the back button to go back and browse through another category. We decided this was inefficient, and so got rid of the grid view. We also decided against combining this view with a list view, as too many views would simply confuse the user.
+
+We then made a revised set of mockups. We first made a new mockup of the home page. ![prototype_home_page][]
+In this mockup, users would see their favorites displayed as a grid, but the grid would consist of results, not of categories. Users would also have the option to search through their favorites, or to add new favorites. This dialog ended up getting redesigned. On the left side, users would be able to see the list of categories that describe these favorites. We also added a breadcrumb bar to allow the user to navigate back and forth between pages.
+
+The next mockup of the search page would allow the user to filter through their results. We discovered that filtering by price was hard to do, so we decided to allow the user to filter by rating and distance instead. ![prototype_grid_page][]
+
+The final mockup is of the add bookmarks page. If the user searches for something like Mexican food, results would be displayed as a grid and would let the user favorite a restaurant or other business. Again, the user would be able to filter through the results. We did not like how the use would have to go back to the home page to search through their bookmarks again, so we decided to combine the add bookmarks and the search bookmarks bars into one tab bar. ![prototype_add_page][]
+
+### Testing ###
+
+We tested Yelptastic throughout the coding process. While we did note visual and aesthetic issues, we focused on usability issues as much as possible. Everybody in the group tested the page as they were coding, but usability tests were spaced out and done when a group member had time.
+
+Varun was the first one to do testing. He focused on error handling, application responsiveness, and consistency. Varun had feedback on making button labels more informative, and on making sure that entering blank text into one of the search boxes would not force a search that would in turn simply throw an error.
+He also noted that when searching through bookmarks, there was no indication that results were clickable, and noticed that there were sometimes issues when trying to use the keyboard to submit a search query (ideally, navigation would be equally straightforward when using the mouse or keyboard). He also noted errors with the breadcrumb bar, where adding bookmarks and then searching through bookmarks would lead to a bookmarks bar with both results. ![varun_test][]
 
 ## Software Engineering ##
 
@@ -100,3 +124,10 @@ Tools we used include:
 All code for Yelptastic can be found on our team's [Github][] repository.
 
 [Github]: https://github.com/thefeinerthingsfall2012/yelptastic
+[bookmarks_page_mockup]: http://varnholm.com/ui/yelptastic/img/mockups/Bookmarks+Page+Mockup.png
+[bookmarks_page_subcategory]: http://varnholm.com/ui/yelptastic/img/mockups/New+mockup+3.png
+[bookmarks_results_page]: http://varnholm.com/ui/yelptastic/img/mockups/Bookmarks+Page+-+Within+Food+Category.png
+[prototype_home_page]: http://varnholm.com/ui/yelptastic/img/mockups/Prototype+Home+Page.png
+[prototype_grid_page]: http://varnholm.com/ui/yelptastic/img/mockups/Tentative+Grid.png
+[prototype_add_page]: http://varnholm.com/ui/yelptastic/img/mockups/Prototype+Add+Page.png
+[varun_test]: http://varnholm.com/ui/yelptastic/img/testing/varun.png
