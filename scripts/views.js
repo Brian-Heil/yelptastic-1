@@ -15,6 +15,7 @@ var searchYelp = function (term, near, offset) {
  */
 var getBookmarks = function(term) {
   var bookmarks = searchFavorites(term);
+  alert('bookmarks length: ' + bookmarks.length);
   browseFavorites(bookmarks);
 }
 
@@ -27,7 +28,7 @@ var browseFavorites = function(data) {
   if (current != 'Search'){
     $('.active1').remove();
     $('.breadcrumb').append('<li onclick="$(\'body\').triggerHandler('+ '\''+ current + '\''+')"><a href="#' + current +'">' + current + '</a> <span class="divider">/</span><li>');
-    $('.breadcrumb').append('<li class="active">' + 'Lookup' +'</li> ');
+    $('.breadcrumb').append('<li class="active1">' + 'Lookup' +'</li> ');
     history.pushState({}, 'Yelptastic- Browse Favorite', '#bookmarksearch');
   }
   $('.columnCenter').empty();
@@ -109,17 +110,18 @@ var addQuery = function (results, opt_int, opt_total, opt_term, opt_location) {
  */
 var browseBookmarks = function (results, opt_int) {
   $('.columnCenter').empty();
-  $thumbnailswrapper = $('<ul class="thumbnails"></ul>');  
+  $thumbnailswrapper = $('<ul class="thumbnails"></ul>');
+  $buttonRow = $('<div class="buttonRow"></div>');
+  alert('Running browse bookmarks')
   var data = [];
-  if(results[i].image_url) {
-      var image_url = results[i].image_url;
-    } else {
-      var image_url = 'http://s3-media3.ak.yelpcdn.com/assets/2/www/img/305e17fe6ed8/gfx/blank_biz_medium_sq.png';
-    }
   if (results.length >=20) {
     for (var i = opt_int; i < opt_int + 20; i ++) {
+      if(results[i].image_url) {
+        var image_url = results[i].image_url;
+      } else {
+        var image_url = 'http://s3-media3.ak.yelpcdn.com/assets/2/www/img/305e17fe6ed8/gfx/blank_biz_medium_sq.png';
+      }
       $button = $('<button>Favorite</button>');
-      alert()
       data.push({
         title:results[i].title,
         image:image_url,
@@ -131,7 +133,13 @@ var browseBookmarks = function (results, opt_int) {
     }  
   } else {
     for (var i = opt_int; i < results.length; i ++) {
+      if(results[i].image_url) {
+        var image_url = results[i].image_url;
+      } else {
+        var image_url = 'http://s3-media3.ak.yelpcdn.com/assets/2/www/img/305e17fe6ed8/gfx/blank_biz_medium_sq.png';
+      }
       $button = $('<button>Favorite</button>');
+      alert(results[i].name);
       data.push({
         title:results[i].title,
         image:image_url,
@@ -152,7 +160,7 @@ var browseBookmarks = function (results, opt_int) {
       $see_prev.click(function() {
         addQuery(results, opt_int-1);
        });
-      $('.thumbnails').append($see_prev);
+      $buttonRow.append($see_prev);
       }
     if (opt_int + 20 <= data.length) {
       alert('Running <')
@@ -160,12 +168,9 @@ var browseBookmarks = function (results, opt_int) {
        $see_all.click(function() {
           addQuery(results, opt_int + 20);
        });
-      $('.thumbnails').append($see_all);
+      $buttonRow.append($see_all);
     }
   }  
-  $buttonRow = $('<div class="buttonRow"></div>');
-  $buttonRow.append($see_prev);
-  $buttonRow.append($see_all);
   
   $thumbnailswrapper.append($buttonRow);
   $('.columnCenter').append($thumbnailswrapper);
