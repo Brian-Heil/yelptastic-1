@@ -17,8 +17,6 @@ function searchFavorites(query) {
 	}
 	return feedback;
 }
-
-
 function getFavoriteCategories() {
 
 	var feedback = {};
