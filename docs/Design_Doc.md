@@ -64,8 +64,9 @@ Steve can no longer afford to dine out or buy beer and must adapt his party anim
 
 ## Design Decisions ##
 
+The first major design decision we made was to target a younger, more technologically-savvy demographic. This group of users would be familiar with review sites like Yelp, and would be used to searching for businesses online to find interesting restaurants or shops. This meant that we could remain consistent with Yelp's look and feel for each result and depend on the user to know what iconography and basic terminology meant.
 
-
+We made major design decisions when creating our mockups. Our first mockups and initial thoughts when writing the use scenarios involved lists of items that could be filtered and searched through, with a search bar at the top and a filter box similar to Amazon's filters on the right. Categories would be displayed in a grid. When a user clicked on a category, they would be taken to another grid of subcategories. For businesses with a category that was two or three tiers down (such as Restaurants > Chinese > Dim Sum), the user would need to click through two categories to see their actual result, and the user would need to click on the back button to go back and browse through another category. We decided that this option did not offer the user much *user control*, and so decided against the grid approach. We also decided against combining this view with a list view, as too many views would simply confuse the user and would not offer much *consistency*.
 
 ## Prototyping and Testing Process ##
 
