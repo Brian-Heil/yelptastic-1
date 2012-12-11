@@ -235,11 +235,7 @@ var browseBookmarks = function (results, opt_int) {
     var source = $('#browse').html();
     var template = Handlebars.compile(source);
     var string = template(data);
-    var accordsource = $('#filters').html();
-    var accordtemplate = Handlebars.compile(accordsource);
-    var accordstring = template({funcname:'filterfavorites', results:JSON.stringify(results)});
     spinner.stop();
-    $('.columnRight').append(accordstring);
     $thumbnailswrapper.append(string);
     if (data.length >= 20) {
         if (opt_int >= 20) {
@@ -257,6 +253,12 @@ var browseBookmarks = function (results, opt_int) {
             $buttonRow.append($see_all);
         }
     }
+    var source1 = $('#filts').html();
+    var template1 = Handlebars.compile(source1);
+    var string1 = template1({funcname:'filterFavorites', results:JSON.stringify(results)});
+    alert('Printing String: ' + string1);
+    $('.columnRight').empty();
+    $('.columnRight').append(string1);
     $thumbnailswrapper.append($buttonRow);
     $('.columnCenter').append($thumbnailswrapper);
     $('#pop').popover();
