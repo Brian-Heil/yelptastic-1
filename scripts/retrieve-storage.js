@@ -3,7 +3,7 @@ function searchFavorites(query) {
 	var resultList = JSON.parse(localStorage.getItem("results"));
 	if (resultList == null) {
 		return feedback;
-	} /*else {
+	} else {
 		_.each(resultList, function(x) {
 			if (x.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
@@ -12,18 +12,18 @@ function searchFavorites(query) {
 
 			} else if (x.notes.toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
-			}*/
-			/*else if (x.location.display_address.join(' ').toLowerCase().indexOf(query.toLowerCase()) > -1) {
+			}
+			else if (x.location.display_address.join(' ').toLowerCase().indexOf(query.toLowerCase()) > -1) {
 				feedback.push(x);
-			}*/
-		//});
-	//}
+			}
+		});
+	}
 	return feedback;
 }
 
 //filters are distance, rating, category
 function filterFavorites(criterion, filter, results) {
-  
+
 	var feedback = [];
 	if (filter == "rating") {
 		feedback = _.filter(results, function(x) {
@@ -146,16 +146,16 @@ function getFavoriteCategories() {
 	var cats = {};
 	_.each(feedback, function(innerCat, ky) {
 		getBroadCategories(ky, answer, innerCat, allcategories);
-	
 
-	
+
+
 	});
-	
+
 	return cats;
 }
 
 //this function needs testing
-//innerCat has Traditional(American), Gluten-Free | Mexican, Catering 
+//innerCat has Traditional(American), Gluten-Free | Mexican, Catering
 function getBroadCategories(busName, answers, innerCat, globalCategories) {
 	for (var singleCat in innerCat) {
 		answers[singleCat] = [];
@@ -170,28 +170,28 @@ function findStrings(busName, singleCat, catsForThisCat, globalCategories, stati
 	if ( typeof globalCategories == 'object') {
 		for (var ky in globalCategories) {
 			catsForThisCat.push(ky);
-		
+
 			if (typeof findStrings(busName, singleCat, catsForThisCat, globalCategories[ky], staticGlobal) == "object"){
-				
+
 			}else{
 				while(Object.keys(staticGlobal).indexOf(catsForThisCat.pop()) != -1){
 				}
 			}
-			
+
 		}
 		} else if ( typeof globalCategories == 'string') {
-		
+
 			if (globalCategories.toLowerCase().indexOf(singleCat.toLowerCase()) > -1) {
 				saveThisHierachy(busName, singleCat, catsForThisCat);
 				return catsForThisCat;
 				//return the list which contains the hierachy of categories for this business
 				//first element in the list is the inner most category and the last element is the broad category
 			} else {
-				return "NF";			
+				return "NF";
 			}
 		}
-		
-	
+
+
 }
 
 function saveThisHierachy(bus, subcategory, tree){
@@ -222,11 +222,11 @@ function addBusinessToFavorite(business) {
 	localStorage.setItem("results", JSON.stringify(resultList));
 }
 
-function deleteBusinessFromStorage(business) {   
+function deleteBusinessFromStorage(business) {
     var resultList = JSON.parse(localStorage.getItem("results"));
     var temp = removeA(resultList, business);
     localStorage.setItem("results", JSON.stringify(temp));
-    getBookmarks(lastTerm[0]);	
+    getBookmarks(lastTerm[0]);
 }
 
 function removeA(array, item) {
